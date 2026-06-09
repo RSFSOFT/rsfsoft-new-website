@@ -1,0 +1,412 @@
+/* =====================================================
+   RSF SOFT — Lightweight Premium Animations
+   Pure CSS wherever possible — zero layout shifts
+   GPU-accelerated (transform + opacity ONLY)
+   ===================================================== */
+
+/* ================================================
+   SCROLL PROGRESS BAR (top)
+   ================================================ */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #7c3aed, #06d6f0, #a855f7);
+  z-index: 9999;
+  will-change: width;
+  box-shadow: 0 0 8px rgba(124,58,237,0.5);
+  pointer-events: none;
+}
+
+/* ================================================
+   FLOATING BACKGROUND ORBS (CSS-only, 3 orbs)
+   ================================================ */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  animation: orbBreath ease-in-out infinite;
+}
+body::before {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 70%);
+  top: -200px; left: -200px;
+  animation-duration: 16s;
+}
+body::after {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(6,214,240,0.10) 0%, transparent 70%);
+  bottom: -150px; right: -150px;
+  animation-duration: 20s;
+  animation-delay: -8s;
+}
+@keyframes orbBreath {
+  0%, 100% { transform: scale(1) translate(0,0); }
+  50%       { transform: scale(1.12) translate(30px, -20px); }
+}
+
+/* Extra orb via pseudo on html */
+html::before {
+  content: '';
+  position: fixed;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.09) 0%, transparent 70%);
+  filter: blur(70px);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbBreath 24s ease-in-out infinite -12s;
+  will-change: transform;
+}
+
+/* ================================================
+   SUBTLE GRID MESH (CSS-only)
+   ================================================ */
+.bg-grid-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: meshDrift 40s linear infinite;
+  will-change: transform;
+}
+@keyframes meshDrift {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(80px, 80px); }
+}
+
+/* ================================================
+   3 FLOATING BADGES (CSS-only positions)
+   ================================================ */
+.float-badge {
+  position: fixed;
+  z-index: 4;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  background: rgba(8,13,26,0.85);
+  border: 1px solid rgba(124,58,237,0.25);
+  border-radius: 50px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  will-change: transform;
+  animation: badgeFloat ease-in-out infinite;
+}
+.float-badge-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+.float-badge-dot.cyan   { background: rgba(6, 214, 240, 0.8); box-shadow: 0 0 10px rgba(6, 214, 240, 0.8); }
+.float-badge-dot.violet { background: #7c3aed; }
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+
+.float-badge-1 { top: 25%; left: 1.5%; animation-duration: 5s;   animation-delay: 0s; }
+.float-badge-2 { top: 52%; right: 1.5%; animation-duration: 6.5s; animation-delay: -2.5s; }
+.float-badge-3 { top: 75%; left: 2%;   animation-duration: 7s;   animation-delay: -5s; }
+
+/* ================================================
+   SHIMMER (badges + featured cards)
+   ================================================ */
+.shimmer { position: relative; overflow: hidden; }
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  animation: shimmerSlide 3.5s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+@keyframes shimmerSlide {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ================================================
+   GRADIENT TEXT ANIMATION
+   ================================================ */
+.gradient-text {
+  background: linear-gradient(270deg, #7c3aed, #06d6f0, #a855f7, #7c3aed);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradShift 8s ease-in-out infinite;
+  will-change: background-position;
+}
+@keyframes gradShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================================================
+   NEON PULSE (CTA buttons)
+   ================================================ */
+.neon-pulse {
+  animation: neonGlow 3s ease-in-out infinite;
+  will-change: box-shadow;
+}
+@keyframes neonGlow {
+  0%, 100% { box-shadow: 0 8px 32px rgba(124,58,237,0.4); }
+  50%       { box-shadow: 0 8px 32px rgba(124,58,237,0.4), 0 0 40px rgba(124,58,237,0.25), 0 0 80px rgba(6,214,240,0.1); }
+}
+
+/* ================================================
+   ENTRANCE ANIMATIONS (Intersection Observer)
+   ================================================ */
+.anim-enter {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.anim-enter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================
+   SCAN LINE on hero
+   ================================================ */
+.scan-sweep {
+  position: absolute;
+  top: 0; left: -60%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.035) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: scanSweep 7s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes scanSweep {
+  0%   { transform: translateX(0); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(320%); opacity: 0; }
+}
+
+/* ================================================
+   PULSING RINGS (CTA sections)
+   ================================================ */
+.pulse-ring {
+  position: absolute;
+  width: 180px; height: 180px;
+  top: 50%; left: 50%;
+  margin: -90px 0 0 -90px;
+  border-radius: 50%;
+  border: 1px solid rgba(124,58,237,0.2);
+  pointer-events: none;
+  animation: ringExpand 4s ease-out infinite;
+  will-change: transform, opacity;
+}
+.pulse-ring-2 { animation-delay: -1.33s; }
+.pulse-ring-3 { animation-delay: -2.66s; }
+@keyframes ringExpand {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(4);   opacity: 0; }
+}
+
+/* ================================================
+   CURSOR GLOW
+   ================================================ */
+.cursor-glow {
+  position: fixed;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: left 0.2s ease, top 0.2s ease;
+  will-change: left, top;
+}
+
+/* ================================================
+   SECTION GLOW ACCENT
+   ================================================ */
+.content-section-alt { position: relative; overflow: hidden; }
+.content-section-alt::after {
+  content: '';
+  position: absolute;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%);
+  filter: blur(40px);
+  bottom: -100px; left: -80px;
+  pointer-events: none;
+  animation: sectionGlowShift 14s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes sectionGlowShift {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(40px, -30px); }
+}
+
+/* ================================================
+   MOBILE: disable everything
+   ================================================ */
+@media (max-width: 768px) {
+  body::before, body::after, html::before { display: none; }
+  .bg-grid-mesh { display: none; }
+  .float-badge { display: none; }
+  .cursor-glow { display: none; }
+  .scan-sweep { display: none; }
+  .pulse-ring { display: none; }
+  .content-section-alt::after { display: none; }
+}
+
+/* ================================================
+   REDUCED MOTION: stop all animations
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ================================================
+   3D BILLBOARD VIDEO INTEGRATION
+   ================================================ */
+.billboard-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: visible;
+}
+.bv-glow {
+  position: absolute;
+  top: 10%; left: 10%; right: 10%; bottom: 10%;
+  background: rgba(6,214,240,0.5);
+  filter: blur(60px);
+  z-index: 0;
+  animation: bvPulse 4s ease-in-out infinite;
+}
+@keyframes bvPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.1); opacity: 0.8; }
+}
+.billboard-video {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+  /* Optional: A very subtle tilt to seat it in the scene nicely */
+  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  transition: transform 0.5s ease;
+}
+.billboard-video:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+/* =====================================================
+   VISUAL UPGRADES (Cursor, Orbs, Tilt)
+   ===================================================== */
+
+/* 1. Custom Neon Cursor */
+@media (pointer: fine) {
+  body, a, button, input, textarea, select {
+    cursor: auto !important;
+  }
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 14px; height: 14px;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #06d6f0, 0 0 40px #06d6f0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999999 !important;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s, border 0.2s;
+}
+
+.cursor-hover #custom-cursor {
+  width: 32px; height: 32px;
+  background: rgba(6, 214, 240, 0.1);
+  border: 2px solid #06d6f0;
+  box-shadow: 0 0 10px #06d6f0, 0 0 30px #7c3aed, inset 0 0 10px #06d6f0;
+}
+
+/* 2. Ambient Orbs */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: 9999 !important;
+  opacity: 0.15 !important;
+  pointer-events: none;
+  animation: floatOrb 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 40vw; height: 40vw;
+  background: #7c3aed;
+  top: -10%; left: -10%;
+}
+
+.orb-2 {
+  width: 30vw; height: 30vw;
+  background: #06d6f0;
+  bottom: -10%; right: -10%;
+  animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(10vw, 5vh) scale(1.1); }
+  100% { transform: translate(-5vw, 15vh) scale(0.9); }
+}
+
+
+/* Marquee Animation */
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 16px)); } /* Scrolls half the width to seamlessly loop 4 sets */
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+.trust-badge-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(66,133,244,0.5) !important;
+  box-shadow: 0 20px 60px rgba(66,133,244,0.2) !important;
+}

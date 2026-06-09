@@ -1,0 +1,9 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://www.rsfsoft.com/sitemap.xml
+
+Disallow: /signin
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /wp-admin

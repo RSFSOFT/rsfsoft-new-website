@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Development | RSF Soft</title>
+  <meta name="description" content="Expert iOS, Android & cross-platform app development by RSF Soft. Native apps, React Native, Flutter &mdash; beautifully engineered mobile solutions for businesses worldwide.">
+  <meta name="keywords" content="app development, iOS app development, Android app development, React Native, Flutter, mobile app, RSF Soft">
+  <meta property="og:title" content="App Development | RSF Soft">
+  <meta property="og:description" content="Native iOS, Android & cross-platform apps engineered by specialists who solve complex mobile challenges beautifully.">
+  <meta property="og:url" content="https://www.rsfsoft.com/mobile-app.html">
+  <link rel="canonical" href="https://www.rsfsoft.com/mobile-app.html">
+  <link rel="icon" href="assets/img/favicon-new.png" type="image/x-icon">
+
+  <!-- Google Fonts -->
+<!-- Font Awesome -->
+  
+
+  <!-- Three.js -->
+  
+
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+
+<div id="site-nav"></div>
+
+<!-- ================================================
+     PAGE HERO
+     ================================================ -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>App Development</span>
+    </nav>
+    <div class="page-hero-badge"> Mobile App Specialists</div>
+    <h1 class="page-hero-title">
+      We Build Apps That <span class="gradient-text">Change the Game </span>
+    </h1>
+    <p class="page-hero-sub">
+      Native iOS, Android &amp; cross-platform apps engineered by specialists who solve complex mobile challenges beautifully. From idea to App Store &mdash; we handle everything.
+    </p>
+    <div class="page-hero-actions">
+      <button class="btn-primary-3d" data-modal="callback">
+        <i class="fa fa-rocket"></i> Get Free Quote
+      </button>
+      <a href="tel:+441296794358" class="btn-glass">
+        <i class="fa fa-phone-alt"></i> Call Us Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 1 &mdash; SPLIT LAYOUT: Expert Team + Checklist
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+    <div class="split-layout aos">
+      <div class="split-content">
+        <span class="section-badge">Our Expertise</span>
+        <h2>Expert App <span class="gradient-text">Development Team</span> </h2>
+        <p>
+          Our mobile engineers have 10+ years of experience shipping apps across every major category &mdash; fintech, healthtech, e-commerce, B2B and B2C platforms. We don't just write code; we craft experiences that users love and businesses scale with.
+        </p>
+        <p>
+          Whether you need a native iOS/Android app, a cross-platform Flutter solution, a Progressive Web App, or full e-commerce mobile commerce &mdash; our 300+ team delivers pixel-perfect, performance-optimised applications on time and on budget. Starting from $999.
+        </p>
+        <div class="checklist">
+          <div class="checklist-item">Native iOS app development (iPhone &amp; iPad) </div>
+          <div class="checklist-item">Native Android app development </div>
+          <div class="checklist-item">Hybrid &amp; cross-platform development (Flutter, React Native) </div>
+          <div class="checklist-item">Progressive Web Apps (PWA) </div>
+          <div class="checklist-item">Mobile App UX/UI Design &amp; prototyping </div>
+          <div class="checklist-item">E-commerce &amp; M-commerce solutions (B2B &amp; B2C) </div>
+          <div class="checklist-item">App Marketing &amp; Promotion strategies </div>
+          <div class="checklist-item">Ongoing mobile app support &amp; maintenance </div>
+        </div>
+        <button class="btn-primary-3d" data-modal="callback" style="margin-top:16px;">
+          <i class="fa fa-comments"></i> Discuss Your App Idea
+        </button>
+      </div>
+      <div class="split-visual aos-right">
+        <div class="visual-icon-big"></div>
+        <div class="visual-title">Your App, Built Right</div>
+        <div class="visual-sub">From concept to launch &mdash; full lifecycle app development</div>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px;">
+          <div style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.4rem;"></span>
+            <div style="text-align:left;">
+              <div style="font-weight:700;font-size:0.9rem;">iOS App Development</div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);">Swift &middot; SwiftUI &middot; Xcode</div>
+            </div>
+          </div>
+          <div style="background:rgba(6,214,240,0.08);border:1px solid rgba(6,214,240,0.2);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.4rem;"></span>
+            <div style="text-align:left;">
+              <div style="font-weight:700;font-size:0.9rem;">Android App Development</div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);">Kotlin &middot; Jetpack Compose &middot; Android Studio</div>
+            </div>
+          </div>
+          <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+            <span style="font-size:1.4rem;"></span>
+            <div style="text-align:left;">
+              <div style="font-weight:700;font-size:0.9rem;">Hybrid / Cross-Platform</div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);">React Native &middot; Flutter &middot; PWA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 2 &mdash; PROCESS STEPS
+     ================================================ -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">How We Work</span>
+      <h2 class="section-title">Our App <span class="gradient-text">Development Process</span></h2>
+      <p class="section-subtitle">A proven 4-step framework that ensures your app is delivered on time, on budget and exactly to spec.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step aos d1">
+        <div class="step-number">1</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Discovery &amp; Planning</div>
+        <div class="step-text">We deep-dive into your vision, target audience, and technical requirements to create a comprehensive project roadmap. User stories, wireframes and tech stack defined here.</div>
+      </div>
+      <div class="process-step aos d2">
+        <div class="step-number">2</div>
+        <div class="step-icon"></div>
+        <div class="step-title">UI/UX Design</div>
+        <div class="step-text">Our designers craft pixel-perfect interfaces with interactive prototypes. Every screen is designed for maximum usability, engagement and brand consistency before a single line of code is written.</div>
+      </div>
+      <div class="process-step aos d3">
+        <div class="step-number">3</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Development &amp; Testing</div>
+        <div class="step-text">Agile sprints with weekly demos keep you in the loop. Rigorous QA testing across 50+ devices &mdash; performance, security, and edge cases all covered before launch.</div>
+      </div>
+      <div class="process-step aos d1">
+        <div class="step-number">4</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Launch &amp; Support</div>
+        <div class="step-text">We handle App Store and Google Play submission end-to-end. Post-launch, our support team monitors performance, fixes bugs and rolls out updates so your app stays ahead.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 3 &mdash; FEATURES GRID 3COL
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">What We Offer</span>
+      <h2 class="section-title">Full-Spectrum <span class="gradient-text">App Development</span> Services</h2>
+      <p class="section-subtitle">Every aspect of your mobile app, covered by our specialist teams &mdash; from first pixel to final push notification.</p>
+    </div>
+    <div class="features-grid-3col">
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">iOS Development</div>
+        <div class="feature-block-text">Native iPhone &amp; iPad apps built with Swift and SwiftUI to Apple's highest standards. App Store-optimised, performance-tuned and beautifully crafted for the iOS ecosystem. We handle everything from development to App Store submission.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Android Development</div>
+        <div class="feature-block-text">Kotlin-powered Android apps that run beautifully on every device. Google Play-ready with Material Design 3 compliance. From simple utilities to complex enterprise applications &mdash; built for performance and scale.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Hybrid &amp; Cross-Platform</div>
+        <div class="feature-block-text">One codebase, two platforms &mdash; iOS and Android. React Native and Flutter apps that perform like native while significantly reducing development cost and time-to-market. Perfect for startups and MVPs.</div>
+      </div>
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Progressive Web Apps</div>
+        <div class="feature-block-text">PWAs that combine the best of web and mobile. Offline functionality, push notifications, fast load times and app-like experiences &mdash; all delivered through the browser. No App Store required. Lower cost, broad reach.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">E-commerce &amp; M-Commerce</div>
+        <div class="feature-block-text">Full B2B and B2C mobile commerce solutions &mdash; from consumer shopping apps to complex B2B ordering platforms. Native payment integration (Stripe, Apple Pay, Google Pay), inventory management and real-time order tracking.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">App Support &amp; Marketing</div>
+        <div class="feature-block-text">Comprehensive post-launch support including OS compatibility updates, crash monitoring, feature enhancements and 24/7 emergency support. Plus app marketing and ASO (App Store Optimisation) to maximise visibility and downloads.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 4 &mdash; STATS ROW
+     ================================================ -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">Our Track Record</span>
+      <h2 class="section-title">Numbers That <span class="gradient-text">Speak for Themselves</span> </h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;" class="aos">
+      <div style="text-align:center;background:rgba(8,13,26,0.7);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:36px 20px;backdrop-filter:blur(16px);">
+        <div style="font-size:2.8rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">
+          <span data-count="2000" data-suffix="+">2,000+</span>
+        </div>
+        <div style="font-size:0.95rem;font-weight:700;margin-top:8px;">Projects Delivered</div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;">Across all services including apps</div>
+      </div>
+      <div style="text-align:center;background:rgba(8,13,26,0.7);border:1px solid rgba(6,214,240,0.2);border-radius:var(--radius-lg);padding:36px 20px;backdrop-filter:blur(16px);">
+        <div style="font-size:2.8rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">
+          <span data-count="98" data-suffix="%">98%</span>
+        </div>
+        <div style="font-size:0.95rem;font-weight:700;margin-top:8px;">On-Time Delivery</div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;">Milestones hit without delay</div>
+      </div>
+      <div style="text-align:center;background:rgba(8,13,26,0.7);border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius-lg);padding:36px 20px;backdrop-filter:blur(16px);">
+        <div style="font-size:2.8rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">4.9&#9733;</div>
+        <div style="font-size:0.95rem;font-weight:700;margin-top:8px;">Client Rating</div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;">Average across all app projects</div>
+      </div>
+      <div style="text-align:center;background:rgba(8,13,26,0.7);border:1px solid rgba(6,214,240,0.2);border-radius:var(--radius-lg);padding:36px 20px;backdrop-filter:blur(16px);">
+        <div style="font-size:2.8rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">24/7</div>
+        <div style="font-size:0.95rem;font-weight:700;margin-top:8px;">Support</div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:4px;">Round-the-clock after-launch care</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 5 &mdash; TESTIMONIALS
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">Client Reviews</span>
+      <h2 class="section-title">What Our App <span class="gradient-text">Clients Say</span> </h2>
+      <p class="section-subtitle">Real feedback from real businesses who trusted us to bring their app ideas to life.</p>
+    </div>
+    <div class="testi-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="testi-card aos d1">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">We got a stunning cross-platform app in just 8 weeks. The quality is outstanding and they kept us updated at every step. The UI is better than apps from companies 10x our size. Will definitely use RSF Soft again!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f97316,#eab308);">DM</div>
+          <div>
+            <div class="testi-name">David Mitchell</div>
+            <div class="testi-loc"> Melbourne, Australia &middot; E-commerce App</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card aos d2">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">RSF Soft built our B2B e-commerce app from scratch. Complex inventory sync, multi-tier pricing and real-time order tracking &mdash; they handled everything flawlessly and delivered ahead of schedule. Our sales team can't imagine working without it now!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#06d6f0,#a855f7);">MS</div>
+          <div>
+            <div class="testi-name">Michael Starc</div>
+            <div class="testi-loc"> New York, USA &middot; FinTech App</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 6 &mdash; CTA BANNER
+     ================================================ -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-title">
+      Ready to Build Your <span class="gradient-text">App </span>
+    </div>
+    <p class="cta-banner-sub">
+        App development starts from just $999. Get a free consultation and fixed-price quote &mdash; no obligations, no hidden fees. 2,000+ projects delivered by our 300+ team across 10+ years.
+    </p>
+    <div class="cta-banner-actions">
+      <button class="btn-primary-3d" data-modal="callback">
+        <i class="fa fa-mobile-alt"></i> Get Free Quote
+      </button>
+      <a href="tel:+441296794358" class="btn-glass">
+        <i class="fa fa-phone-alt"></i>  UK: +441296794358
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================
+     SECTION 7 &mdash; FAQ
+     ================================================ -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">FAQ</span>
+      <h2 class="section-title">App Development <span class="gradient-text">Questions Answered</span> </h2>
+      <p class="section-subtitle">Everything you need to know before we start building your app together.</p>
+    </div>
+    <div class="faq-list faq-inner aos">
+      <div class="faq-item">
+        <button class="faq-q"> How long does it take to build an app?<span class="faq-icon">+</span></button>
+        <div class="faq-ans"><div class="faq-ans-inner">Timeline depends on complexity. A simple MVP app typically takes 6&ndash;10 weeks. A full-featured consumer app with multiple integrations takes 12&ndash;20 weeks. An enterprise-grade app can take 4&ndash;6+ months. We provide a detailed project timeline during the discovery phase so you always know exactly when you'll go live.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"> Should I build for iOS or Android first?<span class="faq-icon">+</span></button>
+        <div class="faq-ans"><div class="faq-ans-inner">This depends on your target audience. If your customers are primarily in the UK, USA or Australia, iOS first is often preferred since iPhone users tend to have higher purchasing power. If you're targeting a broader global audience or emerging markets, Android has a larger market share. We often recommend React Native or Flutter for new projects &mdash; one codebase, both platforms, significant cost savings.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"> How much does app development cost?<span class="faq-icon">+</span></button>
+        <div class="faq-ans"><div class="faq-ans-inner">App development costs vary significantly based on features, platforms and complexity. A basic single-platform app starts from $4,999. A cross-platform app with standard features typically ranges from $8,000&ndash;$25,000. Complex apps with custom backends, advanced features and multiple integrations can range from $25,000&ndash;$100,000+. We provide a fixed, all-inclusive quote after the discovery call &mdash; no hidden costs, ever.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"> Do you provide ongoing maintenance after launch?<span class="faq-icon">+</span></button>
+        <div class="faq-ans"><div class="faq-ans-inner">Yes, absolutely. We offer flexible monthly maintenance plans that cover OS compatibility updates (iOS/Android new versions), security patches, performance monitoring, bug fixes, feature enhancements and 24/7 emergency support. Your app will always work perfectly on the latest devices. Most clients stay on a maintenance plan long-term &mdash; it's the best way to protect your investment.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Development Services | RSF Soft</title>
+  <meta name="description" content="Custom websites, WordPress, Shopify & full-stack web apps crafted by RSF Soft to convert visitors into paying customers. 750+ custom web projects, 25+ years experience, 75+ developers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rsfsoft.com/web-development.html">
+
+  <!-- Google Fonts -->
+<!-- Font Awesome -->
+  
+
+  <!-- Three.js CDN -->
+  
+
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+
+  <style>
+    /* Feature pricing table */
+    .feature-price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .fp-card {
+      background: rgba(8,13,26,0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .fp-card:hover {
+      border-color: rgba(124,58,237,0.35);
+      background: rgba(124,58,237,0.07);
+      transform: translateX(6px);
+    }
+    .fp-name { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+    .fp-name span { font-size: 0.78rem; color: var(--text-muted); font-weight: 400; display: block; margin-top: 2px; }
+    .fp-price {
+      font-size: 1.05rem; font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; white-space: nowrap;
+    }
+    /* Tech stack pills */
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .tech-pill {
+      padding: 8px 18px;
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 40px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--accent-violet);
+      transition: all 0.3s;
+    }
+    .tech-pill:hover {
+      background: rgba(124,58,237,0.2);
+      border-color: rgba(124,58,237,0.5);
+      transform: translateY(-2px);
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+
+<!-- NAV INJECTION -->
+<div id="site-nav"></div>
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>Web Development</span>
+    </nav>
+    <div class="page-hero-badge">
+      <span></span> Web Development
+    </div>
+    <h1 class="page-hero-title">
+      Websites That Work As Hard<br>
+      <span class="gradient-text">As You Do </span>
+    </h1>
+    <p class="page-hero-sub">
+      Custom websites, WordPress, Shopify &amp; full-stack web apps crafted to convert visitors into paying customers at scale. 750+ projects delivered by 75+ expert developers with 25+ years of combined experience.
+    </p>
+    <div class="page-hero-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="hero-cta-btn">
+        <i class="fa fa-rocket"></i> Start Your Project
+      </button>
+      <a href="#feature-pricing" class="btn-glass">
+        <i class="fa fa-tag"></i> View Feature Pricing
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 1: WHY OUR WEBSITES CONVERT (SPLIT) ===================== -->
+<section class="content-section">
+  <div class="container">
+    <div class="split-layout aos">
+      <!-- LEFT: Content + Checklist -->
+      <div class="split-content">
+        <div class="section-badge"> Built to Convert</div>
+        <h2>Why Our Websites <span class="gradient-text">Convert</span> </h2>
+        <p>We don't just build pretty websites &mdash; we engineer high-performance digital machines that attract, engage and convert. Every decision is backed by data, UX science and real-world testing across 750+ live projects delivered by our elite team of 75+ developers.</p>
+        <p>From the very first wireframe to go-live, we obsess over load times, mobile experience, SEO structure and conversion flow so your website becomes your best salesperson &mdash; working 24/7 with zero sick days.</p>
+        <div class="checklist">
+          <div class="checklist-item"> Custom design &amp; development tailored to your brand identity</div>
+          <div class="checklist-item"> Mobile-first responsive design &mdash; perfect on every device</div>
+          <div class="checklist-item"> Fast loading speed &mdash; sub-2-second load times guaranteed</div>
+          <div class="checklist-item"> SEO-optimized structure with proper schema markup built-in</div>
+          <div class="checklist-item"> CMS integration &mdash; manage your content with ease, no code needed</div>
+          <div class="checklist-item"> E-commerce functionality to sell online from day one</div>
+          <div class="checklist-item"> API &amp; third-party integrations &mdash; CRM, payment, analytics, ERP</div>
+          <div class="checklist-item"> Ongoing support &amp; maintenance &mdash; we're always in your corner</div>
+        </div>
+        <div style="margin-top: 28px;">
+          <button class="btn-primary-3d" data-modal="callback" id="split-cta-btn">
+            <i class="fa fa-phone"></i> Get Free Consultation
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Visual -->
+      <div class="split-visual aos-right">
+        <div class="visual-icon-big"></div>
+        <div class="visual-title">Websites That Convert</div>
+        <div class="visual-sub">Built for performance, optimised for growth</div>
+        <div style="margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div style="background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">25+</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Years Experience</div>
+          </div>
+          <div style="background: rgba(6,214,240,0.1); border: 1px solid rgba(6,214,240,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">75+</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Expert Developers</div>
+          </div>
+          <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">750+</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Projects Delivered</div>
+          </div>
+          <div style="background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.2); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">400+</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 2: SERVICES GRID ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Our Services</div>
+      <h2 class="section-title">Everything You Need <span class="gradient-text">Under One Roof</span></h2>
+      <p class="section-subtitle">From simple landing pages to complex enterprise web applications &mdash; we've got the expertise, tools and talent to deliver excellence every single time.</p>
+    </div>
+    <div class="features-grid-3col">
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Custom Websites</div>
+        <div class="feature-block-text">Bespoke designs built from scratch to perfectly match your brand identity. No templates, no shortcuts &mdash; pure craftsmanship. Pixel-perfect on every device and browser. We design with conversion goals in mind from day one, ensuring your site not only looks amazing but generates measurable revenue growth.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">WordPress Development</div>
+        <div class="feature-block-text">Powerful, flexible WordPress sites with custom themes, plugins and full WooCommerce integration. Easy for you to manage without technical knowledge. We build speed-optimised, security-hardened WordPress environments on our recommended hosting stack that scales gracefully with your business growth.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Shopify Development</div>
+        <div class="feature-block-text">High-converting Shopify stores with custom themes, seamless payment gateways and powerful app integrations. Built to sell from day one. Our Shopify experts understand e-commerce psychology and apply proven conversion tactics to maximize your average order value and repeat purchase rates.</div>
+      </div>
+      <div class="feature-block aos d4">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Web Applications</div>
+        <div class="feature-block-text">Complex, scalable web applications built with modern full-stack technology using PHP, Laravel, ReactJS, Node.js and more. From SaaS platforms to customer portals and booking systems &mdash; we architect, build and deploy production-ready applications that handle thousands of concurrent users.</div>
+      </div>
+      <div class="feature-block aos d5">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Landing Pages</div>
+        <div class="feature-block-text">High-converting, laser-focused landing pages engineered to turn ad traffic into qualified leads and paying customers. Every element &mdash; headline, hero image, CTA placement, form length &mdash; is optimised for maximum conversion. Perfect for PPC campaigns, product launches and lead generation funnels.</div>
+      </div>
+      <div class="feature-block aos d6">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Website Redesign</div>
+        <div class="feature-block-text">Transform your outdated website into a modern, high-performance digital powerhouse. We audit your existing site, identify conversion bottlenecks and redesign with precision. Our redesigns consistently deliver significant improvements in user engagement, bounce rate reduction and revenue per visitor.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TECHNOLOGY STACK ===================== -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Tech Stack</div>
+      <h2 class="section-title">Built With <span class="gradient-text">Industry-Leading Technologies</span></h2>
+      <p class="section-subtitle">We leverage the best and most proven technologies in the industry &mdash; chosen for performance, security, scalability and long-term maintainability.</p>
+    </div>
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="tech-grid aos">
+        <div class="tech-pill">PHP</div>
+        <div class="tech-pill">Laravel</div>
+        <div class="tech-pill">Zend Framework</div>
+        <div class="tech-pill">CodeIgniter</div>
+        <div class="tech-pill">CakePHP</div>
+        <div class="tech-pill">Yii</div>
+        <div class="tech-pill">ReactJS</div>
+        <div class="tech-pill">AngularJS</div>
+        <div class="tech-pill">Node.js</div>
+        <div class="tech-pill">WordPress</div>
+        <div class="tech-pill">Magento</div>
+        <div class="tech-pill">Shopify</div>
+        <div class="tech-pill">NoSQL</div>
+        <div class="tech-pill">MariaDB</div>
+        <div class="tech-pill">MySQL</div>
+        <div class="tech-pill">REST APIs</div>
+        <div class="tech-pill">HTML5 / CSS3</div>
+        <div class="tech-pill">JavaScript</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3: PROCESS STEPS ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Our Process</div>
+      <h2 class="section-title">From Idea to <span class="gradient-text">Live in 4 Steps</span></h2>
+      <p class="section-subtitle">A proven, transparent process refined over 750+ project deliveries. You'll know exactly what's happening at every stage and why.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step aos d1">
+        <div class="step-number">1</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Discovery</div>
+        <div class="step-text">We deep-dive into your business goals, target audience, competitors and requirements. A thorough discovery session ensures we build exactly what you need &mdash; no guesswork. We document everything in a clear project brief you approve before a single line of code is written.</div>
+      </div>
+      <div class="process-step aos d2">
+        <div class="step-number">2</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Design</div>
+        <div class="step-text">Our UI/UX designers craft stunning, conversion-optimised wireframes and high-fidelity mockups in Figma. You'll see exactly how your website will look before development begins. We iterate on your feedback until every pixel is perfect and you're 100% happy.</div>
+      </div>
+      <div class="process-step aos d3">
+        <div class="step-number">3</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Development</div>
+        <div class="step-text">Our expert developers bring the approved design to life using clean, semantic, standards-compliant code. We build mobile-first, performance-first and SEO-first. You get regular progress updates and staging environment access throughout, with rigorous testing before any deployment.</div>
+      </div>
+      <div class="process-step aos d4">
+        <div class="step-number">4</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Launch</div>
+        <div class="step-text">We handle the full deployment, DNS configuration, SSL setup, performance optimisation and post-launch monitoring. Your site goes live with zero downtime. We include full handover documentation, CMS training and 30 days of free post-launch support so you're set up for long-term success.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 4: STATS ===================== -->
+<section class="stats-section">
+  <div class="stats-bg"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header aos" style="margin-bottom: 48px;">
+      <div class="section-badge"> By The Numbers</div>
+      <h2 class="section-title">Results That <span class="gradient-text">Speak Volumes</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-flip-card aos d1">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="25" data-suffix="+">25+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">25+ Years in Business</div>
+            <div class="stat-back-sub">A trusted name in digital since the early days of the web</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d2">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="75" data-suffix="+">75+</div>
+            <div class="stat-label">Expert Developers</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">75+ Full-Stack Experts</div>
+            <div class="stat-back-sub">Specialists in PHP, React, Node, WordPress, Shopify and more</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d3">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="750" data-suffix="+">750+</div>
+            <div class="stat-label">Custom Web Projects</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">750+ Projects Delivered</div>
+            <div class="stat-back-sub">From startups to enterprise brands across 40+ countries worldwide</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d4">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="400" data-suffix="+">400+</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">400+ Satisfied Clients</div>
+            <div class="stat-back-sub">Clients who return again and again &mdash; our retention rate speaks for itself</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 5: FEATURE-BASED PRICING ===================== -->
+<section id="feature-pricing" class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Feature Pricing</div>
+      <h2 class="section-title">Build It <span class="gradient-text">Your Way &mdash; Pay for What You Need</span></h2>
+      <p class="section-subtitle">Our transparent, feature-by-feature pricing model means you only pay for exactly what your project requires. No bloated packages, no wasted budget &mdash; just honest pricing.</p>
+    </div>
+
+    <div class="feature-price-grid">
+      <div class="fp-card aos d1">
+        <div class="fp-name"> Login System <span>Secure user authentication</span></div>
+        <div class="fp-price">$750</div>
+      </div>
+      <div class="fp-card aos d2">
+        <div class="fp-name"> Social Login <span>Google, Facebook, Apple OAuth</span></div>
+        <div class="fp-price">$500</div>
+      </div>
+      <div class="fp-card aos d3">
+        <div class="fp-name"> Dashboard <span>Custom admin / user panel</span></div>
+        <div class="fp-price">$2,000</div>
+      </div>
+      <div class="fp-card aos d1">
+        <div class="fp-name"> User Profile <span>Profile pages with media upload</span></div>
+        <div class="fp-price">$1,200</div>
+      </div>
+      <div class="fp-card aos d2">
+        <div class="fp-name"> Messaging System <span>Real-time chat / inbox</span></div>
+        <div class="fp-price">$880</div>
+      </div>
+      <div class="fp-card aos d3">
+        <div class="fp-name">&#9733; Reviews &amp; Ratings <span>User review system</span></div>
+        <div class="fp-price">$900</div>
+      </div>
+      <div class="fp-card aos d1">
+        <div class="fp-name"> Calendar System <span>Event / availability calendar</span></div>
+        <div class="fp-price">$900</div>
+      </div>
+      <div class="fp-card aos d2">
+        <div class="fp-name"> Booking System <span>Appointment / reservation engine</span></div>
+        <div class="fp-price">$1,200</div>
+      </div>
+      <div class="fp-card aos d3">
+        <div class="fp-name"> Comments System <span>Threaded discussions</span></div>
+        <div class="fp-price">$1,200</div>
+      </div>
+      <div class="fp-card aos d1">
+        <div class="fp-name"> SSL-Based Encryption <span>Data security layer</span></div>
+        <div class="fp-price">$300</div>
+      </div>
+      <div class="fp-card aos d2">
+        <div class="fp-name"> CMS Integration <span>Content management system</span></div>
+        <div class="fp-price">$750</div>
+      </div>
+      <div class="fp-card aos d3">
+        <div class="fp-name"> API Integration <span>Third-party API connections</span></div>
+        <div class="fp-price">$1,200</div>
+      </div>
+      <div class="fp-card aos d1">
+        <div class="fp-name"> SEO Optimization <span>On-page, schema, speed</span></div>
+        <div class="fp-price">$420</div>
+      </div>
+      <div class="fp-card aos d2">
+        <div class="fp-name"> Unique UI/UX Design <span>Custom design system</span></div>
+        <div class="fp-price">$250</div>
+      </div>
+      <div class="fp-card aos d3">
+        <div class="fp-name"> Responsive Design <span>All devices &amp; screen sizes</span></div>
+        <div class="fp-price">$150</div>
+      </div>
+    </div>
+
+    <div class="aos" style="text-align: center; margin-top: 48px; padding: 32px; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 20px; max-width: 640px; margin-left: auto; margin-right: auto;">
+      <div style="font-size: 2rem; margin-bottom: 12px;"></div>
+      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 10px;">Need a Custom Quote?</h3>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">
+        Mix and match the features above or describe your project to us. We'll put together a detailed, itemised quote with a clear project timeline &mdash; usually within 24 hours.
+      </p>
+      <button class="btn-primary-3d" data-modal="callback" id="custom-quote-btn" style="font-size: 0.9rem; padding: 14px 30px;">
+        <i class="fa fa-calculator"></i> Get My Custom Quote
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BANNER ===================== -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="aos">
+      <div class="section-badge" style="margin-bottom: 16px;"> Ready to Build?</div>
+      <h2 class="cta-banner-title">
+        Let's Build Your <span class="gradient-text">Dream Website Together </span>
+      </h2>
+      <p class="cta-banner-sub">
+        Join 400+ happy clients who trust RSF Soft to deliver websites that work hard, look stunning and grow their revenue. Get your free consultation today &mdash; no obligation, no pressure, just expertise.
+      </p>
+      <div class="cta-banner-actions">
+        <button class="btn-primary-3d" data-modal="callback" id="cta-banner-btn">
+          <i class="fa fa-rocket"></i> Start My Project Today
+        </button>
+        <a href="contact-us.html" class="btn-glass">
+          <i class="fa fa-envelope"></i> Send Us a Message
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FAQ ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Common Questions</div>
+      <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+    </div>
+    <div class="faq-list faq-inner">
+      <div class="faq-item aos d1" id="faq-1">
+        <button class="faq-q" onclick="toggleFaq('faq-1')">
+          <span> How long does it take to build a website?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Most websites are delivered within 3&ndash;4 weeks from the time we receive your approved design sign-off. Simple brochure sites can be faster (1&ndash;2 weeks), while complex e-commerce or web app projects may take 6&ndash;10 weeks. We provide a detailed project timeline at the start so you always know exactly when to expect delivery. Rush timelines are available &mdash; just ask during your free consultation.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d2" id="faq-2">
+        <button class="faq-q" onclick="toggleFaq('faq-2')">
+          <span> How does your feature-based pricing work?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Our feature-based pricing lets you build exactly what you need without paying for things you don't. Simply tell us which features you require &mdash; login system, dashboard, booking, API integrations, etc. &mdash; and we calculate a precise project cost. You only pay for what you actually need, making it ideal for both simple sites and complex web applications. Contact us for a free itemised quote.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d3" id="faq-3">
+        <button class="faq-q" onclick="toggleFaq('faq-3')">
+          <span> Will I be able to update the website myself?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Absolutely! Every website we build includes a CMS &mdash; typically WordPress &mdash; that lets you update text, images, blog posts, products and more without touching a single line of code. We include full CMS training as part of every project handover, plus detailed documentation. If you ever get stuck, our support team is just one message away and always happy to help.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d4" id="faq-4">
+        <button class="faq-q" onclick="toggleFaq('faq-4')">
+          <span> Will my website rank on Google?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Every website we build includes solid SEO foundations &mdash; proper heading hierarchy, meta tags, schema markup, sitemap.xml, robots.txt, canonical URLs, image alt texts and Core Web Vitals optimisation. This gives you an excellent technical SEO base. For ongoing SEO campaigns, content marketing and link building, our specialist SEO team offers comprehensive monthly packages that have helped clients reach Page 1 for competitive keywords.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER INJECTION -->
+<div id="site-footer"></div>
+
+<!-- Scripts -->
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  // Three.js background animation
+  (function() {
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    const geometry = new THREE.BufferGeometry();
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 20;
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ color: 0x7c3aed, size: 0.025, transparent: true, opacity: 0.55 });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame += 0.002;
+      stars.rotation.y = frame * 0.08;
+      stars.rotation.x = frame * 0.04;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  })();
+
+  // FAQ Toggle
+  function toggleFaq(id) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-ans').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      item.querySelector('.faq-ans').style.maxHeight = item.querySelector('.faq-ans-inner').scrollHeight + 'px';
+    }
+  }
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

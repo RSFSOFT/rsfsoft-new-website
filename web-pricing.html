@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Pricing Calculator | RSF Soft</title>
+  <meta name="description" content="Transparent website pricing from RSF Soft. Use our interactive calculator to estimate your website project cost. Fixed prices from &pound;499, no hidden fees.">
+  <link rel="icon" href="assets/img/favicon-new.png">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+<div id="site-nav"></div>
+
+<!-- ================================================
+     PAGE HERO
+     ================================================ -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="web-development.html">Web Development</a>
+      <span>&rsaquo;</span>
+      <span>Web Pricing</span>
+    </nav>
+    <div class="page-hero-badge"> Web Pricing</div>
+    <h1 class="page-hero-title">
+      Transparent Website <span class="gradient-text">Pricing Calculator</span> 
+    </h1>
+    <p class="page-hero-sub">
+      Select the features you need and get an instant cost estimate. All our prices are fixed with no hidden fees &mdash; what you see is what you pay.
+    </p>
+    <div class="page-hero-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="hero-web-pricing-cta">
+        <i class="fa fa-calculator"></i> Get Exact Quote
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 1 &mdash; SPLIT: Interactive Calculator
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+    <div class="split-layout aos">
+      <div class="split-content">
+        <span class="section-badge">Interactive Calculator</span>
+        <h2>Build Your Website Quote</h2>
+        <p style="color:#94a3b8;line-height:1.7;margin-bottom:8px;">
+          Select the features you need below for an instant estimate. For a precise bespoke quote, contact our team directly.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:20px 0;">
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="750" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Email/Password Login</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$750</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="2000" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Admin Dashboard</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$2,000</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="1200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">User Profile Pages</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$1,200</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="500" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Shopping Cart</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$500</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="1200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Payment Processing</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$1,200</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="250" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Custom UI/UX Design</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$250</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="150" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Responsive Design</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$150</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="1200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Booking / Scheduling System</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$1,200</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="900" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Reviews &amp; Rating System</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$900</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="900" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Calendar Integration</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$900</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="900" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Community Forum</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$900</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="1200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Comments System</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$1,200</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="1200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">API Integration</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$1,200</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="300" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">SSL Certificate</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$300</span>
+          </label>
+
+          <label class="feat-card" style="background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.2s;color:#e2e8f0;">
+            <input type="checkbox" data-price="200" style="accent-color:#7c3aed;width:16px;height:16px;">
+            <span style="flex:1;">Advanced Search</span>
+            <span style="color:#7c3aed;font-weight:700;font-size:0.9rem;">$200</span>
+          </label>
+
+        </div>
+
+        <div class="price-display" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,214,240,0.1));border:1px solid rgba(124,58,237,0.3);border-radius:16px;padding:20px 28px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:0.85rem;color:#94a3b8;">Estimated Cost</div>
+            <div class="calc-total" style="font-size:2.2rem;font-weight:800;color:#7c3aed;">$0</div>
+          </div>
+          <button class="btn-primary-3d" data-modal="callback" id="web-calc-quote-cta">Get Exact Quote &rarr;</button>
+        </div>
+
+      </div>
+
+      <div class="split-visual aos d1">
+        <div class="visual-icon-big"></div>
+        <div class="visual-title">Fixed Price. No Surprises.</div>
+        <div class="visual-sub">All prices confirmed before work begins &mdash; zero hidden fees guaranteed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.feat-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const cb=card.querySelector('input[type=checkbox]');
+    cb.checked=!cb.checked;
+    card.style.borderColor=cb.checked&rarr;#7c3aed':'rgba(255,255,255,0.1)';
+    card.style.background=cb.checked&rarr;rgba(124,58,237,0.1)':'rgba(255,255,255,0.04)';
+    let total=0;
+    document.querySelectorAll('.feat-card input:checked').forEach(c=>total+=parseInt(c.dataset.price||0));
+    document.querySelector('.calc-total').textContent='$'+total.toLocaleString();
+  });
+});
+</script>
+
+<!-- ================================================
+     SECTION 2 &mdash; PRICING PACKAGES
+     ================================================ -->
+<section class="content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">Package Plans</span>
+      <h2 class="section-title">Ready-Made Website <span class="gradient-text">Packages</span></h2>
+      <p class="section-subtitle">Choose a fixed package or get a custom quote tailored to your exact requirements.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card aos d1" data-tilt>
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Starter Website</div>
+        <div class="pricing-amount">&pound;499</div>
+        <div class="pricing-period">per project</div>
+        <ul class="pricing-features">
+          <li> 5 pages</li>
+          <li> Responsive design</li>
+          <li> Contact form</li>
+          <li> Basic SEO setup</li>
+          <li> 1 revision</li>
+          <li> SSL certificate</li>
+          <li> 2-week delivery</li>
+        </ul>
+        <button class="pricing-cta btn-primary-3d" data-modal="callback" id="web-basic-cta">Get Started</button>
+      </div>
+
+      <div class="pricing-card featured aos d2" data-tilt>
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Professional Website</div>
+        <div class="pricing-amount">&pound;999</div>
+        <div class="pricing-period">per project</div>
+        <ul class="pricing-features">
+          <li> 10 pages</li>
+          <li> WordPress CMS</li>
+          <li> Blog setup</li>
+          <li> Full on-page SEO</li>
+          <li> Google Analytics</li>
+          <li> 3 revisions</li>
+          <li> 3-week delivery</li>
+        </ul>
+        <button class="pricing-cta btn-primary-3d" data-modal="callback" id="web-pro-cta">Get Started</button>
+      </div>
+
+      <div class="pricing-card aos d3" data-tilt>
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Premium Website</div>
+        <div class="pricing-amount">&pound;1,999</div>
+        <div class="pricing-period">per project</div>
+        <ul class="pricing-features">
+          <li> Unlimited pages</li>
+          <li> E-commerce ready</li>
+          <li> Custom design</li>
+          <li> Priority support</li>
+          <li> 6 revisions</li>
+          <li> 6 months maintenance</li>
+          <li> 4-week delivery</li>
+        </ul>
+        <button class="pricing-cta btn-primary-3d" data-modal="callback" id="web-premium-cta">Get Started</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 3 &mdash; PLATFORM 3-COL
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header aos">
+      <span class="section-badge">Technologies</span>
+      <h2 class="section-title">Built With the <span class="gradient-text">Right Technology</span></h2>
+      <p class="section-subtitle">We choose the best platform for your project goals, budget and long-term needs.</p>
+    </div>
+    <div class="features-grid-3col">
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Custom Development</div>
+        <div class="feature-block-text">Built from scratch to your exact specifications using any tech stack.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">WordPress Development</div>
+        <div class="feature-block-text">Flexible, powerful CMS perfect for most business websites.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Shopify Development</div>
+        <div class="feature-block-text">Purpose-built e-commerce platform for online stores that sell.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     CTA BANNER
+     ================================================ -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-title">
+      Ready to Start Your Website Project? 
+    </div>
+    <p class="cta-banner-sub">
+      Get a free consultation and fixed-price quote within 24 hours.
+    </p>
+    <div class="cta-banner-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="web-pricing-final-cta">
+        <i class="fa fa-rocket"></i> Get Free Quote
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+document.querySelectorAll('.faq-item').forEach(i=>i.querySelector('.faq-q').addEventListener('click',()=>{const o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}));
+if(typeof VanillaTilt!=='undefined')VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{max:8,speed:400,glare:true,'max-glare':0.1});
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

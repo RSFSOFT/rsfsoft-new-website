@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify Development | RSF Soft</title>
+  <meta name="description" content="RSF Soft builds high-converting Shopify stores with custom themes, advanced features and seamless integrations that grow your revenue. 750+ projects, 25+ years experience.">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+<div id="site-nav"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="web-development.html">Web Development</a>
+      <span>&rsaquo;</span>
+      <span>Shopify</span>
+    </nav>
+    <div class="page-hero-badge"><span></span> Shopify Development</div>
+    <h1 class="page-hero-title">Shopify Stores That <span class="gradient-text">Sell </span></h1>
+    <p class="page-hero-sub">We build high-converting Shopify stores with custom themes, advanced features and seamless integrations that grow your revenue.</p>
+    <div class="page-hero-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="hero-shopify-cta">
+        <i class="fa fa-store"></i> Get a Free Quote
+      </button>
+      <a href="#shopify-services" class="btn-glass">
+        <i class="fa fa-list"></i> See What's Included
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: SPLIT LAYOUT -->
+<section class="content-section" id="shopify-what-we-build">
+  <div class="container">
+    <div class="split-layout aos">
+      <div class="split-content">
+        <h2>What We Build <span class="gradient-text">For You</span></h2>
+        <div class="checklist">
+          <div class="checklist-item">Custom Shopify Themes</div>
+          <div class="checklist-item">Custom Headers &amp; Navigation (resizing/animating on scroll)</div>
+          <div class="checklist-item">Personalised Font Installation</div>
+          <div class="checklist-item">Parallax Scrolling Effects</div>
+          <div class="checklist-item">Video Background Integration</div>
+          <div class="checklist-item">Custom Mobile Layouts</div>
+          <div class="checklist-item">White Glove Setup (full end-to-end)</div>
+          <div class="checklist-item">Payment Gateway Integration</div>
+          <div class="checklist-item">App Integration</div>
+          <div class="checklist-item">SEO-Friendly Store Structure</div>
+        </div>
+      </div>
+      <div class="split-visual aos-right">
+        <div class="visual-icon-big"></div>
+        <div class="visual-title">Your Store. Your Brand.</div>
+        <div class="visual-sub">High-converting Shopify stores built to scale</div>
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.15); border-radius: 10px;">
+            <span style="font-size: 0.85rem; color: var(--text-secondary);"> Avg Conversion Rate Uplift</span>
+            <span style="font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+40%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(6,214,240,0.08); border: 1px solid rgba(6,214,240,0.15); border-radius: 10px;">
+            <span style="font-size: 0.85rem; color: var(--text-secondary);"> Avg PageSpeed Score (Mobile)</span>
+            <span style="font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">95+</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15); border-radius: 10px;">
+            <span style="font-size: 0.85rem; color: var(--text-secondary);"> Typical Go-Live Time</span>
+            <span style="font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">2&ndash;4 Wks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: FEATURES 3COL -->
+<section class="content-section content-section-alt" id="shopify-services">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge">Our Shopify Services</div>
+      <h2 class="section-title">Everything Your Store <span class="gradient-text">Needs</span></h2>
+    </div>
+    <div class="features-grid-3col">
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Custom Theme Design</div>
+        <div class="feature-block-text">Unique brand-aligned store designs built from scratch &mdash; no stock templates in sight.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Product Setup &amp; Migration</div>
+        <div class="feature-block-text">Full product catalogue setup and store migration from any platform with zero downtime.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Payment Gateways</div>
+        <div class="feature-block-text">Stripe, PayPal, Shopify Payments and more integrated for seamless global checkout.</div>
+      </div>
+      <div class="feature-block aos d4">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">App Integration</div>
+        <div class="feature-block-text">Third-party apps, inventory, CRM and fulfilment systems connected and configured.</div>
+      </div>
+      <div class="feature-block aos d5">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">SEO Optimisation</div>
+        <div class="feature-block-text">SEO-friendly structure, meta tags and site speed optimised for Google rankings.</div>
+      </div>
+      <div class="feature-block aos d6">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Ongoing Support</div>
+        <div class="feature-block-text">Monthly maintenance, updates and priority support available post-launch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: PRICING -->
+<section class="content-section" id="shopify-pricing">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge">Shopify Pricing</div>
+      <h2 class="section-title">Transparent <span class="gradient-text">Project Pricing</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <!-- Basic Store -->
+      <div class="pricing-card aos d1">
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Basic Store</div>
+        <div class="pricing-desc">Perfect for new businesses launching their first Shopify store quickly and affordably.</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">&pound;</span>
+          <span class="pricing-amount">799</span>
+          <span class="pricing-period">per project</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Custom theme setup</div>
+          <div class="pricing-feature">Up to 50 products</div>
+          <div class="pricing-feature">Payment gateway setup</div>
+          <div class="pricing-feature">Mobile responsive</div>
+          <div class="pricing-feature">Basic SEO</div>
+          <div class="pricing-feature">Contact form</div>
+        </div>
+        <button class="pricing-cta outline" data-modal="callback" id="shopify-basic-btn">Get Started</button>
+      </div>
+
+      <!-- Full Store FEATURED -->
+      <div class="pricing-card featured aos d2">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Full Store</div>
+        <div class="pricing-desc">Our most popular package &mdash; a complete, feature-rich Shopify store built to convert and scale.</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">&pound;</span>
+          <span class="pricing-amount">1,499</span>
+          <span class="pricing-period">per project</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Custom theme design</div>
+          <div class="pricing-feature">Unlimited products</div>
+          <div class="pricing-feature">All payment gateways</div>
+          <div class="pricing-feature">App integrations (up to 5)</div>
+          <div class="pricing-feature">Full SEO setup</div>
+          <div class="pricing-feature">Speed optimisation</div>
+          <div class="pricing-feature">3 months support</div>
+        </div>
+        <button class="pricing-cta" data-modal="callback" id="shopify-full-btn">Get Started</button>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card aos d3">
+        <div class="pricing-icon"></div>
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">For high-volume brands needing fully bespoke Shopify development and dedicated support.</div>
+        <div class="pricing-price">
+          <span class="pricing-currency">&pound;</span>
+          <span class="pricing-amount">2,999</span>
+          <span class="pricing-period">starting from</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Fully bespoke design</div>
+          <div class="pricing-feature">Custom Shopify apps</div>
+          <div class="pricing-feature">Multi-currency/language</div>
+          <div class="pricing-feature">Advanced analytics</div>
+          <div class="pricing-feature">Priority support</div>
+          <div class="pricing-feature">6 months maintenance</div>
+          <div class="pricing-feature">Dedicated PM</div>
+        </div>
+        <button class="pricing-cta outline" data-modal="callback" id="shopify-enterprise-btn">Contact Us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: STATS BAND -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos" style="margin-bottom: 48px;">
+      <div class="section-badge"> Our Track Record</div>
+      <h2 class="section-title">Numbers That <span class="gradient-text">Drive Confidence</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-flip-card aos d1">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="750" data-suffix="+">750+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">750+ Projects</div>
+            <div class="stat-back-sub">Including hundreds of successful Shopify store builds globally</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d2">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="25" data-suffix="+">25+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">25+ Years &amp; Counting</div>
+            <div class="stat-back-sub">One of the most experienced digital agencies in the UK and globally</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d3">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="75" data-suffix="+">75+</div>
+            <div class="stat-label">Developers</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">75+ Specialists</div>
+            <div class="stat-back-sub">Shopify theme devs, Liquid coders and e-commerce strategists</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d4">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="98" data-suffix="%">98%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">98% Satisfaction Rate</div>
+            <div class="stat-back-sub">Verified client feedback across UK, USA, Australia and Pakistan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: CTA BANNER -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="aos">
+      <h2 class="cta-banner-title">Ready to Launch Your <span class="gradient-text">Shopify Store?</span></h2>
+      <p class="cta-banner-sub">Get a free consultation and quote within 24 hours.</p>
+      <div class="cta-banner-actions">
+        <button class="btn-primary-3d" data-modal="callback" id="shopify-cta-btn">
+          <i class="fa fa-store"></i> Get Free Quote
+        </button>
+        <a href="index.html#services" class="btn-glass">
+          <i class="fa fa-th"></i> View All Services
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: FAQ -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> FAQs</div>
+      <h2 class="section-title">Shopify Questions <span class="gradient-text">Answered</span></h2>
+    </div>
+    <div class="faq-list faq-inner">
+      <div class="faq-item aos d1" id="sh-faq-1">
+        <button class="faq-q" onclick="toggleFaq('sh-faq-1')">
+          <span>How long does it take to build a Shopify store?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Basic stores typically take 2&ndash;3 weeks. Full custom stores take 4&ndash;8 weeks depending on complexity and the number of integrations required.</div>
+        </div>
+      </div>
+      <div class="faq-item aos d2" id="sh-faq-2">
+        <button class="faq-q" onclick="toggleFaq('sh-faq-2')">
+          <span>Can you migrate my existing store to Shopify?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Yes, we handle full product, customer and order data migration from WooCommerce, Magento, BigCommerce and more &mdash; with zero downtime.</div>
+        </div>
+      </div>
+      <div class="faq-item aos d3" id="sh-faq-3">
+        <button class="faq-q" onclick="toggleFaq('sh-faq-3')">
+          <span>Do you offer ongoing Shopify support?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Yes, flexible monthly maintenance plans are available covering bug fixes, updates, speed monitoring and priority support.</div>
+        </div>
+      </div>
+      <div class="faq-item aos d4" id="sh-faq-4">
+        <button class="faq-q" onclick="toggleFaq('sh-faq-4')">
+          <span>Will my store be mobile optimised?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Absolutely &mdash; every store we build is fully responsive across all devices. We design dedicated mobile layouts, not just a scaled-down desktop view.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  (function() {
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    const geometry = new THREE.BufferGeometry();
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 20;
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ color: 0xa855f7, size: 0.025, transparent: true, opacity: 0.5 });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame += 0.002;
+      stars.rotation.y = frame * 0.09;
+      stars.rotation.x = frame * 0.045;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  })();
+
+  function toggleFaq(id) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-ans').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      item.querySelector('.faq-ans').style.maxHeight = item.querySelector('.faq-ans-inner').scrollHeight + 'px';
+    }
+  }
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

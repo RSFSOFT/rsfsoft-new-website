@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Sign In | RSF Soft Client Portal</title>
+  <meta name="description" content="Sign in to your RSF Soft client portal to track project progress, view reports, raise support tickets and manage your services.">
+  <link rel="icon" href="assets/img/favicon-new.png">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+  <style>
+    .signin-wrapper {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .signin-card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(8,13,26,0.85);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: var(--radius-xl, 20px);
+      padding: 48px 40px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 20px 80px rgba(124,58,237,0.12), 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .signin-card-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .signin-lock-icon {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+    .signin-card-title {
+      font-family: var(--font-primary, 'Outfit', sans-serif);
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+    .signin-card-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary, #8892a4);
+      margin: 0;
+    }
+    .signin-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0 0 28px;
+    }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 4px 0 24px;
+    }
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary, #8892a4);
+      cursor: pointer;
+      user-select: none;
+    }
+    .remember-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #7c3aed;
+      cursor: pointer;
+    }
+    .forgot-link {
+      font-size: 0.82rem;
+      color: #7c3aed;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .forgot-link:hover { opacity: 0.75; text-decoration: underline; }
+    .signin-below {
+      text-align: center;
+      margin-top: 32px;
+    }
+    .signin-below p {
+      font-size: 0.88rem;
+      color: var(--text-secondary, #8892a4);
+      margin: 0 0 14px;
+    }
+    .signin-note {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted, #616d7e);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .signin-note a { color: #7c3aed; text-decoration: none; }
+    .signin-note a:hover { text-decoration: underline; }
+    .signin-submit-wrap { margin-top: 8px; }
+    .signin-submit-wrap .btn-primary-3d { width: 100%; justify-content: center; }
+    @media (max-width: 520px) {
+      .signin-card { padding: 36px 24px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+<div id="site-nav"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <div class="page-hero-badge">Client Portal</div>
+    <h1 class="page-hero-title">
+      Welcome Back <span class="gradient-text"></span>
+    </h1>
+    <p class="page-hero-sub">
+      Sign in to your RSF Soft client portal to track your projects, view reports and manage your services.
+    </p>
+  </div>
+</section>
+
+<!-- SIGN IN CARD -->
+<div class="signin-wrapper">
+  <div class="signin-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+    <div class="signin-card-header">
+      <div class="signin-lock-icon"></div>
+      <h2 class="signin-card-title">Client Sign In</h2>
+      <p class="signin-card-sub">Access your project dashboard</p>
+    </div>
+    <div class="signin-divider"></div>
+
+    <form id="signin-form" novalidate>
+      <div class="form-grp">
+        <label for="signin-email">Email Address</label>
+        <input type="email" id="signin-email" name="email" placeholder="your@email.com" required autocomplete="email">
+      </div>
+      <div class="form-grp">
+        <label for="signin-password">Password</label>
+        <input type="password" id="signin-password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required autocomplete="current-password">
+      </div>
+
+      <div class="remember-row">
+        <label class="remember-label">
+          <input type="checkbox" id="signin-remember" name="remember">
+          Remember me
+        </label>
+        <a class="forgot-link" href="mailto:info@rsfsoft.com?subject=Password Reset">Forgot password?</a>
+      </div>
+
+      <div class="signin-submit-wrap">
+        <button type="submit" class="btn-primary-3d" id="signin-btn">
+          <i class="fa fa-sign-in-alt"></i> Sign In &rarr;
+        </button>
+      </div>
+
+      <div class="form-ok" id="signin-ok" style="display:none;margin-top:16px;">
+         Redirecting to your dashboard...
+      </div>
+    </form>
+  </div>
+
+  <div class="signin-below">
+    <p>Don't have an account? Contact us to get started.</p>
+    <a href="contact-us.html" class="btn-glass">
+      <i class="fa fa-envelope"></i> Contact Us
+    </a>
+    <p class="signin-note">
+      Having trouble logging in?<br>
+      Email <a href="mailto:info@rsfsoft.com">info@rsfsoft.com</a> or call UK: <a href="tel:+441296794358">+441296794358</a>
+    </p>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  document.getElementById('signin-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('signin-btn');
+    const ok  = document.getElementById('signin-ok');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Signing in...';
+    setTimeout(function() {
+      ok.style.display = 'block';
+      btn.style.display = 'none';
+    }, 1500);
+  });
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

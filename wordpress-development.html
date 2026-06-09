@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPress Development | RSF Soft</title>
+  <meta name="description" content="Expert WordPress development by RSF Soft &mdash; custom themes, WooCommerce stores, plugin development, speed optimisation and security hardening. 10+ years WordPress experience, consultation-based pricing.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rsfsoft.com/wordpress-development.html">
+
+  <!-- Google Fonts -->
+<!-- Font Awesome -->
+  
+
+  <!-- Three.js CDN -->
+  
+
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+
+  <style>
+    /* WordPress-specific styles */
+    .wp-hosting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .wp-hosting-card {
+      background: rgba(8,13,26,0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .wp-hosting-card:hover {
+      border-color: rgba(124,58,237,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(124,58,237,0.15);
+    }
+    .wp-hosting-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .wp-hosting-name { font-size: 0.88rem; font-weight: 700; color: var(--text-primary); }
+    .wp-hosting-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+    .testimonial-mini {
+      background: rgba(8,13,26,0.75);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .testimonial-mini:hover {
+      border-color: rgba(124,58,237,0.3);
+      transform: translateY(-4px);
+    }
+    .testimonial-mini::before {
+      content: '"';
+      position: absolute;
+      top: 10px; left: 20px;
+      font-size: 5rem;
+      color: rgba(124,58,237,0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .tm-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 10px; }
+    .tm-text { font-family: var(--font-secondary); font-size: 0.875rem; color: var(--text-secondary); line-height: 1.85; font-style: italic; margin-bottom: 16px; }
+    .tm-author { font-weight: 700; font-size: 0.88rem; }
+    .tm-role { font-size: 0.75rem; color: var(--text-muted); }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+
+<!-- NAV INJECTION -->
+<div id="site-nav"></div>
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="web-development.html">Web Development</a>
+      <span>&rsaquo;</span>
+      <span>WordPress</span>
+    </nav>
+    <div class="page-hero-badge">
+      <span></span> WordPress Development
+    </div>
+    <h1 class="page-hero-title">
+      Expert WordPress<br>
+      <span class="gradient-text">Development </span>
+    </h1>
+    <p class="page-hero-sub">
+      Custom WordPress websites and plugins built by specialists with 10+ years of dedicated WordPress experience &mdash; powerful, flexible and incredibly easy for you to manage. No technical knowledge required on your end.
+    </p>
+    <div class="page-hero-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="hero-cta-btn">
+        <i class="fa fa-comments"></i> Get Free Consultation
+      </button>
+      <a href="#wp-services" class="btn-glass">
+        <i class="fa fa-list"></i> Explore Services
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 1: WHAT WE BUILD (SPLIT) ===================== -->
+<section class="content-section" id="wp-services">
+  <div class="container">
+    <div class="split-layout aos">
+      <!-- LEFT: Content + Checklist -->
+      <div class="split-content">
+        <div class="section-badge"> WordPress Specialists</div>
+        <h2>What We Build <span class="gradient-text">With WordPress</span></h2>
+        <p>With 10+ years of exclusive WordPress expertise and hundreds of successful deployments, our WordPress team is among the best in the business. We've built everything from personal blogs to enterprise-grade multisite networks processing millions of monthly visitors.</p>
+        <p>Whether you need a stunning portfolio, a feature-rich WooCommerce store, a bespoke plugin that solves a specific business problem, or a full WordPress migration from another platform &mdash; we handle it all with precision, speed and quality craftsmanship.</p>
+        <div class="checklist">
+          <div class="checklist-item"> Custom WordPress themes &mdash; unique, brand-aligned designs built from scratch</div>
+          <div class="checklist-item"> WooCommerce stores &mdash; full e-commerce setup with payment gateways</div>
+          <div class="checklist-item"> Plugin development &mdash; custom functionality for any unique requirement</div>
+          <div class="checklist-item"> WordPress migration &mdash; move from any platform safely with zero data loss</div>
+          <div class="checklist-item"> Speed optimization &mdash; sub-2-second load times with caching, CDN &amp; compression</div>
+          <div class="checklist-item"> Security hardening &mdash; protect against malware, brute force &amp; SQL injection</div>
+          <div class="checklist-item"> Multisite setup &mdash; manage multiple websites from one WordPress installation</div>
+          <div class="checklist-item"> Maintenance plans &mdash; monthly updates, backups, uptime monitoring &amp; support</div>
+        </div>
+        <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn-primary-3d" data-modal="callback" id="split-cta-wp-btn">
+            <i class="fa fa-phone"></i> Talk to a WordPress Expert
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Visual -->
+      <div class="split-visual aos-right">
+        <div class="visual-icon-big"></div>
+        <div class="visual-title">WordPress Excellence</div>
+        <div class="visual-sub">10+ years of dedicated WordPress expertise</div>
+
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.15); border-radius: 10px;">
+            <span style="font-size: 1.4rem;"></span>
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 700;">10+ Years WordPress Experience</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Dedicated WordPress specialists since 2014</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(6,214,240,0.08); border: 1px solid rgba(6,214,240,0.15); border-radius: 10px;">
+            <span style="font-size: 1.4rem;"></span>
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 700;">Speed-First Philosophy</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Average 95+ Google PageSpeed score</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.15); border-radius: 10px;">
+            <span style="font-size: 1.4rem;"></span>
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 700;">Enterprise Security Standards</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">ISO-aligned security practices on every build</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.15); border-radius: 10px;">
+            <span style="font-size: 1.4rem;"></span>
+            <div>
+              <div style="font-size: 0.88rem; font-weight: 700;">Zero-Downtime Migrations</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">300+ successful platform migrations completed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES GRID 3COL ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> WordPress Services</div>
+      <h2 class="section-title">Our Full WordPress <span class="gradient-text">Service Portfolio</span></h2>
+      <p class="section-subtitle">Whether you're starting fresh or need to upgrade an existing WordPress site, we've got a specialist for every WordPress challenge you face.</p>
+    </div>
+    <div class="features-grid-3col">
+      <div class="feature-block aos d1">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Custom Themes</div>
+        <div class="feature-block-text">Pixel-perfect, bespoke WordPress themes designed and coded from scratch to match your brand exactly. No theme marketplace templates &mdash; every theme is written clean, semantic and built for performance. Includes full Gutenberg / block editor support, theme options panel and unlimited colour schemes.</div>
+      </div>
+      <div class="feature-block aos d2">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">WooCommerce Stores</div>
+        <div class="feature-block-text">Complete WooCommerce setup and customisation &mdash; product catalogues, variable products, subscriptions, memberships, multi-currency and multi-language support. We integrate all major payment gateways (Stripe, PayPal, Klarna, etc.) and shipping providers for a seamless checkout experience that maximises conversions.</div>
+      </div>
+      <div class="feature-block aos d3">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Plugin Development</div>
+        <div class="feature-block-text">Custom WordPress plugins built to solve your exact business challenges &mdash; whether it's a booking system, custom post type, membership area, integration with your CRM or any unique functionality. Our plugins follow WordPress coding standards, are thoroughly tested and maintained with future updates in mind.</div>
+      </div>
+      <div class="feature-block aos d4">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Speed Optimization</div>
+        <div class="feature-block-text">Transform your slow WordPress site into a lightning-fast one. We implement advanced caching (Redis, Memcached), image optimisation, lazy loading, database cleanup, CDN integration, code minification and Core Web Vitals fixes. Most clients see a 300%+ improvement in load times after our optimization service.</div>
+      </div>
+      <div class="feature-block aos d5">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Security Hardening</div>
+        <div class="feature-block-text">Protect your WordPress site from hackers, malware, brute force attacks and spam. We implement two-factor authentication, login rate limiting, file permission hardening, malware scanning, database prefix changes, XML-RPC disabling and real-time threat monitoring. Plus automated daily backups stored off-site for peace of mind.</div>
+      </div>
+      <div class="feature-block aos d6">
+        <div class="feature-block-icon"></div>
+        <div class="feature-block-title">Migrations</div>
+        <div class="feature-block-text">Migrating from Wix, Squarespace, Joomla, Drupal or another WordPress site? We handle the entire migration process with zero downtime and zero data loss. This includes database migration, media file transfer, URL structure preservation, 301 redirect setup and thorough post-migration QA testing across all pages and functionality.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOSTING OPTIONS ===================== -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Hosting Options</div>
+      <h2 class="section-title">We Recommend the <span class="gradient-text">Best Hosting for Your Needs</span></h2>
+      <p class="section-subtitle">Choosing the right hosting is critical for WordPress performance. We guide you to the perfect host based on your traffic, budget and technical requirements.</p>
+    </div>
+    <div class="wp-hosting-grid">
+      <div class="wp-hosting-card aos d1">
+        <div class="wp-hosting-icon"></div>
+        <div class="wp-hosting-name">SiteGround</div>
+        <div class="wp-hosting-desc">Best for small&ndash;medium sites</div>
+      </div>
+      <div class="wp-hosting-card aos d2">
+        <div class="wp-hosting-icon"></div>
+        <div class="wp-hosting-name">WP Engine</div>
+        <div class="wp-hosting-desc">Managed WordPress hosting</div>
+      </div>
+      <div class="wp-hosting-card aos d3">
+        <div class="wp-hosting-icon"></div>
+        <div class="wp-hosting-name">Kinsta</div>
+        <div class="wp-hosting-desc">Google Cloud powered</div>
+      </div>
+      <div class="wp-hosting-card aos d4">
+        <div class="wp-hosting-icon"></div>
+        <div class="wp-hosting-name">Cloudways</div>
+        <div class="wp-hosting-desc">Flexible cloud hosting</div>
+      </div>
+      <div class="wp-hosting-card aos d5">
+        <div class="wp-hosting-icon"></div>
+        <div class="wp-hosting-name">AWS / GCP</div>
+        <div class="wp-hosting-desc">Enterprise &amp; high-traffic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESS STEPS ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Our Process</div>
+      <h2 class="section-title">How We Deliver <span class="gradient-text">Your WordPress Site</span></h2>
+      <p class="section-subtitle">A smooth, transparent process that keeps you in the loop at every stage &mdash; from first call to final handover.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step aos d1">
+        <div class="step-number">1</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Discovery Call</div>
+        <div class="step-text">We start with a free consultation to understand your business, goals and what you need from your WordPress site. We ask the right questions, listen carefully and document everything. This forms the foundation of your project brief and ensures we build exactly what you need, first time.</div>
+      </div>
+      <div class="process-step aos d2">
+        <div class="step-number">2</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Design &amp; Approve</div>
+        <div class="step-text">Our designers create stunning Figma mockups showing every key page of your site. You review, give feedback and we refine until you love it. Only when you've approved the design in full do we move to development &mdash; guaranteeing no nasty surprises when you see the finished website.</div>
+      </div>
+      <div class="process-step aos d3">
+        <div class="step-number">3</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Build &amp; Test</div>
+        <div class="step-text">Our WordPress experts code your theme from scratch, set up your plugins, configure WooCommerce (if applicable) and build out all pages on a private staging environment. We run comprehensive QA testing across 20+ devices and browsers, fix every issue found and share staging access for your review.</div>
+      </div>
+      <div class="process-step aos d4">
+        <div class="step-number">4</div>
+        <div class="step-icon"></div>
+        <div class="step-title">Launch &amp; Train</div>
+        <div class="step-text">We migrate your approved site to the live server with zero downtime, configure SSL, set up caching, submit your sitemap to Google and monitor performance. Then we provide full WordPress training so you can confidently manage your site, along with detailed documentation and ongoing support access.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="stats-section">
+  <div class="stats-bg"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header aos" style="margin-bottom: 48px;">
+      <div class="section-badge"> WordPress Track Record</div>
+      <h2 class="section-title">Numbers That <span class="gradient-text">Build Trust</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-flip-card aos d1">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="10" data-suffix="+">10+</div>
+            <div class="stat-label">Years WordPress Experience</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">A WordPress Decade</div>
+            <div class="stat-back-sub">Dedicated WordPress specialists since 2014 &mdash; we've seen and solved it all</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d2">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="300" data-suffix="+">300+</div>
+            <div class="stat-label">Responsive Websites</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">300+ Responsive Sites</div>
+            <div class="stat-back-sub">Every site we build looks and works perfectly on every device</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d3">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="75" data-suffix="+">75+</div>
+            <div class="stat-label">Expert Developers</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">75+ WordPress Experts</div>
+            <div class="stat-back-sub">Theme devs, plugin devs, WooCommerce specialists and performance engineers</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-flip-card aos d4">
+        <div class="stat-flip-inner">
+          <div class="stat-face">
+            <div class="stat-emoji"></div>
+            <div class="stat-number" data-count="100" data-suffix="%">100%</div>
+            <div class="stat-label">Security Guaranteed</div>
+          </div>
+          <div class="stat-face back">
+            <div class="stat-back-text">Zero Security Breaches</div>
+            <div class="stat-back-sub">Not a single client site has been compromised under our maintenance plans</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONSULTATION PRICING ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> Pricing Model</div>
+      <h2 class="section-title">Consultation-Based <span class="gradient-text">Pricing &mdash; Built Around You</span></h2>
+      <p class="section-subtitle">We don't believe in one-size-fits-all pricing for WordPress. Every project is unique, so we put together a custom quote based on your exact requirements, timeline and budget.</p>
+    </div>
+
+    <div class="split-layout aos" style="gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="why-item">
+          <div class="why-item-icon"></div>
+          <div>
+            <div class="why-item-title">Tell Us What You Need</div>
+            <div class="why-item-desc">Describe your project in a free 30-minute consultation. No jargon, no pressure &mdash; just an honest conversation about what you want to achieve and what it will realistically cost.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"></div>
+          <div>
+            <div class="why-item-title">Receive a Detailed Proposal</div>
+            <div class="why-item-desc">Within 24 hours, you'll receive a clear, itemised proposal outlining exactly what's included, the project timeline and a fixed-price quote. No surprise charges, ever.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"></div>
+          <div>
+            <div class="why-item-title">Approve &amp; We Get Started</div>
+            <div class="why-item-desc">Once you're happy with the proposal, we kick off immediately. 50% deposit to secure your project slot, 50% on final delivery after your full approval.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"></div>
+          <div>
+            <div class="why-item-title">Ongoing Maintenance Plans</div>
+            <div class="why-item-desc">Keep your WordPress site secure, fast and up-to-date with our monthly maintenance plans &mdash; including core updates, plugin updates, daily backups, uptime monitoring and priority support.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-visual">
+        <div style="font-size: 3.5rem; margin-bottom: 16px;"></div>
+        <div class="visual-title">Free WordPress Consultation</div>
+        <div class="visual-sub" style="margin-bottom: 24px;">30 minutes &middot; No obligation &middot; Expert advice</div>
+        <div style="text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+            <span style="color: var(--accent-cyan); font-weight: 800;">&#10003;</span> Free site audit included
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+            <span style="color: var(--accent-cyan); font-weight: 800;">&#10003;</span> Fixed-price custom quote within 24h
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+            <span style="color: var(--accent-cyan); font-weight: 800;">&#10003;</span> No hidden fees &mdash; ever
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+            <span style="color: var(--accent-cyan); font-weight: 800;">&#10003;</span> WordPress expert assigned to your project
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+            <span style="color: var(--accent-cyan); font-weight: 800;">&#10003;</span> UK, US &amp; Australia-based account managers
+          </div>
+        </div>
+        <button class="pricing-cta" data-modal="callback" id="wp-consult-btn" style="font-size: 0.95rem; padding: 16px;">
+           Book My Free Consultation
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BANNER ===================== -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="aos">
+      <div class="section-badge" style="margin-bottom: 16px;"> WordPress Awaits</div>
+      <h2 class="cta-banner-title">
+        Ready for a WordPress Site <span class="gradient-text">That Truly Performs? </span>
+      </h2>
+      <p class="cta-banner-sub">
+        With 10+ years of WordPress expertise, 75+ developers and hundreds of successful projects under our belt &mdash; we're confident we can build the WordPress site of your dreams. Let's talk.
+      </p>
+      <div class="cta-banner-actions">
+        <button class="btn-primary-3d" data-modal="callback" id="wp-cta-banner-btn">
+          <i class="fa fa-rocket"></i> Start My WordPress Project
+        </button>
+        <a href="web-development.html" class="btn-glass">
+          <i class="fa fa-arrow-left"></i> Back to Web Dev
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FAQ ===================== -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos">
+      <div class="section-badge"> WordPress FAQs</div>
+      <h2 class="section-title">Your WordPress Questions <span class="gradient-text">Answered</span></h2>
+    </div>
+    <div class="faq-list faq-inner">
+      <div class="faq-item aos d1" id="wp-faq-1">
+        <button class="faq-q" onclick="toggleFaq('wp-faq-1')">
+          <span> Why WordPress and not another platform?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            WordPress powers over 43% of all websites on the internet &mdash; and for good reason. It's incredibly flexible, has a massive plugin ecosystem, is well-supported, cost-effective to maintain and gives you full ownership and control of your site. Unlike proprietary builders (Wix, Squarespace), you're never locked in. It also has excellent SEO capabilities and scales from a simple blog to a high-traffic enterprise platform with ease.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d2" id="wp-faq-2">
+        <button class="faq-q" onclick="toggleFaq('wp-faq-2')">
+          <span> Can you fix or improve my existing WordPress site?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Absolutely &mdash; this is one of our most popular services. Whether your site is slow, outdated, broken, hacked or just needs a redesign, we can help. We start with a thorough audit to identify every issue, then present a prioritised action plan with clear costs. We can handle anything from a simple plugin conflict to a full site rebuild. We've rescued hundreds of WordPress sites from all sorts of problems.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d3" id="wp-faq-3">
+        <button class="faq-q" onclick="toggleFaq('wp-faq-3')">
+          <span> Can you build a WooCommerce store?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Yes &mdash; WooCommerce is one of our core specialisms. We build everything from simple product stores to complex multi-vendor marketplaces with subscription products, wholesale pricing, digital downloads and international shipping. We integrate all major payment gateways (Stripe, PayPal, Klarna, Square, etc.) and configure tax rules for UK, US, EU and global selling. Our WooCommerce stores are optimised for conversions from day one.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item aos d4" id="wp-faq-4">
+        <button class="faq-q" onclick="toggleFaq('wp-faq-4')">
+          <span> How do you keep WordPress sites secure?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
+            Security is built into every WordPress site we deliver. Our standard security stack includes: SSL certificate configuration, two-factor authentication, login attempt limiting, file permission hardening, database prefix randomisation, XML-RPC disabling, malware scanning, web application firewall (WAF), daily automated backups stored off-site and real-time threat monitoring. For clients on our monthly maintenance plan, we handle all security updates and patches proactively so vulnerabilities are addressed before they can be exploited.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER INJECTION -->
+<div id="site-footer"></div>
+
+<!-- Scripts -->
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  // Three.js background animation
+  (function() {
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    const geometry = new THREE.BufferGeometry();
+    const count = 1800;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 20;
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ color: 0x06d6f0, size: 0.025, transparent: true, opacity: 0.5 });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame += 0.002;
+      stars.rotation.y = frame * 0.07;
+      stars.rotation.x = frame * 0.035;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  })();
+
+  // FAQ Toggle
+  function toggleFaq(id) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-ans').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      item.querySelector('.faq-ans').style.maxHeight = item.querySelector('.faq-ans-inner').scrollHeight + 'px';
+    }
+  }
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

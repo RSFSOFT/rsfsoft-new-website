@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay Now | RSF Soft</title>
+  <meta name="description" content="Pay securely for your RSF Soft services using our 2Checkout secure payment gateway. Supports GBP, USD, CAD, AUD and AED currencies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+<style>
+    /*  Currency Tab Switcher  */
+    .currency-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .currency-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: 1px solid rgba(124,58,237,0.25);
+      background: rgba(8,13,26,0.6);
+      backdrop-filter: blur(14px);
+      color: var(--text-secondary);
+      font-family: var(--font-primary);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    .currency-tab:hover {
+      border-color: rgba(124,58,237,0.5);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124,58,237,0.2);
+    }
+    .currency-tab.active {
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 100%);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(124,58,237,0.45);
+    }
+
+    /*  Payment Section Layout  */
+    .pay-section-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /*  Security Badge Row  */
+    .security-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .sec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 50px;
+      border: 1px solid rgba(6,214,240,0.25);
+      background: rgba(6,214,240,0.05);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /*  Payment Form Panel  */
+    .pay-form-panel {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .pay-form-panel.active {
+      display: block;
+    }
+    .pay-form-panel.visible {
+      opacity: 1;
+    }
+
+    .pay-form-card {
+      background: rgba(8,13,26,0.8);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      backdrop-filter: blur(20px);
+    }
+
+    .pay-card-header {
+      background: linear-gradient(135deg, rgba(124,58,237,0.18) 0%, rgba(6,214,240,0.08) 100%);
+      border-bottom: 1px solid rgba(124,58,237,0.18);
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pay-card-header-flag {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .pay-card-header-text h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .pay-card-header-text span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-family: var(--font-secondary);
+    }
+    .pay-card-body {
+      padding: 32px;
+    }
+
+    .pay-amount-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .pay-amount-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: var(--font-primary);
+      color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+    .pay-amount-input:focus {
+      border-color: var(--accent-violet);
+      background: rgba(124,58,237,0.06);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+    }
+    .pay-amount-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.92rem;
+    }
+
+    .pay-submit-btn {
+      width: 100%;
+      padding: 17px 24px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 100%);
+      color: #fff;
+      font-family: var(--font-primary);
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(124,58,237,0.4);
+    }
+    .pay-submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .pay-submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(124,58,237,0.55);
+    }
+    .pay-submit-btn:hover::before { opacity: 1; }
+    .pay-submit-btn:active { transform: translateY(0); }
+    .pay-redirect-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-family: var(--font-secondary);
+    }
+    .pay-redirect-note i { color: var(--accent-cyan); margin-right: 4px; }
+
+    /*  Trust Panel (Right Side)  */
+    .trust-panel {
+      background: rgba(8,13,26,0.7);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: var(--radius-xl);
+      padding: 36px 30px;
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 100px;
+    }
+    .trust-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-cyan) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 32px rgba(124,58,237,0.45);
+    }
+    .trust-panel h3 {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+    .trust-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .trust-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      font-family: var(--font-secondary);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .trust-checklist li span.check-ico {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .trust-2co-logo {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .trust-2co-logo img {
+      max-width: 180px;
+      opacity: 0.85;
+      filter: brightness(1.1);
+    }
+
+    /*  Section Intro  */
+    .pay-section-intro {
+      margin-bottom: 40px;
+    }
+    .pay-section-intro .section-sub {
+      font-family: var(--font-secondary);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .pay-section-intro h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    /*  Features Grid  */
+    .features-grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+    .feat-box {
+      background: rgba(8,13,26,0.65);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.35s ease;
+    }
+    .feat-box:hover {
+      border-color: rgba(124,58,237,0.35);
+      background: rgba(124,58,237,0.06);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(124,58,237,0.15);
+    }
+    .feat-box-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+    .feat-box-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .feat-box-text {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-family: var(--font-secondary);
+      line-height: 1.7;
+    }
+
+    /*  Responsive  */
+    @media (max-width: 960px) {
+      .pay-section-grid { grid-template-columns: 1fr; }
+      .features-grid-3col { grid-template-columns: 1fr 1fr; }
+      .trust-panel { position: static; }
+    }
+    @media (max-width: 640px) {
+      .security-badges { gap: 8px; }
+      .sec-badge { font-size: 0.72rem; padding: 6px 12px; }
+      .features-grid-3col { grid-template-columns: 1fr; }
+      .currency-tab { padding: 9px 16px; font-size: 0.82rem; }
+      .pay-card-body { padding: 22px 18px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+<div id="site-nav"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero" style="padding-bottom:60px;">
+  <div class="page-hero-glow"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span style="color:var(--text-secondary);">Pay Now</span>
+    </div>
+    <div class="page-hero-badge">
+      <span class="hero-badge-dot"></span> Secure Payment
+    </div>
+    <h1 class="page-hero-title"> Pay Safely &amp; <span class="gradient-text">Securely</span></h1>
+    <p class="page-hero-sub">Trusted payment gateway powered by 2Checkout. Pay in your preferred currency &mdash; GBP, USD, CAD, AUD or AED.</p>
+  </div>
+</section>
+
+<!-- MAIN PAYMENT SECTION -->
+<section class="content-section" style="padding-top:40px;">
+  <div class="container">
+
+    <!-- Intro -->
+    <div class="pay-section-intro aos">
+      <p class="section-sub">The UK's most trusted Digital Marketing Agency &amp; SEO Company offering affordable, guaranteed results.</p>
+      <h2>RSFSOFT &mdash; <span class="gradient-text">Pay Safely</span></h2>
+
+      <!-- Security Badges -->
+      <div class="security-badges">
+        <div class="sec-badge"> 256-bit SSL Encrypted</div>
+        <div class="sec-badge"> 2Checkout Secure</div>
+        <div class="sec-badge"> Money Back Guarantee</div>
+        <div class="sec-badge"> 5 Currencies Supported</div>
+      </div>
+
+      <!-- Currency Tabs -->
+      <div class="currency-tabs" id="currency-tabs" role="tablist">
+        <button class="currency-tab active" id="tab-gbp" data-target="pay-form-gbp" role="tab" aria-selected="true"> GBP</button>
+        <button class="currency-tab" id="tab-usd" data-target="pay-form-usd" role="tab" aria-selected="false"> USD</button>
+        <button class="currency-tab" id="tab-cad" data-target="pay-form-cad" role="tab" aria-selected="false"> CAD</button>
+        <button class="currency-tab" id="tab-aud" data-target="pay-form-aud" role="tab" aria-selected="false"> AUD</button>
+        <button class="currency-tab" id="tab-aed" data-target="pay-form-aed" role="tab" aria-selected="false"> AED</button>
+      </div>
+    </div>
+
+    <!-- Payment Grid: Forms (left) + Trust Panel (right) -->
+    <div class="pay-section-grid">
+
+      <!-- LEFT: Payment Form Panels -->
+      <div id="pay-forms-container">
+
+        <!-- GBP -->
+        <div class="pay-form-panel active visible" id="pay-form-gbp" role="tabpanel">
+          <div class="pay-form-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="pay-card-header">
+              <div class="pay-card-header-flag"></div>
+              <div class="pay-card-header-text">
+                <h3>British Pound Sterling (GBP) &mdash; Secure Payment</h3>
+                <span>Processed via 2Checkout secure gateway</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <form method="post" action="https://www.2checkout.com/checkout/purchase" id="form-gbp">
+                <label class="pay-amount-label" for="li_0_price_gbp">Payment Amount</label>
+                <input class="pay-amount-input" type="text" id="li_0_price_gbp" name="li_0_price" placeholder="Enter amount in GBP..." required>
+                <input type="hidden" name="sid" value="103020151">
+                <input type="hidden" name="mode" value="2CO">
+                <input type="hidden" name="currency_code" value="GBP">
+                <input type="hidden" name="li_0_name" value="Seo">
+                <button type="submit" class="pay-submit-btn">Pay Now </button>
+              </form>
+              <p class="pay-redirect-note"><i class="fa fa-shield-halved"></i>You will be redirected to our secure 2Checkout payment page</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- USD -->
+        <div class="pay-form-panel" id="pay-form-usd" role="tabpanel">
+          <div class="pay-form-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="pay-card-header">
+              <div class="pay-card-header-flag"></div>
+              <div class="pay-card-header-text">
+                <h3>US Dollar (USD) &mdash; Secure Payment</h3>
+                <span>Processed via 2Checkout secure gateway</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <form method="post" action="https://www.2checkout.com/checkout/purchase" id="form-usd">
+                <label class="pay-amount-label" for="li_0_price_usd">Payment Amount</label>
+                <input class="pay-amount-input" type="text" id="li_0_price_usd" name="li_0_price" placeholder="Enter amount in USD..." required>
+                <input type="hidden" name="sid" value="103020151">
+                <input type="hidden" name="mode" value="2CO">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="li_0_name" value="Seo">
+                <button type="submit" class="pay-submit-btn">Pay Now </button>
+              </form>
+              <p class="pay-redirect-note"><i class="fa fa-shield-halved"></i>You will be redirected to our secure 2Checkout payment page</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CAD -->
+        <div class="pay-form-panel" id="pay-form-cad" role="tabpanel">
+          <div class="pay-form-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="pay-card-header">
+              <div class="pay-card-header-flag"></div>
+              <div class="pay-card-header-text">
+                <h3>Canadian Dollar (CAD) &mdash; Secure Payment</h3>
+                <span>Processed via 2Checkout secure gateway</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <form method="post" action="https://www.2checkout.com/checkout/purchase" id="form-cad">
+                <label class="pay-amount-label" for="li_0_price_cad">Payment Amount</label>
+                <input class="pay-amount-input" type="text" id="li_0_price_cad" name="li_0_price" placeholder="Enter amount in CAD..." required>
+                <input type="hidden" name="sid" value="103020151">
+                <input type="hidden" name="mode" value="2CO">
+                <input type="hidden" name="currency_code" value="CAD">
+                <input type="hidden" name="li_0_name" value="Seo">
+                <button type="submit" class="pay-submit-btn">Pay Now </button>
+              </form>
+              <p class="pay-redirect-note"><i class="fa fa-shield-halved"></i>You will be redirected to our secure 2Checkout payment page</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUD -->
+        <div class="pay-form-panel" id="pay-form-aud" role="tabpanel">
+          <div class="pay-form-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="pay-card-header">
+              <div class="pay-card-header-flag"></div>
+              <div class="pay-card-header-text">
+                <h3>Australian Dollar (AUD) &mdash; Secure Payment</h3>
+                <span>Processed via 2Checkout secure gateway</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <form method="post" action="https://www.2checkout.com/checkout/purchase" id="form-aud">
+                <label class="pay-amount-label" for="li_0_price_aud">Payment Amount</label>
+                <input class="pay-amount-input" type="text" id="li_0_price_aud" name="li_0_price" placeholder="Enter amount in AUD..." required>
+                <input type="hidden" name="sid" value="103020151">
+                <input type="hidden" name="mode" value="2CO">
+                <input type="hidden" name="currency_code" value="AUD">
+                <input type="hidden" name="li_0_name" value="Seo">
+                <button type="submit" class="pay-submit-btn">Pay Now </button>
+              </form>
+              <p class="pay-redirect-note"><i class="fa fa-shield-halved"></i>You will be redirected to our secure 2Checkout payment page</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AED -->
+        <div class="pay-form-panel" id="pay-form-aed" role="tabpanel">
+          <div class="pay-form-card" data-tilt data-tilt-max="3" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="pay-card-header">
+              <div class="pay-card-header-flag"></div>
+              <div class="pay-card-header-text">
+                <h3>UAE Dirham (AED) &mdash; Secure Payment</h3>
+                <span>Processed via 2Checkout secure gateway</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <form method="post" action="https://www.2checkout.com/checkout/purchase" id="form-aed">
+                <label class="pay-amount-label" for="li_0_price_aed">Payment Amount</label>
+                <input class="pay-amount-input" type="text" id="li_0_price_aed" name="li_0_price" placeholder="Enter amount in AED..." required>
+                <input type="hidden" name="sid" value="103020151">
+                <input type="hidden" name="mode" value="2CO">
+                <input type="hidden" name="currency_code" value="AED">
+                <input type="hidden" name="li_0_name" value="Seo">
+                <button type="submit" class="pay-submit-btn">Pay Now </button>
+              </form>
+              <p class="pay-redirect-note"><i class="fa fa-shield-halved"></i>You will be redirected to our secure 2Checkout payment page</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /pay-forms-container -->
+
+      <!-- RIGHT: Trust Panel -->
+      <div class="trust-panel aos-right">
+        <div class="trust-icon-wrap"></div>
+        <h3>Why Pay <span class="gradient-text">With Us</span></h3>
+        <ul class="trust-checklist">
+          <li><span class="check-ico"></span> Verified 2Checkout merchant</li>
+          <li><span class="check-ico"></span> SSL 256-bit encryption</li>
+          <li><span class="check-ico"></span> Instant payment confirmation</li>
+          <li><span class="check-ico"></span> Receipt sent to your email</li>
+          <li><span class="check-ico"></span> Money-back guarantee</li>
+          <li><span class="check-ico"></span> 24/7 support after payment</li>
+        </ul>
+        <div class="trust-2co-logo">
+          <img loading="lazy" src="https://rsfsoft.com/assets/img/banners/2checkout.png" alt="2Checkout Secure Payment" style="max-width:200px;margin-top:20px;">
+        </div>
+      </div>
+
+    </div><!-- /pay-section-grid -->
+
+    <!-- 3-Column Feature Boxes -->
+    <div class="features-grid-3col">
+      <div class="feat-box aos d1" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="feat-box-icon"></div>
+        <div class="feat-box-title">Bank-Level Security</div>
+        <div class="feat-box-text">We use industry-standard 256-bit SSL encryption to protect every transaction from start to finish.</div>
+      </div>
+      <div class="feat-box aos d2" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="feat-box-icon"></div>
+        <div class="feat-box-title">Instant Confirmation</div>
+        <div class="feat-box-text">Receive an immediate payment confirmation email with your transaction receipt upon successful payment.</div>
+      </div>
+      <div class="feat-box aos d3" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="feat-box-icon"></div>
+        <div class="feat-box-title">Global Currencies</div>
+        <div class="feat-box-text">Pay in GBP, USD, CAD, AUD or AED &mdash; we support your local currency for maximum convenience.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="aos">
+      <div class="page-hero-badge" style="margin-bottom:20px;"> Need Help</div>
+      <h2 class="cta-banner-title">Questions About <span class="gradient-text">Payment</span> </h2>
+      <p class="cta-banner-sub">Our team is ready to assist you with any payment queries. Give us a call and we'll guide you through the process in minutes.</p>
+      <div class="cta-banner-actions">
+        <a href="tel:+441296794358" class="btn-primary-3d"><i class="fa fa-phone"></i> Call Us Now</a>
+        <a href="mailto:info@rsfsoft.com" class="btn-glass"><i class="fa fa-envelope"></i> info@rsfsoft.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  //  Three.js animated background 
+  (function(){
+    const canvas = document.getElementById('three-canvas');
+    if(!canvas) return;
+    const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.z = 30;
+    const geo = new THREE.BufferGeometry();
+    const count = 600;
+    const positions = new Float32Array(count*3);
+    for(let i=0;i<count*3;i++) positions[i]=(Math.random()-0.5)*120;
+    geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({color:0x7c3aed, size:0.2, transparent:true, opacity:0.45})));
+    function animate(){requestAnimationFrame(animate);scene.rotation.y+=0.0003;scene.rotation.x+=0.0001;renderer.render(scene,camera);}
+    animate();
+    window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+  })();
+
+  //  Currency Tab Switcher 
+  (function(){
+    var tabs = document.querySelectorAll('.currency-tab');
+    var panels = document.querySelectorAll('.pay-form-panel');
+
+    // On page load: show only GBP
+    panels.forEach(function(p){ p.classList.remove('active','visible'); });
+    var defaultPanel = document.getElementById('pay-form-gbp');
+    if(defaultPanel){
+      defaultPanel.classList.add('active');
+      // Trigger reflow then add visible
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          defaultPanel.classList.add('visible');
+        });
+      });
+    }
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var targetId = this.getAttribute('data-target');
+        var targetPanel = document.getElementById(targetId);
+        if(!targetPanel) return;
+
+        // Update tab active states
+        tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+        this.classList.add('active');
+        this.setAttribute('aria-selected','true');
+
+        // Fade out all panels, then show target
+        panels.forEach(function(p){
+          p.classList.remove('visible');
+          // After transition remove display:block from all non-target
+          setTimeout(function(){
+            p.classList.remove('active');
+          }, 310);
+        });
+
+        // Show target panel with fade
+        setTimeout(function(){
+          targetPanel.classList.add('active');
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              targetPanel.classList.add('visible');
+            });
+          });
+        }, 50);
+      });
+    });
+  })();
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

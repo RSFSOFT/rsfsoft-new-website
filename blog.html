@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Digital Marketing &amp; SEO Insights | RSF Soft</title>
+  <meta name="description" content="Read the RSF Soft blog for expert SEO tips, web development guides, digital marketing insights and industry news from our team of specialists.">
+  <meta name="keywords" content="RSF Soft blog, SEO tips, digital marketing blog, web development guides, SEO insights, digital marketing news">
+  <meta property="og:title" content="Blog | Digital Marketing &amp; SEO Insights | RSF Soft">
+  <meta property="og:description" content="Read the RSF Soft blog for expert SEO tips, web development guides, digital marketing insights and industry news from our team of specialists.">
+  <meta property="og:url" content="https://www.rsfsoft.com/blog.html">
+  <link rel="canonical" href="https://www.rsfsoft.com/blog.html">
+  <link rel="icon" href="assets/img/favicon-new.png" type="image/x-icon">
+
+  <!-- Google Fonts -->
+<!-- Font Awesome 6.5 -->
+  
+
+  <!-- Three.js r128 -->
+  
+
+  <!-- VanillaTilt -->
+  
+
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript></noscript>
+  <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:Outfit,system-ui,sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block;height:auto}#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}.top-bar{position:relative;z-index:100;background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:9px 0;text-align:center;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.4px}.top-bar-ticker{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}.ticker-sep{opacity:.3}.navbar{position:sticky;top:0;z-index:1000;background:rgba(4,7,15,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07)}.nav-container{max-width:1300px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:74px}.nav-logo img{height:46px;width:auto}.nav-menu{display:flex;align-items:center;gap:4px}.nav-link{padding:9px 15px;border-radius:10px;font-size:.88rem;font-weight:500;color:#94a3b8}.nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:10px 24px!important;border-radius:40px!important;font-weight:700!important}.page-hero{position:relative;padding:140px 0 80px;z-index:1;text-align:center}.page-hero-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#7c3aed;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px}.page-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:16px}.page-hero-sub{font-size:1rem;color:#94a3b8;max-width:620px;margin:0 auto 28px;line-height:1.8}.page-hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}.breadcrumb{font-size:.82rem;color:#94a3b8}.breadcrumb a{color:#7c3aed}.container{max-width:1300px;margin:0 auto;padding:0 28px}.btn-primary-3d{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;font-family:inherit}.btn-glass{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.12);border-radius:50px;cursor:pointer;font-family:inherit}.gradient-text{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}@media(max-width:768px){.hero-content{grid-template-columns:1fr}.hero-visual{display:none}#three-canvas{display:none}.nav-menu{display:none}.nav-toggle{display:flex;flex-direction:column}}</style>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="css/animations.css"></noscript>
+
+  <style>
+    /* Blog-specific styles */
+    .blog-filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-secondary);
+      font-family: var(--font-primary);
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+    }
+    .filter-pill:hover {
+      border-color: rgba(124,58,237,0.4);
+      color: var(--text-primary);
+      background: rgba(124,58,237,0.08);
+      transform: translateY(-2px);
+    }
+    .filter-pill.active {
+      background: var(--gradient-primary);
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 8px 24px rgba(124,58,237,0.35);
+    }
+
+    /* Blog grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } }
+
+    .blog-card {
+      background: rgba(8,13,26,0.7);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(124,58,237,0.3);
+      box-shadow: 0 24px 64px rgba(124,58,237,0.18);
+    }
+    .blog-card.hidden { display: none; }
+
+    .blog-card-header {
+      padding: 24px 24px 0;
+    }
+    .blog-cat-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .cat-seo    { background: rgba(124,58,237,0.18); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
+    .cat-web    { background: rgba(6,214,240,0.12); color: #06d6f0; border: 1px solid rgba(6,214,240,0.3); }
+    .cat-digital{ background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+    .cat-social { background: rgba(236,72,153,0.12); color: #f472b6; border: 1px solid rgba(236,72,153,0.3); }
+    .cat-shopify{ background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+    .cat-wordpress{ background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+
+    .blog-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    .blog-card-excerpt {
+      font-family: var(--font-secondary);
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-body {
+      padding: 14px 24px;
+      flex: 1;
+    }
+    .blog-card-footer {
+      padding: 14px 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: auto;
+    }
+    .blog-meta {
+      display: flex;
+      gap: 14px;
+      font-family: var(--font-secondary);
+      font-size: 0.77rem;
+      color: var(--text-muted);
+    }
+    .blog-meta span { display: flex; align-items: center; gap: 4px; }
+    .blog-read-more {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-violet);
+      text-decoration: none;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .blog-read-more:hover {
+      color: var(--accent-cyan);
+      gap: 8px;
+    }
+
+    /* Newsletter form */
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 520px;
+      margin: 0 auto 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      min-width: 260px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-secondary);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .newsletter-form input[type="email"]:focus { border-color: rgba(124,58,237,0.5); }
+    .newsletter-form input[type="email"]::placeholder { color: var(--text-muted); }
+    .newsletter-success {
+      display: none;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .newsletter-hint {
+      font-family: var(--font-secondary);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+
+<div id="site-nav"></div>
+
+<!-- ================================================
+     PAGE HERO
+     ================================================ -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>Blog</span>
+    </nav>
+    <div class="page-hero-badge">Our Blog</div>
+    <h1 class="page-hero-title">
+      Expert Insights &amp; <span class="gradient-text">Digital Tips</span> 
+    </h1>
+    <p class="page-hero-sub">
+      Stay up to date with the latest SEO strategies, web development trends, digital marketing tips and industry news from the RSF Soft team.
+    </p>
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 1 &mdash; BLOG FILTER + GRID
+     ================================================ -->
+<section class="content-section">
+  <div class="container">
+
+    <!-- Category Filter Pills -->
+    <div class="blog-filter-bar aos">
+      <button class="filter-pill active" data-filter="all" id="filter-all" onclick="filterBlog('all')">All Posts</button>
+      <button class="filter-pill" data-filter="seo" id="filter-seo" onclick="filterBlog('seo')"> SEO</button>
+      <button class="filter-pill" data-filter="web" id="filter-web" onclick="filterBlog('web')"> Web Development</button>
+      <button class="filter-pill" data-filter="digital" id="filter-digital" onclick="filterBlog('digital')"> Digital Marketing</button>
+      <button class="filter-pill" data-filter="social" id="filter-social" onclick="filterBlog('social')"> Social Media</button>
+      <button class="filter-pill" data-filter="shopify" id="filter-shopify" onclick="filterBlog('shopify')"> Shopify</button>
+      <button class="filter-pill" data-filter="wordpress" id="filter-wordpress" onclick="filterBlog('wordpress')"> WordPress</button>
+    </div>
+
+    <!-- Blog Cards Grid -->
+    <div class="blog-grid" id="blog-grid">
+
+      <!-- Card A: SEO -->
+      <article class="blog-card aos d1" data-category="seo">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-seo">SEO</span>
+          <h2 class="blog-card-title">How to Rank on Google Page 1 in 2024: A Complete SEO Guide</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Master the proven strategies our experts use to push websites to the top of Google search results for competitive keywords.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Dec 2024</span>
+            <span><i class="fa fa-clock"></i> 8 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card B: Web Dev -->
+      <article class="blog-card aos d2" data-category="web">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-web">Web Development</span>
+          <h2 class="blog-card-title">10 Web Design Trends That Will Dominate in 2025</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">From glassmorphism to AI-powered interfaces, discover the web design trends that will define the digital landscape in 2025.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Nov 2024</span>
+            <span><i class="fa fa-clock"></i> 6 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card C: SEO -->
+      <article class="blog-card aos d3" data-category="seo">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-seo">SEO</span>
+          <h2 class="blog-card-title">Local SEO for Small Businesses: The Complete 2024 Guide</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Learn how to dominate local search results and attract more customers from your area using proven local SEO strategies.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Nov 2024</span>
+            <span><i class="fa fa-clock"></i> 10 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card D: Digital -->
+      <article class="blog-card aos d1" data-category="digital">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-digital">Digital Marketing</span>
+          <h2 class="blog-card-title">Google Ads vs Facebook Ads: Which Is Better for Your Business?</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">An in-depth comparison of Google Ads and Facebook Ads to help you decide where to invest your paid advertising budget.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Oct 2024</span>
+            <span><i class="fa fa-clock"></i> 7 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card E: Shopify -->
+      <article class="blog-card aos d2" data-category="shopify">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-shopify">Shopify</span>
+          <h2 class="blog-card-title">How to Increase Shopify Store Conversions by 40%</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Discover the exact optimizations our team made to triple conversion rates for our e-commerce clients on Shopify.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Oct 2024</span>
+            <span><i class="fa fa-clock"></i> 9 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card F: WordPress -->
+      <article class="blog-card aos d3" data-category="wordpress">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-wordpress">WordPress</span>
+          <h2 class="blog-card-title">WordPress vs Shopify: Which Platform is Right for Your Business?</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">A comprehensive comparison of WordPress and Shopify to help you choose the right platform for your online store.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Sep 2024</span>
+            <span><i class="fa fa-clock"></i> 8 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card G: Social -->
+      <article class="blog-card aos d1" data-category="social">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-social">Social Media</span>
+          <h2 class="blog-card-title">Instagram Marketing in 2024: Grow Your Following Organically</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">The proven strategies our social media team uses to grow Instagram accounts by 10,000+ followers without paid ads.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Sep 2024</span>
+            <span><i class="fa fa-clock"></i> 6 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card H: SEO -->
+      <article class="blog-card aos d2" data-category="seo">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-seo">SEO</span>
+          <h2 class="blog-card-title">Link Building in 2024: What Still Works (And What Doesn't)</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">An honest look at modern link building strategies &mdash; what Google rewards, what gets penalized, and how to build links safely.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Aug 2024</span>
+            <span><i class="fa fa-clock"></i> 11 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Card I: Web Dev -->
+      <article class="blog-card aos d3" data-category="web">
+        <div class="blog-card-header">
+          <span class="blog-cat-badge cat-web">Web Development</span>
+          <h2 class="blog-card-title">Why Your Website Speed Matters More Than Ever in 2024</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Learn how page speed affects your SEO rankings, user experience and conversion rates &mdash; and how to fix a slow website fast.</p>
+        </div>
+        <div class="blog-card-footer">
+          <div class="blog-meta">
+            <span><i class="fa fa-calendar-alt"></i> Aug 2024</span>
+            <span><i class="fa fa-clock"></i> 5 min read</span>
+          </div>
+          <a href="#" class="blog-read-more">Read More &rarr;</a>
+        </div>
+      </article>
+
+    </div><!-- /blog-grid -->
+  </div>
+</section>
+
+<!-- ================================================
+     SECTION 2 &mdash; NEWSLETTER SIGNUP
+     ================================================ -->
+<section class="content-section content-section-alt">
+  <div class="container">
+    <div class="section-header aos" style="text-align:center;">
+      <span class="section-badge">Stay Updated</span>
+      <h2 class="section-title">Get Weekly <span class="gradient-text">Digital Tips</span> to Your Inbox </h2>
+      <p class="section-subtitle">Join thousands of business owners and marketers who get our best content first.</p>
+    </div>
+    <div class="aos" style="text-align:center;">
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" id="newsletter-email" placeholder="Enter your email address" autocomplete="email" required>
+        <button type="submit" class="btn-primary-3d">
+          <i class="fa fa-paper-plane"></i> Subscribe Free
+        </button>
+      </form>
+      <div class="newsletter-success" id="newsletter-success">
+         You're subscribed! Check your inbox for a confirmation email.
+      </div>
+      <p class="newsletter-hint"> Join 5,000+ digital marketers. No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     CTA BANNER
+     ================================================ -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-title">
+      Need Expert Digital Marketing Help? <span class="gradient-text"></span>
+    </div>
+    <p class="cta-banner-sub">
+      Let our team of specialists create a tailored digital marketing strategy that drives real, measurable results for your business.
+    </p>
+    <div class="cta-banner-actions">
+      <button class="btn-primary-3d" data-modal="callback" id="blog-cta-btn">
+        <i class="fa fa-handshake"></i> Get Free Consultation
+      </button>
+      <a href="index.html#services" class="btn-glass">
+        <i class="fa fa-th-large"></i> Our Services
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="js/shared.js" defer></script>
+  <script src="js/bg-canvas.js" defer></script>
+  <script src="js/animations.js" defer></script>
+<script>
+  // Blog category filter
+  function filterBlog(category) {
+    const cards = document.querySelectorAll('.blog-card');
+    const pills = document.querySelectorAll('.filter-pill');
+
+    pills.forEach(p => p.classList.remove('active'));
+    document.getElementById('filter-' + category).classList.add('active');
+
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  // Newsletter form
+  function handleNewsletter(e) {
+    e.preventDefault();
+    const form = document.getElementById('newsletter-form');
+    const success = document.getElementById('newsletter-success');
+    form.style.display = 'none';
+    success.style.display = 'block';
+  }
+</script>
+  <script src="js/perf.js" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
