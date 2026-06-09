@@ -51,7 +51,8 @@ const NAV_HTML = `
           <li><a href="pay-now.html"><i class="fa fa-credit-card"></i> Pay Now</a></li>
         </ul>
       </li>
-      <li class="nav-item"><a href="contact-us.html" class="nav-link nav-cta">Contact Us</a></li>
+      <li class="nav-item"><a href="questionaire.html" class="nav-link nav-cta" style="margin-right:8px;background:linear-gradient(135deg,#06d6f0,#7c3aed)!important;">Get a Quote</a>
+          <a href="contact-us.html" class="nav-link nav-cta">Contact Us</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -123,7 +124,7 @@ const FOOTER_HTML = `
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">(c) 2024 RSFSOFT Ltd. All Rights Reserved. Powered by <a href="index.html" style="color:var(--accent-violet);">RSF Soft</a></p>
+      <p class="footer-copy">&copy; 2026 RSFSOFT Ltd. All Rights Reserved. Powered by <a href="index.html" style="color:var(--accent-violet);">RSF Soft</a></p>
       <div class="footer-policy">
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="terms-and-conditions.html">Terms & Conditions</a>
