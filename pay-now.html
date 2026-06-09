@@ -576,87 +576,81 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="js/shared.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/shared.js"></script>
   <script src="js/bg-canvas.js" defer></script>
   <script src="js/animations.js" defer></script>
 <script>
-  //  Three.js animated background 
-  (function(){
-    const canvas = document.getElementById('three-canvas');
-    if(!canvas) return;
-    const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-    camera.position.z = 30;
-    const geo = new THREE.BufferGeometry();
-    const count = 600;
-    const positions = new Float32Array(count*3);
-    for(let i=0;i<count*3;i++) positions[i]=(Math.random()-0.5)*120;
-    geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({color:0x7c3aed, size:0.2, transparent:true, opacity:0.45})));
-    function animate(){requestAnimationFrame(animate);scene.rotation.y+=0.0003;scene.rotation.x+=0.0001;renderer.render(scene,camera);}
-    animate();
-    window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
-  })();
+  document.addEventListener('DOMContentLoaded', function () {
 
-  //  Currency Tab Switcher 
-  (function(){
-    var tabs = document.querySelectorAll('.currency-tab');
+    // ── Three.js animated background ──────────────────────────────
+    (function(){
+      const canvas = document.getElementById('three-canvas');
+      if(!canvas || typeof THREE === 'undefined') return;
+      const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+      camera.position.z = 30;
+      const geo = new THREE.BufferGeometry();
+      const count = 600;
+      const positions = new Float32Array(count*3);
+      for(let i=0;i<count*3;i++) positions[i]=(Math.random()-0.5)*120;
+      geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+      scene.add(new THREE.Points(geo, new THREE.PointsMaterial({color:0x7c3aed, size:0.2, transparent:true, opacity:0.45})));
+      function animate(){requestAnimationFrame(animate);scene.rotation.y+=0.0003;scene.rotation.x+=0.0001;renderer.render(scene,camera);}
+      animate();
+      window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+    })();
+
+    // ── Currency Tab Switcher ──────────────────────────────────────
+    var tabs   = document.querySelectorAll('.currency-tab');
     var panels = document.querySelectorAll('.pay-form-panel');
 
-    // On page load: show only GBP
+    if (!tabs.length || !panels.length) return;
+
+    // Show GBP by default
     panels.forEach(function(p){ p.classList.remove('active','visible'); });
     var defaultPanel = document.getElementById('pay-form-gbp');
-    if(defaultPanel){
+    if (defaultPanel) {
       defaultPanel.classList.add('active');
-      // Trigger reflow then add visible
       requestAnimationFrame(function(){
-        requestAnimationFrame(function(){
-          defaultPanel.classList.add('visible');
-        });
+        requestAnimationFrame(function(){ defaultPanel.classList.add('visible'); });
       });
     }
 
     tabs.forEach(function(tab){
       tab.addEventListener('click', function(){
-        var targetId = this.getAttribute('data-target');
+        var targetId    = this.getAttribute('data-target');
         var targetPanel = document.getElementById(targetId);
-        if(!targetPanel) return;
+        if (!targetPanel) return;
 
-        // Update tab active states
+        // Update tab highlights
         tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
         this.classList.add('active');
         this.setAttribute('aria-selected','true');
 
-        // Fade out all panels, then show target
+        // Fade out all panels
         panels.forEach(function(p){
           p.classList.remove('visible');
-          // After transition remove display:block from all non-target
-          setTimeout(function(){
-            p.classList.remove('active');
-          }, 310);
+          setTimeout(function(){ p.classList.remove('active'); }, 310);
         });
 
-        // Show target panel with fade
+        // Fade in the selected panel
         setTimeout(function(){
           targetPanel.classList.add('active');
           requestAnimationFrame(function(){
-            requestAnimationFrame(function(){
-              targetPanel.classList.add('visible');
-            });
+            requestAnimationFrame(function(){ targetPanel.classList.add('visible'); });
           });
         }, 50);
       });
     });
-  })();
+
+  }); // end DOMContentLoaded
 </script>
   <script src="js/perf.js" defer></script>
 </body>
-</html>
-
-
 
 
 
