@@ -14,7 +14,7 @@ const NAV_HTML = `
     <span class="ticker-sep">|</span>
     <span><i class="fa fa-phone" style="margin-right:5px;"></i> AU: <a href="tel:+61370762195">+61370762195</a></span>
     <span class="ticker-sep">|</span>
-    <span><i class="fa fa-clock" style="margin-right:5px;"></i> Mon-Fri 9am-6pm</span>
+    <span><i class="fa fa-clock" style="margin-right:5px;"></i> Monday to Friday, 9am&ndash;6pm</span>
     <span class="ticker-sep">|</span>
     <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener noreferrer" title="RSF Soft — Certified Google Partner" style="display:inline-flex;align-items:center;gap:5px;text-decoration:none;opacity:0.9;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
       <img src="https://www.gstatic.com/partners/badge/images/2024/PartnerBadgeClickable.svg" alt="Google Partner" style="height:22px;width:auto;vertical-align:middle;" onerror="this.style.display='none'">
@@ -128,7 +128,7 @@ const FOOTER_HTML = `
           <div class="fci"><span></span><span><a href="tel:+61370762195">AU: +61370762195</a></span></div>
           <div class="fci"><span></span><span><a href="tel:+923200605762">PK: +92-320-060-5762</a></span></div>
           <div class="fci"><span></span><span><a href="mailto:info@rsfsoft.com">info@rsfsoft.com</a></span></div>
-          <div class="fci"><span></span><span>Mon-Fri, 9am-6pm</span></div>
+          <div class="fci"><span></span><span>Monday to Friday, 9am&ndash;6pm</span></div>
         </div>
       </div>
     </div>
