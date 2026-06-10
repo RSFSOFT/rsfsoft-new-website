@@ -86,7 +86,7 @@ const FOOTER_HTML = `
           <a href="https://www.instagram.com/rsfsoftofficial/" target="_blank" class="fsoc-btn"><i class="fab fa-instagram"></i></a>
           <a href="https://twitter.com/SoftRsf" target="_blank" class="fsoc-btn"><i class="fab fa-twitter"></i></a>
           <a href="https://www.youtube.com/channel/UCyVmyzkaACKsV6u44b52VEQ" target="_blank" class="fsoc-btn"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/rsfsoft" target="_blank" class="fsoc-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/company/rsf-soft/" target="_blank" class="fsoc-btn"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div style="display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap;">
           <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener noreferrer" title="RSFSOFT LTD -- Certified Google Partner" style="display:inline-block;opacity:0.85;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
