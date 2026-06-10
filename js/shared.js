@@ -29,41 +29,197 @@ const NAV_HTML = `
     <a href="index.html" class="nav-logo" style="text-decoration:none;">
       <span style="font-size:1.8rem; font-weight:900; font-family:'Outfit',sans-serif; background:linear-gradient(135deg,#7c3aed,#06d6f0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:1px;">RSF SOFT</span>
     </a>
+
     <ul class="nav-menu" id="nav-menu">
+
+      <!-- HOME -->
       <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-      <li class="nav-item"><a href="about-us.html" class="nav-link">About Us</a></li>
+
+      <!-- SERVICES MEGA MENU -->
+      <li class="nav-item has-mega">
+        <a href="index.html#services" class="nav-link nav-link-arrow">
+          Services <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:4px;"></i>
+        </a>
+        <div class="mega-menu" id="mega-services">
+          <div class="mega-inner">
+
+            <!-- Col 1: SEO -->
+            <div class="mega-col">
+              <div class="mega-col-head"><i class="fa fa-search-dollar"></i> SEO &amp; Search</div>
+              <a href="search-engine-optimization.html" class="mega-link">
+                <i class="fa fa-chart-line"></i>
+                <span><strong>SEO Services</strong><em>Rank on Page 1, drive organic traffic</em></span>
+              </a>
+              <a href="seo-packages.html" class="mega-link">
+                <i class="fa fa-tags"></i>
+                <span><strong>SEO Packages</strong><em>Transparent monthly pricing</em></span>
+              </a>
+              <a href="google-my-business-optimisation.html" class="mega-link">
+                <i class="fa fa-map-marker-alt"></i>
+                <span><strong>Google My Business</strong><em>Dominate local search</em></span>
+              </a>
+              <a href="local-business.html" class="mega-link">
+                <i class="fa fa-store"></i>
+                <span><strong>Local Business SEO</strong><em>Get found in your area</em></span>
+              </a>
+              <a href="blogger-outreach-service.html" class="mega-link">
+                <i class="fa fa-pen-nib"></i>
+                <span><strong>Blogger Outreach</strong><em>High-quality backlinks</em></span>
+              </a>
+              <a href="penalty-recovery.html" class="mega-link">
+                <i class="fa fa-shield-alt"></i>
+                <span><strong>Penalty Recovery</strong><em>Recover from Google penalties</em></span>
+              </a>
+            </div>
+
+            <!-- Col 2: Web & App Dev -->
+            <div class="mega-col">
+              <div class="mega-col-head"><i class="fa fa-code"></i> Web &amp; App Dev</div>
+              <a href="web-development.html" class="mega-link">
+                <i class="fa fa-laptop-code"></i>
+                <span><strong>Web Development</strong><em>Custom, fast, conversion-focused</em></span>
+              </a>
+              <a href="wordpress-development.html" class="mega-link">
+                <i class="fab fa-wordpress"></i>
+                <span><strong>WordPress Development</strong><em>Themes, plugins, WooCommerce</em></span>
+              </a>
+              <a href="shopify.html" class="mega-link">
+                <i class="fab fa-shopify"></i>
+                <span><strong>Shopify Development</strong><em>High-converting stores</em></span>
+              </a>
+              <a href="mobile-app.html" class="mega-link">
+                <i class="fa fa-mobile-alt"></i>
+                <span><strong>App Development</strong><em>iOS, Android &amp; cross-platform</em></span>
+              </a>
+            </div>
+
+            <!-- Col 3: Social & Content -->
+            <div class="mega-col">
+              <div class="mega-col-head"><i class="fa fa-bullhorn"></i> Social &amp; Content</div>
+              <a href="social-media-marketing.html" class="mega-link">
+                <i class="fab fa-instagram"></i>
+                <span><strong>Social Media Marketing</strong><em>Grow &amp; engage your audience</em></span>
+              </a>
+              <a href="social-media-packages.html" class="mega-link">
+                <i class="fa fa-layer-group"></i>
+                <span><strong>Social Media Packages</strong><em>Plans for every budget</em></span>
+              </a>
+              <a href="content-writing-service.html" class="mega-link">
+                <i class="fa fa-file-alt"></i>
+                <span><strong>Content Writing</strong><em>SEO blogs, web copy &amp; more</em></span>
+              </a>
+              <a href="infographic-design-service.html" class="mega-link">
+                <i class="fa fa-palette"></i>
+                <span><strong>Graphic &amp; Infographic Design</strong><em>Visuals that stop the scroll</em></span>
+              </a>
+              <a href="ppc-packages.html" class="mega-link">
+                <i class="fa fa-ad"></i>
+                <span><strong>PPC &amp; Paid Ads</strong><em>Google &amp; Meta ad management</em></span>
+              </a>
+              <a href="reputation-services.html" class="mega-link">
+                <i class="fa fa-star"></i>
+                <span><strong>Reputation Management</strong><em>Build &amp; protect your brand</em></span>
+              </a>
+            </div>
+
+            <!-- Col 4: CTA panel -->
+            <div class="mega-col mega-col-cta">
+              <div class="mega-cta-box">
+                <div class="mega-cta-icon"><i class="fa fa-rocket"></i></div>
+                <div class="mega-cta-title">Free Strategy Call</div>
+                <div class="mega-cta-sub">Tell us your goals — we'll build a plan and give you a fixed price within 24 hrs.</div>
+                <button class="mega-cta-btn" data-modal="callback">Get Free Quote</button>
+              </div>
+              <div class="mega-popular">
+                <div class="mega-popular-head"><i class="fa fa-fire" style="color:#f97316;"></i> Most Popular</div>
+                <a href="seo-packages.html" class="mega-popular-link">SEO Packages</a>
+                <a href="web-development.html" class="mega-popular-link">Web Development</a>
+                <a href="mobile-app.html" class="mega-popular-link">App Development</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </li>
+
+      <!-- PRICING -->
       <li class="nav-item has-dropdown">
-        <a href="#" class="nav-link">Services</a>
+        <a href="index.html#calculator" class="nav-link nav-link-arrow">
+          Pricing <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:4px;"></i>
+        </a>
         <ul class="dropdown-menu">
-          <li><a href="search-engine-optimization.html"><i class="fa fa-search"></i> SEO</a></li>
-          <li><a href="web-development.html"><i class="fa fa-laptop-code"></i> Web Development</a></li>
-          <li><a href="mobile-app.html"><i class="fa fa-mobile-alt"></i> App Development</a></li>
-          <li><a href="social-media-marketing.html"><i class="fa fa-hashtag"></i> Social Media</a></li>
-          <li><a href="content-writing-service.html"><i class="fa fa-pen-nib"></i> Content Writing</a></li>
-          <li><a href="infographic-design-service.html"><i class="fa fa-paint-brush"></i> Graphic Design</a></li>
-          <li><a href="reputation-services.html"><i class="fa fa-shield-alt"></i> Reputation Mgmt</a></li>
-          <li><a href="google-my-business-optimisation.html"><i class="fa fa-map-marker-alt"></i> Google Business</a></li>
-          <li><a href="ppc-packages.html"><i class="fa fa-ad"></i> PPC Services</a></li>
-          <li><a href="blogger-outreach-service.html"><i class="fa fa-link"></i> Blogger Outreach</a></li>
+          <li><a href="seo-packages.html"><i class="fa fa-search" style="width:18px;color:#7c3aed;"></i> SEO Packages</a></li>
+          <li><a href="social-media-packages.html"><i class="fab fa-instagram" style="width:18px;color:#ec4899;"></i> Social Media Packages</a></li>
+          <li><a href="ppc-packages.html"><i class="fa fa-ad" style="width:18px;color:#f97316;"></i> PPC Packages</a></li>
+          <li><a href="index.html#calculator"><i class="fa fa-calculator" style="width:18px;color:#06d6f0;"></i> Price Calculator</a></li>
         </ul>
       </li>
-      <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-      <li class="nav-item"><a href="case-studies.html" class="nav-link">Case Studies</a></li>
-      <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+
+      <!-- COMPANY -->
       <li class="nav-item has-dropdown">
-        <a href="#" class="nav-link">Resources</a>
+        <a href="#" class="nav-link nav-link-arrow">
+          Company <i class="fa fa-chevron-down" style="font-size:0.65rem;margin-left:4px;"></i>
+        </a>
         <ul class="dropdown-menu">
-          <li><a href="faq.html"><i class="fa fa-question-circle"></i> FAQ</a></li>
-          <li><a href="careers.html"><i class="fa fa-briefcase"></i> Careers</a></li>
-          <li><a href="pay-now.html"><i class="fa fa-credit-card"></i> Pay Now</a></li>
+          <li><a href="index.html#why-us"><i class="fa fa-award" style="width:18px;color:#f59e0b;"></i> Why RSF Soft</a></li>
+          <li><a href="index.html#testimonials"><i class="fa fa-star" style="width:18px;color:#f59e0b;"></i> Client Reviews</a></li>
+          <li><a href="index.html#trust-badges"><i class="fa fa-certificate" style="width:18px;color:#22c55e;"></i> Certifications</a></li>
+          <li><a href="index.html#faq"><i class="fa fa-question-circle" style="width:18px;color:#06d6f0;"></i> FAQ</a></li>
+          <li><a href="case-studies.html"><i class="fa fa-folder-open" style="width:18px;color:#06d6f0;"></i> Case Studies</a></li>
+          <li><a href="contact-us.html"><i class="fa fa-envelope" style="width:18px;color:#a855f7;"></i> Contact Us</a></li>
+          <li><a href="privacy-policy.html"><i class="fa fa-shield-alt" style="width:18px;color:#64748b;"></i> Privacy Policy</a></li>
         </ul>
       </li>
-      <li class="nav-item"><a href="questionaire.html" class="nav-link nav-cta" style="margin-right:8px;background:linear-gradient(135deg,#06d6f0,#7c3aed)!important;">Get a Quote</a>
-          <a href="contact-us.html" class="nav-link nav-cta">Contact Us</a></li>
+
+      <li class="nav-item"><a href="index.html#contact" class="nav-link nav-cta"><i class="fa fa-comments" style="margin-right:6px;"></i>Get a Quote</a></li>
     </ul>
+
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-inner">
+      <div class="mobile-section">
+        <div class="mobile-section-head">SEO &amp; Search</div>
+        <a href="search-engine-optimization.html">SEO Services</a>
+        <a href="seo-packages.html">SEO Packages</a>
+        <a href="google-my-business-optimisation.html">Google My Business</a>
+        <a href="local-business.html">Local Business SEO</a>
+        <a href="penalty-recovery.html">Penalty Recovery</a>
+      </div>
+      <div class="mobile-section">
+        <div class="mobile-section-head">Web &amp; App Dev</div>
+        <a href="web-development.html">Web Development</a>
+        <a href="wordpress-development.html">WordPress Development</a>
+        <a href="shopify.html">Shopify Development</a>
+        <a href="mobile-app.html">App Development</a>
+      </div>
+      <div class="mobile-section">
+        <div class="mobile-section-head">Social &amp; Content</div>
+        <a href="social-media-marketing.html">Social Media Marketing</a>
+        <a href="content-writing-service.html">Content Writing</a>
+        <a href="infographic-design-service.html">Graphic Design</a>
+        <a href="ppc-packages.html">PPC &amp; Paid Ads</a>
+        <a href="reputation-services.html">Reputation Management</a>
+      </div>
+      <div class="mobile-section">
+        <div class="mobile-section-head">Pricing</div>
+        <a href="seo-packages.html">SEO Packages</a>
+        <a href="social-media-packages.html">Social Media Packages</a>
+        <a href="ppc-packages.html">PPC Packages</a>
+      </div>
+      <div class="mobile-section">
+        <div class="mobile-section-head">Company</div>
+        <a href="index.html#why-us">Why RSF Soft</a>
+        <a href="index.html#testimonials">Client Reviews</a>
+        <a href="case-studies.html">Case Studies</a><br>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <button class="mega-cta-btn" data-modal="callback" style="width:100%;margin-top:16px;">Get a Free Quote</button>
+    </div>
   </div>
 </nav>`;
 
