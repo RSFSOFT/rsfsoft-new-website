@@ -44,7 +44,7 @@ const disclaimerHtml = `<!DOCTYPE html>
         <p>Materials on our website may contain information that includes or is based upon forward-looking statements. These express our expectations or forecasts of future events. Any and all forward-looking statements here or on any of our sales material are intended to express our opinion of earnings potential.</p>
 
         <h2 style="color: #06d6f0; margin-bottom: 20px;">4. Contact Us</h2>
-        <p>If you have questions about this disclaimer, please contact our legal team at legal@rsfsoft.com.</p>
+        <p>If you have questions about this disclaimer, please contact our legal team at legal@rsfsoft.co.uk.</p>
       </div>
     </section>
   </main>
@@ -88,7 +88,7 @@ const accessibilityHtml = `<!DOCTYPE html>
         <p>Our efforts are ongoing as we implement the relevant improvements to meet WCAG 2.1 AA guidelines over time. We conduct regular audits using automated testing tools and manual evaluation to identify and rectify accessibility barriers.</p>
 
         <h2 style="color: #06d6f0; margin-top: 30px; margin-bottom: 20px;">3. Feedback & Contact</h2>
-        <p>If you experience any difficulty accessing any part of this website, please feel free to email us at accessibility@rsfsoft.com. Please provide the URL of the material you tried to access, the problem you experienced, and your contact information. We will work with you to provide the information, item, or transaction you seek through an alternate communication method that is accessible for you.</p>
+        <p>If you experience any difficulty accessing any part of this website, please feel free to email us at accessibility@rsfsoft.co.uk. Please provide the URL of the material you tried to access, the problem you experienced, and your contact information. We will work with you to provide the information, item, or transaction you seek through an alternate communication method that is accessible for you.</p>
       </div>
     </section>
   </main>

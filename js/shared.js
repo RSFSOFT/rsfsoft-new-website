@@ -122,7 +122,7 @@ const FOOTER_HTML = `
         <div class="footer-contacts">
           <div class="fci"><span></span><span>UK Registered Office: <a href="tel:+441296794358">+441296794358</a></span></div>
           <div class="fci"><span></span><span>PK Operations: <a href="tel:+923200605762">+92-320-060-5762</a></span></div>
-          <div class="fci"><span></span><span>Email: <a href="mailto:info@rsfsoft.com">info@rsfsoft.com</a></span></div>
+          <div class="fci"><span></span><span>Email: <a href="mailto:info@rsfsoft.co.uk">info@rsfsoft.co.uk</a></span></div>
           <div class="fci"><span></span><span>Hours: Monday to Friday, 9am&ndash;6pm</span></div>
         </div>
       </div>
