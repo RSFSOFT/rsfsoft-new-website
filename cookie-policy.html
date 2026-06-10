@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://rsfsoft-new-website.netlify.app/assets/img/favicon-new.png">
+  <meta property="og:site_name" content="RSF Soft">
+  <title>Cookie Policy | RSF Soft</title>
+  <meta name="description" content="Cookie Policy for RSFSOFT LTD — understand what cookies we use, why we use them, and how to manage your cookie preferences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <style>
+    .legal-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .legal-content h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 40px 0 14px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .legal-content h3:first-child { margin-top: 0; }
+    .legal-content p {
+      font-family: var(--font-secondary);
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+    .legal-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<canvas id="three-canvas"></canvas>
+<div id="site-nav"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>Cookie Policy</span>
+    </nav>
+    <div class="page-hero-badge"><span></span> Legal</div>
+    <h1 class="page-hero-title">Cookie <span class="gradient-text">Policy</span></h1>
+    <p class="page-hero-sub">How we use cookies to improve your digital browsing experience.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="content-section">
+  <div class="container">
+    <div class="legal-content">
+      <div class="legal-updated">
+        <i class="fa fa-calendar-alt"></i> Last updated: June 2026
+      </div>
+
+      <h3>1. What Are Cookies</h3>
+      <p>Cookies are small text files stored on your computer or mobile device when you visit websites. They are widely used to make websites work, or work more efficiently, as well as to provide reporting information to site owners.</p>
+
+      <h3>2. How We Use Cookies</h3>
+      <p>RSFSOFT LTD uses cookies for several reasons. Some cookies are required for technical reasons for our website to operate, and we refer to these as "essential" or "strictly necessary" cookies. Other cookies enable us to track and target the interests of our users to enhance their experience on our website.</p>
+
+      <h3>3. Types of Cookies We Use</h3>
+      <p><strong>Strictly Necessary Cookies:</strong> These cookies are essential to provide you with services available through our website and to use some of its features, such as accessing secure areas.<br><br>
+         <strong>Performance and Functionality Cookies:</strong> These cookies are used to enhance the performance and functionality of our website but are non-essential to their use. However, without these cookies, certain functionality may become unavailable.<br><br>
+         <strong>Analytics and Customization Cookies:</strong> These cookies collect information that is used either in aggregate form to help us understand how our website is being used or how effective our marketing campaigns are, or to help us customize our website for you.
+      </p>
+
+      <h3>4. Controlling Your Preferences</h3>
+      <p>You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences by using the cookie consent banner that appears when you first visit the site, or by adjusting your web browser controls to accept or refuse cookies. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted.</p>
+
+      <h3>5. Contact Us</h3>
+      <p>If you have any questions about our use of cookies or other technologies, please email us at:<br><br>
+        <strong>RSFSOFT LTD</strong><br>
+        Registered Office: 2nd Floor College House, 17 King Edwards Road, Ruislip, Middlesex, HA4 7AE, United Kingdom<br>
+        Email: <a href="mailto:info@rsfsoft.com" style="color: var(--accent-violet);">info@rsfsoft.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="js/shared.js"></script>
+<script>
+  (function() {
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas || typeof THREE === 'undefined') return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    const geometry = new THREE.BufferGeometry();
+    const count = 1200;
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 20;
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const material = new THREE.PointsMaterial({ color: 0xa855f7, size: 0.02, transparent: true, opacity: 0.3 });
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+    let frame = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      frame += 0.001;
+      stars.rotation.y = frame * 0.05;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  })();
+</script>
+</body>
+</html>

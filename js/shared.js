@@ -6,13 +6,11 @@
 const NAV_HTML = `
 <div class="top-bar">
   <div class="top-bar-ticker">
-    <span><i class="fa fa-users" style="margin-right:5px;"></i> Trusted by <strong>1,500+</strong> businesses globally</span>
+    <span><i class="fa fa-users" style="margin-right:5px;"></i> Trusted by <strong>150+</strong> businesses globally</span>
     <span class="ticker-sep">|</span>
-    <span><i class="fa fa-phone" style="margin-right:5px;"></i> UK: <a href="tel:+441296794358">+441296794358</a></span>
+    <span><i class="fa fa-phone" style="margin-right:5px;"></i> UK Office: <a href="tel:+441296794358">+441296794358</a></span>
     <span class="ticker-sep">|</span>
-    <span><i class="fa fa-phone" style="margin-right:5px;"></i> USA: <a href="tel:+19513299954">+19513299954</a></span>
-    <span class="ticker-sep">|</span>
-    <span><i class="fa fa-phone" style="margin-right:5px;"></i> AU: <a href="tel:+61370762195">+61370762195</a></span>
+    <span><i class="fa fa-phone" style="margin-right:5px;"></i> PK Operations: <a href="tel:+923200605762">+92-320-060-5762</a></span>
     <span class="ticker-sep">|</span>
     <span><i class="fa fa-clock" style="margin-right:5px;"></i> Monday to Friday, 9am&ndash;6pm</span>
     <span class="ticker-sep">|</span>
@@ -78,9 +76,8 @@ const FOOTER_HTML = `
           <a href="index.html" style="text-decoration:none; display:inline-block;">
             <span style="font-size:2.2rem; font-weight:900; font-family:'Outfit',sans-serif; background:linear-gradient(135deg,#7c3aed,#06d6f0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:1px; display:block;">RSF SOFT</span>
           </a>
-          
         </div>
-        <p class="footer-desc">RSFSOFT Ltd is a global digital agency providing Web Development, App Development, SEO, Social Media Marketing, Content Writing, Graphic Design, and Reputation Management across UK, USA, Australia & Pakistan.</p>
+        <p class="footer-desc">RSFSOFT LTD is a professional digital agency providing Web Development, App Development, SEO, Social Media Marketing, and Reputation Management. Registered in the UK with our dedicated operations and engineering center in Pakistan.</p>
         <div class="footer-soc">
           <a href="https://www.facebook.com/RsfSoft/" target="_blank" class="fsoc-btn"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/rsfsoftofficial/" target="_blank" class="fsoc-btn"><i class="fab fa-instagram"></i></a>
@@ -121,20 +118,23 @@ const FOOTER_HTML = `
         </div>
       </div>
       <div>
-        <div class="footer-head">Contact</div>
+        <div class="footer-head">Contact Info</div>
         <div class="footer-contacts">
-          <div class="fci"><span></span><span><a href="tel:+441296794358">UK: +441296794358</a></span></div>
-          <div class="fci"><span></span><span><a href="tel:+19513299954">USA: +19513299954</a></span></div>
-          <div class="fci"><span></span><span><a href="tel:+61370762195">AU: +61370762195</a></span></div>
-          <div class="fci"><span></span><span><a href="tel:+923200605762">PK: +92-320-060-5762</a></span></div>
-          <div class="fci"><span></span><span><a href="mailto:info@rsfsoft.com">info@rsfsoft.com</a></span></div>
-          <div class="fci"><span></span><span>Monday to Friday, 9am&ndash;6pm</span></div>
+          <div class="fci"><span></span><span>UK Registered Office: <a href="tel:+441296794358">+441296794358</a></span></div>
+          <div class="fci"><span></span><span>PK Operations: <a href="tel:+923200605762">+92-320-060-5762</a></span></div>
+          <div class="fci"><span></span><span>Email: <a href="mailto:info@rsfsoft.com">info@rsfsoft.com</a></span></div>
+          <div class="fci"><span></span><span>Hours: Monday to Friday, 9am&ndash;6pm</span></div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy" style="margin-bottom:12px;">&copy; 2026 RSFSOFT Ltd. All Rights Reserved. RSFSOFT LTD is registered in England &amp; Wales (Company Number: 12874141). Registered Office: 2nd Floor College House, 17 King Edwards Road, Ruislip, Middlesex, HA4 7AE, United Kingdom. Powered by <a href="index.html" style="color:var(--accent-violet);">RSF Soft</a></p>
-      <div style="display:flex;align-items:center;gap:12px;margin:12px 0 18px;flex-wrap:wrap;color:rgba(255,255,255,0.6);font-size:1.6rem;">
+      <div style="border-top: 1px solid rgba(255,255,255,0.06); width: 100%; margin-bottom: 20px;"></div>
+      <p class="footer-copy" style="margin-bottom:8px;">&copy; 2026 RSFSOFT LTD. All Rights Reserved.</p>
+      <p style="font-size:0.72rem; color:rgba(148, 163, 184, 0.7); max-width:850px; margin:0 auto 16px; line-height:1.6; font-family:sans-serif;">
+        RSFSOFT LTD is registered in England &amp; Wales (Company Number: 12874141).<br>
+        Registered Office: 2nd Floor College House, 17 King Edwards Road, Ruislip, Middlesex, HA4 7AE, United Kingdom.
+      </p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:8px 0 20px;flex-wrap:wrap;color:rgba(255,255,255,0.6);font-size:1.6rem;width:100%;">
         <i class="fab fa-cc-visa" title="Visa" style="background:#fff;color:#1a1f71;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
         <i class="fab fa-cc-mastercard" title="Mastercard" style="background:#fff;color:#eb001b;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
         <i class="fab fa-cc-amex" title="American Express" style="background:#fff;color:#007cc3;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
@@ -144,9 +144,17 @@ const FOOTER_HTML = `
       </div>
       <div class="footer-policy">
         <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-and-conditions.html">Terms & Conditions</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
+        <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
         <a href="refund-policy.html">Refund Policy</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
+        <a href="compliance.html">Compliance Verification</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
+        <a href="cookie-policy.html">Cookie Policy</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
         <a href="disclaimer.html">Results Disclaimer</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.75rem;">&bull;</span>
         <a href="accessibility.html">Accessibility Statement</a>
       </div>
     </div>
