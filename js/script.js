@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressBars();
   initDashboardBars();
   initParallax();
+  initFAQ();
+  initCookieConsent();
+  initCustomCursorAndOrbs();
 });
 
 /* =====================================================
@@ -535,4 +538,103 @@ function initScrollTop() {
   if (!btn) return;
   window.addEventListener('scroll', () => btn.classList.toggle('vis', window.scrollY > 500));
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+/* =====================================================
+   FAQ ACCORDION
+   ===================================================== */
+function initFAQ() {
+  document.addEventListener('click', (e) => {
+    const faqQ = e.target.closest('.faq-q');
+    if (!faqQ) return;
+    
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+    e.preventDefault();
+    
+    const item = faqQ.closest('.faq-item');
+    if (!item) return;
+    
+    const isOpen = item.classList.contains('open');
+    const faqList = item.closest('.faq-list') || document;
+    faqList.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      const ans = el.querySelector('.faq-ans');
+      if (ans) ans.style.maxHeight = '0';
+    });
+    
+    if (!isOpen) {
+      item.classList.add('open');
+      const ans = item.querySelector('.faq-ans');
+      const ansInner = item.querySelector('.faq-ans-inner');
+      if (ans && ansInner) {
+        ans.style.maxHeight = ansInner.scrollHeight + 'px';
+      } else if (ans) {
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    }
+  }, true);
+}
+
+/* =====================================================
+   COOKIE CONSENT BANNER (GDPR / CCPA)
+   ===================================================== */
+function initCookieConsent() {
+  if (!localStorage.getItem('rsf_cookie_consent')) {
+    const banner = document.createElement('div');
+    banner.id = 'cookie-consent-banner';
+    banner.innerHTML = `
+        <div style="position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 800px; margin: 0 auto; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(6, 214, 240, 0.3); border-radius: 16px; padding: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); z-index: 99999; display: flex; flex-direction: column; gap: 15px;">
+            <div>
+                <h4 style="color: #fff; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">🍪 We respect your privacy</h4>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; line-height: 1.5;">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. Read our <a href="privacy-policy.html" style="color: #06d6f0; text-decoration: underline;">Privacy Policy</a>.</p>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button id="cookie-decline" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s;">Essential Only</button>
+                <button id="cookie-accept" style="background: linear-gradient(135deg, #06d6f0, #7c3aed); border: none; color: #fff; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(6,214,240,0.3); transition: all 0.2s;">Accept All</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('rsf_cookie_consent', 'all');
+        banner.style.opacity = '0';
+        setTimeout(() => banner.remove(), 300);
+    });
+
+    document.getElementById('cookie-decline').addEventListener('click', () => {
+        localStorage.setItem('rsf_cookie_consent', 'essential');
+        banner.style.opacity = '0';
+        setTimeout(() => banner.remove(), 300);
+    });
+  }
+}
+
+/* =====================================================
+   VISUAL UPGRADES (Cursor & Ambient Orbs)
+   ===================================================== */
+function initCustomCursorAndOrbs() {
+  // 1. Inject Orbs
+  const orb1 = document.createElement('div');
+  orb1.className = 'ambient-orb orb-1';
+  const orb2 = document.createElement('div');
+  orb2.className = 'ambient-orb orb-2';
+  document.body.prepend(orb1, orb2);
+
+  // 2. Inject Neon Cursor
+  const cursor = document.createElement('div');
+  cursor.id = 'custom-cursor';
+  document.body.appendChild(cursor);
+
+  window.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  const hoverElements = document.querySelectorAll('a, button, .trust-badge, .feature-card, .cs-card, .service-card-3d');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
 }

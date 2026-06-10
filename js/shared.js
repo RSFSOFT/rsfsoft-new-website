@@ -182,22 +182,38 @@ const FOOTER_HTML = `
 // Unified initialization function called when DOM is ready or immediately if already loaded
 function initSharedAll() {
   // Inject nav
-  const navPlaceholder = document.getElementById('site-nav');
-  if (navPlaceholder) navPlaceholder.innerHTML = NAV_HTML;
+  try {
+    const navPlaceholder = document.getElementById('site-nav');
+    if (navPlaceholder) navPlaceholder.innerHTML = NAV_HTML;
+  } catch (err) {
+    console.error("Error injecting nav:", err);
+  }
 
   // Inject footer
-  const footerPlaceholder = document.getElementById('site-footer');
-  if (footerPlaceholder) footerPlaceholder.innerHTML = FOOTER_HTML;
+  try {
+    const footerPlaceholder = document.getElementById('site-footer');
+    if (footerPlaceholder) footerPlaceholder.innerHTML = FOOTER_HTML;
+  } catch (err) {
+    console.error("Error injecting footer:", err);
+  }
 
-  // Init shared behaviors
-  initSharedNavbar();
-  initSharedMobileNav();
-  initSharedCallbackModal();
-  initSharedScrollTop();
-  initSharedScrollAnimations();
-  initSharedCounters();
-  initSharedFaq();
-  initSharedVisuals();
+  // Init shared behaviors safely
+  const safeInit = (name, fn) => {
+    try {
+      fn();
+    } catch (err) {
+      console.error(`Error initializing shared module: ${name}`, err);
+    }
+  };
+
+  safeInit("Navbar", initSharedNavbar);
+  safeInit("MobileNav", initSharedMobileNav);
+  safeInit("CallbackModal", initSharedCallbackModal);
+  safeInit("ScrollTop", initSharedScrollTop);
+  safeInit("ScrollAnimations", initSharedScrollAnimations);
+  safeInit("Counters", initSharedCounters);
+  safeInit("Faq", initSharedFaq);
+  safeInit("Visuals", initSharedVisuals);
 }
 
 if (document.readyState === 'loading') {
