@@ -179,8 +179,8 @@ const FOOTER_HTML = `
 <div class="fab-wrap"><button class="fab-btn" data-modal="callback"><i class="fa fa-phone-alt"></i> Call Me Back</button></div>
 <button class="scroll-top-btn" aria-label="Scroll to top">&uarr;</button>`;
 
-// Inject on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
+// Unified initialization function called when DOM is ready or immediately if already loaded
+function initSharedAll() {
   // Inject nav
   const navPlaceholder = document.getElementById('site-nav');
   if (navPlaceholder) navPlaceholder.innerHTML = NAV_HTML;
@@ -197,7 +197,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initSharedScrollAnimations();
   initSharedCounters();
   initSharedFaq();
-});
+  initSharedVisuals();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSharedAll);
+} else {
+  initSharedAll();
+}
 
 function initSharedNavbar() {
   const navbar = document.querySelector('.navbar');
@@ -349,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* =====================================================
    VISUAL UPGRADES (Cursor, Orbs, Tilt, Counters)
    ===================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+function initSharedVisuals() {
     // 1. Inject Orbs
     const orb1 = document.createElement('div');
     orb1.className = 'ambient-orb orb-1';
@@ -410,16 +417,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const observerOptions = {
-        threshold: 0.5
-    };
-
     const statsObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const el = entry.target;
-                const target = parseFloat(el.getAttribute('data-target'));
-                const suffix = el.getAttribute('data-suffix');
+                const targetAttr = el.getAttribute('data-target');
+                const target = targetAttr ? parseFloat(targetAttr) : 0;
+                if (isNaN(target)) {
+                    observer.unobserve(el);
+                    return;
+                }
+                const suffix = el.getAttribute('data-suffix') || '';
                 const duration = 2000; // ms
                 const stepTime = Math.abs(Math.floor(duration / 50));
                 
@@ -439,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(el);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.5 });
 
     statsElements.forEach(el => statsObserver.observe(el));
 
@@ -461,34 +469,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const pScript = document.createElement('script');
         pScript.src = 'https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2/tsparticles.preset.links.bundle.min.js';
         pScript.onload = () => {
-            tsParticles.load("tsparticles", {
-                preset: "links",
-                background: { color: "transparent" },
-                particles: {
-                    number: { value: 80, density: { enable: true, area: 800 } },
-                    color: { value: "#06d6f0" },
-                    links: { color: "#7c3aed", opacity: 0.3, distance: 150, enable: true },
-                    move: { enable: true, speed: 1.2 },
-                    size: { value: 2 },
-                    opacity: { value: 0.6 }
-                },
-                interactivity: {
-                    events: {
-                        onHover: { enable: true, mode: "grab" },
-                        onClick: { enable: true, mode: "push" },
-                        resize: true
+            if (typeof tsParticles !== 'undefined') {
+                tsParticles.load("tsparticles", {
+                    preset: "links",
+                    background: { color: "transparent" },
+                    particles: {
+                        number: { value: 80, density: { enable: true, area: 800 } },
+                        color: { value: "#06d6f0" },
+                        links: { color: "#7c3aed", opacity: 0.3, distance: 150, enable: true },
+                        move: { enable: true, speed: 1.2 },
+                        size: { value: 2 },
+                        opacity: { value: 0.6 }
                     },
-                    modes: {
-                        grab: { distance: 180, links: { opacity: 0.8, color: "#06d6f0" } },
-                        push: { quantity: 3 }
-                    }
-                },
-                detectRetina: true
-            });
+                    interactivity: {
+                        events: {
+                            onHover: { enable: true, mode: "grab" },
+                            onClick: { enable: true, mode: "push" },
+                            resize: true
+                        },
+                        modes: {
+                            grab: { distance: 180, links: { opacity: 0.8, color: "#06d6f0" } },
+                            push: { quantity: 3 }
+                        }
+                    },
+                    detectRetina: true
+                });
+            }
         };
         document.head.appendChild(pScript);
     }
-});
+}
 
 function initSharedFaq() {
   // Capturing click listener to handle all FAQ toggles and prevent conflicting local bubbling click handlers
