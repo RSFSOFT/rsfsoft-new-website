@@ -15,6 +15,15 @@ const NAV_HTML = `
     <span><i class="fa fa-phone" style="margin-right:5px;"></i> AU: <a href="tel:+61370762195">+61370762195</a></span>
     <span class="ticker-sep">|</span>
     <span><i class="fa fa-clock" style="margin-right:5px;"></i> Mon-Fri 9am-6pm</span>
+    <span class="ticker-sep">|</span>
+    <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener noreferrer" title="RSF Soft — Certified Google Partner" style="display:inline-flex;align-items:center;gap:5px;text-decoration:none;opacity:0.9;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+      <img src="https://www.gstatic.com/partners/badge/images/2024/PartnerBadgeClickable.svg" alt="Google Partner" style="height:22px;width:auto;vertical-align:middle;" onerror="this.style.display='none'">
+    </a>
+    <span class="ticker-sep">|</span>
+    <a href="https://www.trustpilot.com/review/www.rsfsoft.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;text-decoration:none;color:inherit;" title="RSF Soft on Trustpilot">
+      <span style="color:#00b67a;font-size:0.8rem;letter-spacing:1px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span style="font-size:0.72rem;color:rgba(255,255,255,0.7);font-weight:600;">Trustpilot</span>
+    </a>
   </div>
 </div>
 <nav class="navbar" id="navbar">
