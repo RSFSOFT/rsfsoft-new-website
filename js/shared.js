@@ -133,7 +133,15 @@ const FOOTER_HTML = `
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">&copy; 2026 RSFSOFT Ltd. All Rights Reserved. Powered by <a href="index.html" style="color:var(--accent-violet);">RSF Soft</a></p>
+      <p class="footer-copy" style="margin-bottom:12px;">&copy; 2026 RSFSOFT Ltd. All Rights Reserved. RSFSOFT LTD is registered in England &amp; Wales (Company Number: 12874141). Registered Office: 2nd Floor College House, 17 King Edwards Road, Ruislip, Middlesex, HA4 7AE, United Kingdom. Powered by <a href="index.html" style="color:var(--accent-violet);">RSF Soft</a></p>
+      <div style="display:flex;align-items:center;gap:12px;margin:12px 0 18px;flex-wrap:wrap;color:rgba(255,255,255,0.6);font-size:1.6rem;">
+        <i class="fab fa-cc-visa" title="Visa" style="background:#fff;color:#1a1f71;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
+        <i class="fab fa-cc-mastercard" title="Mastercard" style="background:#fff;color:#eb001b;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
+        <i class="fab fa-cc-amex" title="American Express" style="background:#fff;color:#007cc3;border-radius:4px;padding:0 3px;height:22px;display:inline-flex;align-items:center;"></i>
+        <i class="fab fa-cc-apple-pay" title="Apple Pay" style="font-size:1.9rem;vertical-align:middle;"></i>
+        <i class="fab fa-google-pay" title="Google Pay" style="font-size:2.2rem;vertical-align:middle;"></i>
+        <span style="font-size:0.75rem;color:#94a3b8;font-family:sans-serif;margin-left:4px;letter-spacing:0.5px;"><i class="fa fa-lock" style="font-size:0.7rem;margin-right:3px;"></i> Secure Global Payments</span>
+      </div>
       <div class="footer-policy">
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="terms-and-conditions.html">Terms & Conditions</a>
