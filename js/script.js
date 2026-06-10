@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initCounters();
   initCalculator();
-  initFAQ();
   initContactForm();
   initCallbackModal();
   initScrollTop();
@@ -468,29 +467,8 @@ function updateCalcPrice() {
   };
   const tl = activeCalc === 'web' ? sel.timeline : sel.timeline;
 
-  priceEl.textContent = '$' + total.toLocaleString();
+  priceEl.textContent = '£' + total.toLocaleString();
   if (timeEl) timeEl.textContent = 'Est. delivery: ' + (tlMap[tl] || 'TBD');
-}
-
-/* =====================================================
-   FAQ
-   ===================================================== */
-function initFAQ() {
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-q')?.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => {
-        i.classList.remove('open');
-        const a = i.querySelector('.faq-ans');
-        if (a) a.style.maxHeight = '0';
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        const ans = item.querySelector('.faq-ans');
-        if (ans) ans.style.maxHeight = ans.scrollHeight + 'px';
-      }
-    });
-  });
 }
 
 /* =====================================================

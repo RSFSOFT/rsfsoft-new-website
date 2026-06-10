@@ -5,93 +5,67 @@ const baseDir = "c:\\Users\\HP\\Desktop\\RSFSOFT New Website";
 
 const caseStudies = [
     {
-        id: "dubai-seo",
-        title: "Scaling a Dubai Real Estate Agency by 345%",
+        id: "design-dental",
+        title: "Design Dental — Dental Practice SEO Campaign",
         service: "SEO & Organic Growth",
-        region: "Dubai",
-        image: "img/cs-dubai-seo.png",
-        file: "case-study-dubai-real-estate.html",
-        challenge: "A leading luxury real estate agency in Dubai was losing highly qualified leads to competitors due to poor organic visibility for ultra-competitive keywords like 'luxury villas in Palm Jumeirah'.",
-        solution: "We executed a comprehensive Technical SEO overhaul, combined with aggressive localized content strategy and high-authority link building in the UAE property niche.",
-        results: [
-            "+345% Increase in Organic Traffic in 6 Months",
-            "Ranked #1 for 15+ high-intent luxury property keywords",
-            "120% Increase in Qualified Inbound Leads"
-        ]
-    },
-    {
-        id: "usa-ecommerce",
-        title: "Scaling a National E-Commerce Brand to $1.2M",
-        service: "Web Dev & E-Commerce SEO",
-        region: "USA",
-        image: "img/cs-usa-ecommerce.png",
-        file: "case-study-usa-ecommerce.html",
-        challenge: "A nationwide USA retailer was struggling with a slow, outdated Magento store that suffered from a high cart abandonment rate and poor search engine rankings.",
-        solution: "We migrated their entire catalog to a headless Shopify build for lightning-fast speeds, and executed an E-Commerce SEO strategy targeting long-tail product keywords.",
-        results: [
-            "80% Reduction in Page Load Times",
-            "$1.2M in Organic Revenue Generated in 8 Months",
-            "Cart Abandonment Rate dropped by 45%"
-        ]
-    },
-    {
-        id: "uk-law",
-        title: "Local SEO Domination for a UK Law Firm",
-        service: "Local SEO & PPC",
         region: "UK",
         image: "img/cs-uk-law.png",
-        file: "case-study-uk-law-firm.html",
-        challenge: "A top-tier London law firm wanted to expand their client base but was entirely reliant on referrals, having virtually zero presence on Google Maps or organic search.",
-        solution: "We optimized their Google My Business profile, built local citations, launched highly targeted Google Ads (PPC) campaigns, and created localized service pages.",
+        file: "case-study-design-dental.html",
+        challenge: "Design Dental (design-dental.co.uk) needed to capture more local dental patients for premium treatments (implants, Invisalign, cosmetic dentistry) in their local area, but was losing search share to local competitors.",
+        solution: "We deployed a hyper-local SEO campaign, optimizing their Google Business Profiles, creating treatment-specific local landing pages, fixing technical crawl issues, and acquiring links from local UK dental and medical publications.",
         results: [
-            "Secured the #1 Google Maps spot in 5 major boroughs",
-            "300% Increase in Inbound Client Phone Calls",
-            "40% Reduction in Cost-Per-Acquisition (CPA)"
+            "Ranked #1 for 'Invisalign treatments' and 'dental implants' locally",
+            "180% Increase in monthly private patient booking enquiries",
+            "Organic monthly traffic grown by 245% since 2020",
+            "Generated an estimated £140,000+ in new patient treatment value"
         ]
     },
     {
-        id: "canada-app",
-        title: "On-Demand Delivery App Launch in Canada",
-        service: "Mobile App Development",
-        region: "Canada",
+        id: "decent-removal",
+        title: "Decent Removal — Local SEO & Website Development",
+        service: "Web Dev & Local SEO",
+        region: "UK",
+        image: "img/cs-usa-ecommerce.png",
+        file: "case-study-decent-removal.html",
+        challenge: "Decent Removal (decentremoval.co.uk) wanted to increase bookings for their removal and clearance services, but their old website was slow, not mobile-responsive, and failed to rank in Google Maps for key local boroughs.",
+        solution: "We built a brand new conversion-focused website, optimized their Google Maps / GMB listing, executed a local citation campaign across major UK business directories, and set up landing pages targeting key removal service areas.",
+        results: [
+            "Secured top 3 Google Maps positions in all target boroughs",
+            "Website load time reduced to under 1.5 seconds",
+            "310% Increase in direct telephone and form enquiries",
+            "Acquired 150+ new booking requests in the first 6 months"
+        ]
+    },
+    {
+        id: "fizz-dj",
+        title: "Fizz DJ — Entertainment Agency Website & Hosting",
+        service: "Web Dev, Hosting & SEO",
+        region: "UK",
         image: "img/cs-canada-app.png",
-        file: "case-study-canada-logistics.html",
-        challenge: "A Canadian logistics startup needed a robust, cross-platform mobile application to connect drivers with local businesses for on-demand deliveries.",
-        solution: "We designed the UI/UX from scratch and built a high-performance React Native application with real-time GPS tracking, automated dispatching, and seamless payment gateways.",
+        file: "case-study-fizz-dj.html",
+        challenge: "Fizz DJ (fizzdj.co.uk) needed a highly secure, reliable, and fast website to showcase their entertainment services, along with high-performance UK-based hosting to handle seasonal traffic spikes without slowing down.",
+        solution: "We designed and developed a premium interactive website, set up dedicated SSD-powered UK hosting with cloud backup, and optimized the site structure for organic search to capture event bookings since 2020.",
         results: [
-            "10,000+ Active Users acquired in the first month",
-            "4.9 Star Rating on the App Store and Google Play",
-            "100% Server Uptime during peak launch traffic"
+            "100% Website uptime maintained through peak event seasons",
+            "Double-digit percentage increase in annual corporate booking enquiries",
+            "Ranked on Page 1 for local entertainment and DJ hire terms",
+            "Saved £1,200/year in infrastructure and maintenance costs"
         ]
     },
     {
-        id: "australia-saas",
-        title: "B2B SaaS Growth & Lead Generation",
-        service: "PPC & Growth Marketing",
-        region: "Australia",
+        id: "taxi-bolton",
+        title: "Taxi Bolton — Local Taxi Dispatch Website & SEO",
+        service: "Web Dev & Local SEO",
+        region: "UK",
         image: "img/cs-australia-saas.png",
-        file: "case-study-australia-saas.html",
-        challenge: "An Australian B2B SaaS company had a great product but was burning through their ad budget with low-quality leads and high customer acquisition costs.",
-        solution: "We restructured their entire Google Ads account, implemented deep conversion tracking, built high-converting landing pages, and launched remarketing campaigns.",
+        file: "case-study-taxi-bolton.html",
+        challenge: "Taxi Bolton (taxibolton.com) needed to compete with national ride-hailing apps in their local city by capturing search queries from local commuters looking for reliable airport transfers and local taxi services.",
+        solution: "We designed a mobile-first booking website with quick call actions, implemented a local SEO blueprint targeting Bolton and surrounding Greater Manchester areas, and automated review collection from passengers since 2020.",
         results: [
-            "450+ High-Quality B2B Leads generated monthly",
-            "60% Reduction in Customer Acquisition Cost (CAC)",
-            "8.5x Return on Ad Spend (ROAS)"
-        ]
-    },
-    {
-        id: "pakistan-social",
-        title: "Brand Building for a National Retail Chain",
-        service: "Social Media & Reputation",
-        region: "Pakistan",
-        image: "img/cs-pakistan-social.png",
-        file: "case-study-pakistan-retail.html",
-        challenge: "A major retail chain in Pakistan was facing negative PR from an old management issue and had a stagnant social media presence that failed to drive foot traffic.",
-        solution: "We executed a crisis reputation management protocol to suppress negative search results, launched viral social media campaigns, and built an automated 5-star review generation system.",
-        results: [
-            "Suppressed negative articles from Page 1 of Google",
-            "Grew Instagram following by 50,000+ engaged users",
-            "Generated 300+ authentic 5-star Google Reviews"
+            "Ranked #1 for local 'airport transfers Bolton' and 'Bolton taxi'",
+            "220% Growth in online booking submissions and phone taps",
+            "Built a solid profile of 400+ 5-star passenger reviews",
+            "Increased monthly recurring local commuter accounts by 85%"
         ]
     }
 ];
@@ -224,7 +198,7 @@ function generateHubPage() {
       <div class="page-hero-glow"></div>
       <div class="container">
         <h1 class="page-hero-title">Our Work & <span class="gradient-text">Case Studies</span></h1>
-        <p class="page-hero-sub">Discover how we've helped businesses across the globe scale their traffic, apps, and revenue.</p>
+        <p class="page-hero-sub">Discover how we've helped businesses across the UK scale their traffic and revenue.</p>
       </div>
     </section>
 
@@ -245,68 +219,5 @@ function generateHubPage() {
     console.log("Generated case-studies.html");
 }
 
-function updateIndexHtml() {
-    const indexPath = path.join(baseDir, "index.html");
-    let html = fs.readFileSync(indexPath, 'utf8');
-
-    const featuredWork = `
-    <!-- ================================================
-         FEATURED CASE STUDIES
-         ================================================ -->
-    <section class="section-dark" style="padding: 100px 0; background: linear-gradient(180deg, #020617 0%, #06112c 100%); position:relative; z-index:10;">
-      <div class="container">
-        <div style="text-align:center; margin-bottom: 50px;">
-          <div class="section-badge">Proven Results</div>
-          <h2 class="section-title" style="font-size:3rem; margin-bottom:15px;">Global <span class="gradient-text">Success Stories</span></h2>
-          <p class="section-subtitle">Real numbers. Real growth. See how we help brands dominate globally.</p>
-        </div>
-
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-          <!-- Card 1 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; overflow:hidden;">
-            <div style="height:200px; background:url('img/cs-dubai-seo.png') center/cover;"></div>
-            <div style="padding:25px;">
-              <span style="color:#06d6f0; font-size:0.8rem; font-weight:700;">Dubai • SEO</span>
-              <h3 style="margin:10px 0;">Scaling a Dubai Real Estate Agency by 345%</h3>
-              <a href="case-study-dubai-real-estate.html" style="color:#7c3aed; font-weight:600; text-decoration:none;">Read Case Study &rarr;</a>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; overflow:hidden;">
-            <div style="height:200px; background:url('img/cs-usa-ecommerce.png') center/cover;"></div>
-            <div style="padding:25px;">
-              <span style="color:#06d6f0; font-size:0.8rem; font-weight:700;">USA • Web Dev</span>
-              <h3 style="margin:10px 0;">Scaling an E-Commerce Brand to $1.2M</h3>
-              <a href="case-study-usa-ecommerce.html" style="color:#7c3aed; font-weight:600; text-decoration:none;">Read Case Study &rarr;</a>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; overflow:hidden;">
-            <div style="height:200px; background:url('img/cs-uk-law.png') center/cover;"></div>
-            <div style="padding:25px;">
-              <span style="color:#06d6f0; font-size:0.8rem; font-weight:700;">UK • Local SEO</span>
-              <h3 style="margin:10px 0;">Local SEO Domination for a UK Law Firm</h3>
-              <a href="case-study-uk-law-firm.html" style="color:#7c3aed; font-weight:600; text-decoration:none;">Read Case Study &rarr;</a>
-            </div>
-          </div>
-        </div>
-        
-        <div style="text-align:center; margin-top:50px;">
-          <a href="case-studies.html" class="btn-glass" style="display:inline-block;">View All Case Studies</a>
-        </div>
-      </div>
-    </section>
-`;
-
-    if (!html.includes("FEATURED CASE STUDIES")) {
-        html = html.replace('<!-- ================================================\n     STATS', featuredWork + '<!-- ================================================\n     STATS');
-        fs.writeFileSync(indexPath, html, 'utf8');
-        console.log("index.html updated with Featured Case Studies");
-    } else {
-        console.log("index.html already has Featured Case Studies");
-    }
-}
-
 generateIndividualPages();
 generateHubPage();
-updateIndexHtml();

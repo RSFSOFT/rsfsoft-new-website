@@ -167,7 +167,11 @@
            How long have you been in business?
           <span class="faq-icon">+</span>
         </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">
             RSF Soft has over 10 years of experience in digital services, serving 150+ clients across the globe since 2015. Throughout this time, we've grown from a small UK agency into a dedicated team of 50+ specialists.
+          </div>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -483,32 +487,7 @@
     window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
   })();
 
-  // FAQ Accordion
-  document.addEventListener('DOMContentLoaded', function(){
-    const items = document.querySelectorAll('.faq-item');
-    items.forEach(item => {
-      const btn = item.querySelector('.faq-q');
-      const ans = item.querySelector('.faq-ans');
-      if(!btn || !ans) return;
 
-      btn.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-
-        // Close all
-        items.forEach(i => {
-          i.classList.remove('open');
-          const a = i.querySelector('.faq-ans');
-          if(a) a.style.maxHeight = '0';
-        });
-
-        // Open clicked
-        if(!isOpen) {
-          item.classList.add('open');
-          ans.style.maxHeight = ans.scrollHeight + 'px';
-        }
-      });
-    });
-  });
 </script>
   <script src="js/perf.js" defer></script>
 </body>

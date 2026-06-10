@@ -21,26 +21,7 @@
     aosEls.forEach(el => aosObserver.observe(el));
   }
 
-  /* ============================================
-     FAQ ACCORDION
-     ============================================ */
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const btn = item.querySelector('.faq-q');
-    const ans = item.querySelector('.faq-ans');
-    if (!btn || !ans) return;
-    btn.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => {
-        i.classList.remove('open');
-        const a = i.querySelector('.faq-ans');
-        if (a) a.style.maxHeight = '0';
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        ans.style.maxHeight = ans.scrollHeight + 'px';
-      }
-    });
-  });
+  /* FAQ Accordion is handled globally and dynamically by js/shared.js */
 
   /* ============================================
      COUNTER ANIMATION

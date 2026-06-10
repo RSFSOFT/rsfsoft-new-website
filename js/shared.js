@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSharedScrollTop();
   initSharedScrollAnimations();
   initSharedCounters();
+  initSharedFaq();
 });
 
 function initSharedNavbar() {
@@ -488,3 +489,61 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(pScript);
     }
 });
+
+function initSharedFaq() {
+  // Capturing click listener to handle all FAQ toggles and prevent conflicting local bubbling click handlers
+  document.addEventListener('click', (e) => {
+    const faqQ = e.target.closest('.faq-q');
+    if (!faqQ) return;
+    
+    // Stop any other event listeners from firing on this click
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+    e.preventDefault();
+    
+    const item = faqQ.closest('.faq-item');
+    if (!item) return;
+    
+    const isOpen = item.classList.contains('open');
+    const faqList = item.closest('.faq-list') || document;
+    faqList.querySelectorAll('.faq-item.open').forEach(el => {
+      el.classList.remove('open');
+      const ans = el.querySelector('.faq-ans');
+      if (ans) ans.style.maxHeight = '0';
+    });
+    
+    if (!isOpen) {
+      item.classList.add('open');
+      const ans = item.querySelector('.faq-ans');
+      const ansInner = item.querySelector('.faq-ans-inner');
+      if (ans && ansInner) {
+        ans.style.maxHeight = ansInner.scrollHeight + 'px';
+      } else if (ans) {
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    }
+  }, true); // capturing phase!
+}
+
+// Global FAQ toggle function for inline onclick handlers
+window.toggleFaq = function(id) {
+  const item = document.getElementById(id);
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  const faqList = item.closest('.faq-list') || document;
+  faqList.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    const ans = el.querySelector('.faq-ans');
+    if (ans) ans.style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    const ans = item.querySelector('.faq-ans');
+    const ansInner = item.querySelector('.faq-ans-inner');
+    if (ans && ansInner) {
+      ans.style.maxHeight = ansInner.scrollHeight + 'px';
+    } else if (ans) {
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  }
+};
