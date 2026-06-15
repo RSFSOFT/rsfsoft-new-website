@@ -624,11 +624,12 @@
         <label class="form-label">Payment Amount</label>
         <div class="currency-row">
           <select class="form-select currency-select" id="currency-select">
-            <option value="GBP">£ GBP</option>
-            <option value="USD" selected>$ USD</option>
-            <option value="EUR">€ EUR</option>
-            <option value="CAD">$ CAD</option>
-            <option value="AUD">$ AUD</option>
+            <option value="GBP">£ GBP — British Pound</option>
+            <option value="USD" selected>$ USD — US Dollar</option>
+            <option value="EUR">€ EUR — Euro (Bancontact, SEPA)</option>
+            <option value="CAD">$ CAD — Canadian Dollar</option>
+            <option value="AUD">$ AUD — Australian Dollar</option>
+            <option value="AED">د.إ AED — UAE Dirham</option>
           </select>
           <div class="amount-input-wrapper">
             <div class="input-wrapper">
@@ -730,7 +731,7 @@
       <span>Fully Encrypted SSL &bull; PCI-DSS Compliant Gateway</span>
     </div>
 
-    <!-- Accepted payment logos (PayPal requirement: show PayPal with equal prominence) -->
+    <!-- Accepted payment logos — Bancontact, PayPal, cards all shown equally -->
     <div style="display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:16px; padding:14px 0; border-top:1px solid rgba(255,255,255,0.06);">
       <span style="font-size:10px; color:var(--text-muted); letter-spacing:.5px; text-transform:uppercase; margin-right:4px;">We Accept:</span>
       <i class="fa-brands fa-paypal" style="font-size:26px; color:#009cde;" title="PayPal"></i>
@@ -739,6 +740,10 @@
       <i class="fa-brands fa-cc-amex" style="font-size:26px; color:#007bc1;" title="American Express"></i>
       <i class="fa-brands fa-google-pay" style="font-size:26px; color:#4285f4;" title="Google Pay"></i>
       <i class="fa-brands fa-apple-pay" style="font-size:26px; color:#f0f6ff;" title="Apple Pay"></i>
+      <!-- Bancontact — Belgian bank payment method -->
+      <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(0,100,200,0.12);border:1px solid rgba(0,100,200,0.3);border-radius:6px;padding:3px 9px;font-size:10px;color:#60a5fa;font-weight:700;letter-spacing:.3px;" title="Bancontact">
+        🏦 Bancontact
+      </span>
       <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:3px 8px;font-size:10px;color:#10b981;font-weight:700;">
         <i class="fa fa-lock" style="font-size:9px;"></i> SSL
       </span>
@@ -1364,3 +1369,4 @@
 </script>
 </body>
 </html>
+<!-- deploy-trigger: 2026-06-15T07:29 -->
