@@ -643,7 +643,7 @@
         <label class="form-label">Website URL <span style="color:#06d6f0;font-size:10px;">(Optional)</span></label>
         <div class="input-wrapper">
           <i class="fa fa-globe input-icon"></i>
-          <input type="url" id="client-website" class="form-input" placeholder="Add your website URL (e.g. www.yourcompany.com)">
+          <input type="text" id="client-website" class="form-input" placeholder="Add your website URL (e.g. www.yourcompany.com)">
         </div>
       </div>
 
@@ -1349,6 +1349,7 @@
         btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
         
         cardElement.confirm({
+          element: cardElement,
           intent_id: data.id,
           client_secret: data.client_secret,
           payment_method: {
