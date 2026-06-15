@@ -103,8 +103,12 @@ async function upsertBillingCustomer(baseUrl, token, { clientName, customerEmail
       request_id:   crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex'),
       name:         clientName    || 'Unknown Client',
       type:         'INDIVIDUAL',                        // INDIVIDUAL or BUSINESS
-      ...(customerEmail  && { email:        customerEmail  }),
-      ...(customerMobile && { phone_number: customerMobile })
+      primary_contact: {
+        first_name: splitName(clientName).first || 'Unknown',
+        last_name:  splitName(clientName).last  || 'Client',
+        email: customerEmail || undefined,
+        phone_number: customerMobile || undefined
+      }
     };
 
     const res = await fetch(`${baseUrl}/billing_customers/create`, {

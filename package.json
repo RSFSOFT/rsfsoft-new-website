@@ -20,5 +20,8 @@
   "homepage": "https://github.com/RSFSOFT/rsfsoft-new-website#readme",
   "dependencies": {
     "nodemailer": "^9.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^26.1.0"
   }
 }

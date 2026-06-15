@@ -121,10 +121,10 @@ function buildCustomerReceipt(data) {
 
     <!-- Footer -->
     <div style="background:#04070f;padding:28px 32px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">
-      <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">RSFSOFT LTD · Company No. 15878082</p>
+      <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">RSFSOFT LTD · Company No. 12874141</p>
       <p style="margin:0 0 8px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">📧 billing@rsfsoft.co.uk · 🌐 www.rsfsoft.co.uk</p>
       <p style="margin:0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">This receipt was automatically generated. Please keep it for your records.</p>
-      <p style="margin:4px 0 0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">🔒 Secured and processed via Airwallex. All payments are encrypted.</p>
+      <p style="margin:4px 0 0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">🔒 All payments are securely encrypted and processed by RSFSOFT LTD.</p>
     </div>
 
   </div>

@@ -328,8 +328,12 @@ exports.handler = async (event) => {
               request_id: require('crypto').randomBytes(16).toString('hex'),
               name:       custName || custEmail || 'RSFSOFT Client',
               type:       'INDIVIDUAL',
-              ...(custEmail && { email:        custEmail }),
-              ...(custPhone && { phone_number: custPhone })
+              primary_contact: {
+                first_name: custName ? custName.split(' ')[0] : 'Client',
+                last_name:  custName && custName.includes(' ') ? custName.split(' ').slice(1).join(' ') : 'Unknown',
+                email:      custEmail || undefined,
+                phone_number: custPhone || undefined
+              }
             };
 
             const bcRes = await fetch(`${baseUrl}/billing_customers/create`, {

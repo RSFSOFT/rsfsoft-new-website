@@ -8,6 +8,10 @@
  * - Returns a signed verification token used in evidence file
  */
 
+const fs     = require('fs');
+const path   = require('path');
+const crypto = require('crypto');
+
 let resolvedDir = null;
 function getEvidenceDir() {
   if (resolvedDir) return resolvedDir;

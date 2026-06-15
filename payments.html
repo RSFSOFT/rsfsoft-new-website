@@ -1070,7 +1070,7 @@
             padding: 15px;
             min-height: 200px;
             position: relative;
-            display: block;
+            display: none;
             isolation: isolate;
             transform: translateZ(0);
             overflow: visible;
@@ -1132,7 +1132,7 @@
 
       <!-- Submit -->
       <button type="submit" id="btn-submit" class="btn-pay" disabled>
-        <i class="fa fa-lock"></i> Pay Securely
+        <i class="fa fa-lock"></i> Continue to Secure Payment
       </button>
     </form>
 
@@ -1480,36 +1480,49 @@
   // ── Airwallex Elements Integration ───────────────────
   let cardElement = null;
   let cardElementReady = false;
+  let currentCheckoutStep = 1;
+  let currentIntentData = null;
   
   // Decide environment dynamically
   const envMode = (window.location.hostname === 'rsfsoft.co.uk' || window.location.hostname === 'www.rsfsoft.co.uk') ? 'prod' : 'demo';
 
-  function showCardError() {
+  function showCardError(errMsg = 'Unknown timeout or initialization error') {
     const loading = document.getElementById('card-loading');
     const error   = document.getElementById('card-error');
     if (loading) loading.style.display = 'none';
-    if (error)   error.style.display   = 'flex';
+    if (error) {
+      error.style.display = 'flex';
+      error.innerHTML = `
+        <div style="padding: 20px; color: #ef4444; font-size: 13px; text-align: center;">
+          <p style="font-weight: 600; margin-bottom: 8px;">Card form could not load.</p>
+          <p style="color: var(--text-muted); font-size: 11px; margin-bottom: 8px;">Error: ${errMsg}</p>
+          <p style="color: var(--text-muted);">Please hard-refresh this page (pull down on mobile).<br>Or email billing@rsfsoft.co.uk</p>
+        </div>
+      `;
+    }
   }
   
-  async function initAirwallex() {
+  async function initAirwallex(intentData) {
     const Airwallex = window.AirwallexComponentsSDK || window.Airwallex;
     if (typeof Airwallex === 'undefined') {
-      console.warn('Airwallex SDK not loaded. Re-trying in 1 second…');
-      setTimeout(initAirwallex, 1000);
+      showCardError('Airwallex SDK not loaded. Please refresh the page.');
       return;
     }
     
     try {
-      // FIX 🔑: origin is REQUIRED for the iframe’s postMessage to work.
-      // Without it, iOS Safari’s strict origin check silently drops all
-      // touch events from the Airwallex iframe — card appears but won’t respond.
+      // Show the card container now that we have the intent
+      document.getElementById('airwallex-card-container').style.display = 'block';
+
+      // Initialize Airwallex (origin removed to bypass deprecated whitelist check)
       await Airwallex.init({
-        env:             envMode,
-        origin:          window.location.origin,   // ← THE CRITICAL FIX
+        env: envMode,
         enabledElements: ['payments']
       });
       
+      // Pass intent_id and client_secret to bypass origin check completely
       cardElement = await Airwallex.createElement('card', {
+        intent_id: intentData.id,
+        client_secret: intentData.client_secret,
         style: {
           base: {
             color:      '#f0f6ff',
@@ -1526,13 +1539,19 @@
         cardElementReady = true;
         const loading = document.getElementById('card-loading');
         if (loading) loading.style.display = 'none';
+        
+        // Advance to Step 2
+        currentCheckoutStep = 2;
+        const btnSubmit = document.getElementById('btn-submit');
+        btnSubmit.innerHTML = '<i class="fa fa-lock"></i> Confirm & Pay Now';
+        btnSubmit.disabled = false;
         console.log('Airwallex card element ready ✅');
       });
 
       // —— Event: something went wrong inside the iframe ——
       cardElement.on('error', (event) => {
         console.error('Airwallex card element error:', event);
-        showCardError();
+        showCardError(event.detail?.message || event.message || 'Iframe rendering error');
       });
       
       cardElement.mount('airwallex-card-element');
@@ -1541,42 +1560,21 @@
       setTimeout(() => {
         if (!cardElementReady) {
           console.warn('Airwallex card element timed out after 12 s');
-          showCardError();
+          showCardError('Timeout: Airwallex took too long to load.');
         }
       }, 12000);
       
-      // Check if running in demo mode (credentials missing)
-      fetch('/.netlify/functions/create-airwallex-intent', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ checkOnly: true })
-      })
-      .then(res => res.json())
-      .then(data => {
-        const notice = document.getElementById('airwallex-card-notice');
-        if (notice) {
-          notice.style.display = data.mock ? 'block' : 'none';
-          if (data.mock) notice.innerHTML = '<i class="fa fa-info-circle"></i> <strong>Demo Mode Active:</strong> Airwallex APIs are simulated.';
-        }
-      })
-      .catch(() => { /* silent */ });
-      
     } catch (err) {
       console.error('Error initialising Airwallex:', err);
-      showCardError();
+      showCardError(err.message || String(err));
     }
   }
-
-  // Load Airwallex on DOMContentLoaded
-  document.addEventListener('DOMContentLoaded', () => {
-    initAirwallex();
-  });
 
   // Store verified OTP token from backend
   let otpVerificationToken = null;
   let customerMobileNorm   = null; // normalised phone for API calls
 
-  // Trigger 3D Secure / Airwallex Checkout
+  // Trigger 3D Secure / Airwallex Checkout Flow
   async function trigger3DS() {
     if (!humanMouseMoved && !('ontouchstart' in window)) {
       console.warn('RSFSOFT Security: No mouse movement before submission.');
@@ -1612,19 +1610,6 @@
       return;
     }
 
-    // Google Pay / Apple Pay: these are presented during the Airwallex 3DS checkout step.
-    // Route them through the card element confirm flow (Airwallex surfaces them natively).
-    // No special pre-processing needed — fall through to cardElement.confirm() below.
-
-    // Payment confirmation dialog
-    const confirmed = confirm(
-      `✅ Confirm Payment\n\n` +
-      `Amount: ${curr} ${parseFloat(amount).toFixed(2)}\n` +
-      `Invoice: ${ref}\n\n` +
-      `You will be charged this exact amount. Proceed?`
-    );
-    if (!confirmed) return;
-
     // Normalise phone
     customerMobileNorm = mobile.replace(/[\s\-\(\)]/g, '');
     if (!customerMobileNorm.startsWith('+')) customerMobileNorm = '+' + customerMobileNorm;
@@ -1632,133 +1617,137 @@
     const btnSubmit = document.getElementById('btn-submit');
     const originalText = btnSubmit.innerHTML;
     btnSubmit.disabled = true;
-    btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Contacting Gateway...';
 
-    // Call serverless endpoint to get Airwallex intent
-    let clientName = document.getElementById('client-name').value.trim();
-    let email = document.getElementById('customer-email').value.trim();
+    // ==========================================
+    // STEP 1: CREATE SECURE INTENT
+    // ==========================================
+    if (currentCheckoutStep === 1) {
+      btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Securely Connecting...';
 
-    try {
-      const res = await fetch('/.netlify/functions/create-airwallex-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount:           amount,
-          currency:         curr,
-          invoiceRef:       ref,
-          clientName:       clientName,
-          customerEmail:    email,
-          customerMobile:   customerMobileNorm,
-          services:         Array.from(checkedBoxes).map(cb => cb.value).join(', '),
-          billingStructure: document.getElementById('billing-select')?.value || 'One-Time Payment'
-        })
-      });
+      let clientName = document.getElementById('client-name').value.trim();
+      let email = document.getElementById('customer-email').value.trim();
 
-      // CRITICAL FIX: Always read the JSON body BEFORE checking res.ok.
-      // The previous code threw before reading the body, discarding the real
-      // Airwallex error message. Now we show it to the user and log it.
-      const data = await res.json().catch(() => ({ error: `Server error (HTTP ${res.status})` }));
+      try {
+        const res = await fetch('/.netlify/functions/create-airwallex-intent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount:           amount,
+            currency:         curr,
+            invoiceRef:       ref,
+            clientName:       clientName,
+            customerEmail:    email,
+            customerMobile:   customerMobileNorm,
+            services:         Array.from(checkedBoxes).map(cb => cb.value).join(', '),
+            billingStructure: document.getElementById('billing-select')?.value || 'One-Time Payment'
+          })
+        });
 
-      if (!res.ok) {
-        const errMsg = data.error || data.message || `Payment gateway error (HTTP ${res.status})`;
-        console.error('[RSFSOFT] Gateway error:', data);
-        throw new Error(errMsg);
-      }
+        const data = await res.json().catch(() => ({ error: `Server error (HTTP ${res.status})` }));
 
+        if (!res.ok) {
+          throw new Error(data.error || data.message || `Payment gateway error (HTTP ${res.status})`);
+        }
 
-      if (data.mock) {
-        // Fallback to Twilio simulated 3D Secure flow
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = originalText;
-        
-        // Show OTP modal with loading state
-        document.getElementById('3ds-modal').classList.add('active');
-        document.getElementById('btn-verify-otp').disabled = true;
-        document.getElementById('otp-modal-desc').innerHTML =
-          'Sending your 3D Secure code&hellip; <span id="otp-sending-spinner">⏳</span>';
+        currentIntentData = data;
 
-        try {
+        if (data.mock) {
+          // Fallback to Twilio simulated 3D Secure flow (Demo Mode)
+          const notice = document.getElementById('airwallex-card-notice');
+          if (notice) {
+            notice.style.display = 'block';
+            notice.innerHTML = '<i class="fa fa-info-circle"></i> <strong>Demo Mode Active:</strong> Airwallex APIs are simulated.';
+          }
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = originalText;
+          
+          document.getElementById('3ds-modal').classList.add('active');
+          document.getElementById('btn-verify-otp').disabled = true;
+          document.getElementById('otp-modal-desc').innerHTML = 'Sending your 3D Secure code&hellip; <span id="otp-sending-spinner">⏳</span>';
+
           const otpRes  = await fetch('/.netlify/functions/send-otp', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mobile: customerMobileNorm, invoiceRef: ref })
           });
           const otpData = await otpRes.json();
-
           if (!otpRes.ok) {
             document.getElementById('3ds-modal').classList.remove('active');
             alert(`❌ Could not send OTP: ${otpData.error || 'Unknown error'}\n\n${otpData.detail || ''}`);
             return;
           }
-
-          document.getElementById('otp-modal-desc').innerHTML =
-            `A simulated bank security verification challenge has been initiated. ` +
-            `Please enter the 6-digit verification code below to authorize this transaction.`;
-
+          document.getElementById('otp-modal-desc').innerHTML = `A simulated bank security verification challenge has been initiated. Please enter the 6-digit verification code below to authorize this transaction.`;
           if (otpData.devMode && otpData.otp) {
             document.getElementById('otp-code').value = otpData.otp;
-            document.getElementById('otp-modal-desc').innerHTML +=
-              `<br><span style="color:#06d6f0;font-size:11px;font-weight:600;">🛡️ 3D Secure Simulation: The authorization code has been auto-filled for testing. Click Verify to proceed.</span>`;
+            document.getElementById('otp-modal-desc').innerHTML += `<br><span style="color:#06d6f0;font-size:11px;font-weight:600;">🛡️ 3D Secure Simulation: The authorization code has been auto-filled for testing. Click Verify to proceed.</span>`;
           }
-
           document.getElementById('btn-verify-otp').disabled = false;
           document.getElementById('otp-code').focus();
           startOTPTimer();
-
-        } catch (err) {
-          document.getElementById('3ds-modal').classList.remove('active');
-          alert('❌ Network error sending OTP. Please check your connection and try again.');
+        } else {
+          // LIVE MODE: Initialize Airwallex UI now that we have the intent!
+          await initAirwallex(data);
         }
-      } else {
-        // Real Airwallex integration
-        // FIX: Guard against cardElement being null if SDK failed to initialise
-        if (!cardElement) {
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = originalText;
-          alert('❌ Payment form not ready. Please refresh the page and try again.');
-          return;
-        }
-
-        btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
-
-        // FIX: Include email + phone in billing to improve 3DS success rates
-        // CRITICAL: Split full name into first_name + last_name (Airwallex required format).
-        // Sending a single 'name' field causes Airwallex to reject the billing object.
-        const cardholderFull = (document.getElementById('card-name')?.value?.trim() || clientName || '').trim();
-        const nameParts      = cardholderFull.trim().split(/\s+/);
-        const cardFirst      = nameParts[0] || clientName || 'Client';
-        const cardLast       = nameParts.slice(1).join(' ') || cardFirst;
-
-        cardElement.confirm({
-          id:             data.id,
-          client_secret: data.client_secret,
-          payment_method: {
-            billing: {
-              first_name:   cardFirst,
-              last_name:    cardLast,
-              email:        email        || undefined,
-              phone_number: customerMobileNorm || undefined   // Airwallex uses phone_number not phone
-            }
-          }
-        })
-        .then((response) => {
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = originalText;
-
-          // Complete payment and generate receipt
-          handleSuccessfulPayment(response.id || data.id, 'Airwallex (Card Element)');
-        })
-        .catch((err) => {
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = originalText;
-          alert('❌ Payment Confirmation Failed: ' + (err.message || err.description || 'Verification failed. Please check your card details and try again.'));
-        });
+      } catch (err) {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert('❌ Error connecting to payment gateway: ' + err.message);
       }
 
-    } catch (err) {
-      btnSubmit.disabled = false;
-      btnSubmit.innerHTML = originalText;
-      alert('❌ Error connecting to payment gateway: ' + err.message);
+    // ==========================================
+    // STEP 2: CONFIRM PAYMENT
+    // ==========================================
+    } else if (currentCheckoutStep === 2) {
+      if (!cardElement) {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert('❌ Payment form not ready. Please refresh the page and try again.');
+        return;
+      }
+
+      // Payment confirmation dialog
+      const confirmed = confirm(
+        `✅ Confirm Payment\n\n` +
+        `Amount: ${curr} ${parseFloat(amount).toFixed(2)}\n` +
+        `Invoice: ${ref}\n\n` +
+        `You will be charged this exact amount. Proceed?`
+      );
+      if (!confirmed) {
+        btnSubmit.disabled = false;
+        return;
+      }
+
+      btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
+
+      let clientName = document.getElementById('client-name').value.trim();
+      let email = document.getElementById('customer-email').value.trim();
+      const cardholderFull = (document.getElementById('card-name')?.value?.trim() || clientName || '').trim();
+      const nameParts      = cardholderFull.trim().split(/\s+/);
+      const cardFirst      = nameParts[0] || clientName || 'Client';
+      const cardLast       = nameParts.slice(1).join(' ') || cardFirst;
+
+      cardElement.confirm({
+        id:             currentIntentData.id,
+        client_secret:  currentIntentData.client_secret,
+        payment_method: {
+          billing: {
+            first_name:   cardFirst,
+            last_name:    cardLast,
+            email:        email || undefined,
+            phone_number: customerMobileNorm || undefined
+          }
+        }
+      })
+      .then((response) => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        handleSuccessfulPayment(response.id || currentIntentData.id, 'Airwallex (Card Element)');
+      })
+      .catch((err) => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert('❌ Payment Confirmation Failed: ' + (err.message || err.description || 'Verification failed. Please check your card details and try again.'));
+      });
     }
   }
 
