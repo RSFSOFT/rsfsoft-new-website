@@ -148,7 +148,6 @@ function buildCustomerReceipt(data) {
   </div>
 </body>
 </html>`;
-}`;
 }
 
 // ─── Internal RSFSOFT Alert HTML ──────────────────────────────────────────────
