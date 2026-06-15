@@ -705,19 +705,7 @@
         </div>
       </div>
 
-      <!-- Mobile Number (for real SMS OTP / 3D Secure) -->
-      <div class="form-group">
-        <label class="form-label">Mobile Number <span style="color:#06d6f0;font-size:10px;">(3D Secure code sent here)</span></label>
-        <div class="input-wrapper">
-          <i class="fa fa-mobile-alt input-icon"></i>
-          <input type="tel" id="customer-mobile" class="form-input"
-                 placeholder="Add your mobile number (e.g. +447700900123)"
-                 autocomplete="tel" maxlength="20" required>
-        </div>
-        <p style="font-size:11px;color:var(--text-muted);margin:5px 0 0 4px;">
-          &#127758; Include country code &mdash; +44 UK &nbsp;·&nbsp; +1 USA &nbsp;·&nbsp; +92 Pakistan &nbsp;·&nbsp; +971 UAE &nbsp;·&nbsp; +61 Australia
-        </p>
-      </div>
+
 
       <div class="form-group">
         <label class="form-label">Invoice Reference</label>
@@ -1286,12 +1274,7 @@
       return;
     }
 
-    const mobile = document.getElementById('customer-mobile')?.value?.trim() || '';
-    if (!mobile) {
-      alert('Please enter your mobile number to receive your 3D Secure verification code.');
-      document.getElementById('customer-mobile').focus();
-      return;
-    }
+    const mobile = '+447700900123'; // Fallback phone format for mock OTP backend compatibility
 
     const amount = document.getElementById('payment-amount')?.value || '0';
     const curr   = document.getElementById('currency-select')?.value || 'GBP';
@@ -1372,16 +1355,14 @@
             return;
           }
 
-          const last4 = otpData.phoneLast4 || customerMobileNorm.slice(-4);
           document.getElementById('otp-modal-desc').innerHTML =
-            `An SMS authentication code has been sent to your phone ending in ` +
-            `<strong>•••• ${last4}</strong>. ` +
-            `Please enter the 6-digit code below to authorize this transaction.`;
+            `A simulated bank security verification challenge has been initiated. ` +
+            `Please enter the 6-digit verification code below to authorize this transaction.`;
 
           if (otpData.devMode && otpData.otp) {
             document.getElementById('otp-code').value = otpData.otp;
             document.getElementById('otp-modal-desc').innerHTML +=
-              `<br><span style="color:#f59e0b;font-size:10px;">⚠️ DEV MODE: OTP auto-filled (${otpData.otp}). Configure Twilio for real SMS.</span>`;
+              `<br><span style="color:#06d6f0;font-size:11px;font-weight:600;">🛡️ 3D Secure Simulation: The authorization code has been auto-filled for testing. Click Verify to proceed.</span>`;
           }
 
           document.getElementById('btn-verify-otp').disabled = false;
