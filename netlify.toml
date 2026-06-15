@@ -89,12 +89,21 @@
     Cache-Control = "no-store, no-cache"
     X-Frame-Options = "DENY"
 
-# ─── Apple Pay Domain Verification — served via Netlify Function ──────────────
-# The function apple-pay-verify.js has the file content embedded directly.
-# This is 100% reliable — no static file serving issues possible.
+# ─── Apple Pay Domain Verification ───────────────────────────────────────────
+# Apply the required octet-stream header to BOTH the visible path and the rewrite path
+[[headers]]
+  for = "/.well-known/apple-developer-merchantid-domain-association"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+
+[[headers]]
+  for = "/Apple/apple-developer-merchantid-domain-association"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+
 [[redirects]]
   from   = "/.well-known/apple-developer-merchantid-domain-association"
-  to     = "/.netlify/functions/apple-pay-verify"
+  to     = "/Apple/apple-developer-merchantid-domain-association"
   status = 200
   force  = true
 
