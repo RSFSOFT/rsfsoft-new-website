@@ -89,6 +89,20 @@
     Cache-Control = "no-store, no-cache"
     X-Frame-Options = "DENY"
 
+# ─── Apple Pay Domain Verification — URL Rewrite ─────────────────────────────
+# Apple's verification bot fetches this exact URL to verify domain ownership.
+# We rewrite it transparently (status 200) to the file in /Apple/ folder.
+# This bypasses any hidden-directory (.well-known) serving issues on Netlify.
+# force=true ensures this rule runs even if the .well-known file also exists.
+[[redirects]]
+  from   = "/.well-known/apple-developer-merchantid-domain-association"
+  to     = "/Apple/apple-developer-merchantid-domain-association"
+  status = 200
+  force  = true
+
+  [redirects.headers]
+    Content-Type = "application/octet-stream"
+
 # ─── Secure Evidence Folder — block direct web access ────────────────────────
 [[headers]]
   for = "/secure_payment_evidence/*"
