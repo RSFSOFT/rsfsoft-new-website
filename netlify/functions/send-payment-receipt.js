@@ -76,7 +76,7 @@ function buildCustomerReceipt(data) {
     <div style="text-align:center;padding:28px 32px 0;">
       <div style="display:inline-block;width:56px;height:56px;background:rgba(6,214,240,0.12);border:2px solid #06d6f0;border-radius:50%;line-height:56px;font-size:24px;color:#06d6f0;box-shadow:0 0 20px rgba(6,214,240,0.2);">✓</div>
       <h2 style="margin:16px 0 4px;color:#f0f6ff;font-size:22px;font-weight:700;">Payment Confirmed</h2>
-      <p style="color:#94a3b8;font-size:13px;margin:0;font-family:'Inter',sans-serif;">3D Secure Verified &amp; Signed Electronically</p>
+      <p style="color:#94a3b8;font-size:13px;margin:0;font-family:'Inter',sans-serif;">Thank you for your payment.</p>
     </div>
 
     <!-- Invoice table -->
@@ -126,13 +126,13 @@ function buildCustomerReceipt(data) {
       </table>
     </div>` : ''}
 
-    <!-- Refund policy note -->
-    <div style="padding:16px 24px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;margin:0 32px 28px;border-radius:0 8px 8px 0;">
-      <p style="margin:0;font-size:12px;color:#fef08a;line-height:1.6;font-family:'Inter',sans-serif;">
-        <strong>No-Refund Policy:</strong> By completing this payment, you confirmed your agreement to RSFSOFT's
-        <a href="https://www.rsfsoft.co.uk/terms-and-conditions.html" style="color:#06d6f0;text-decoration:none;">Terms &amp; Conditions</a>
+    <!-- Support / Agreement reference -->
+    <div style="padding:16px 24px;background:rgba(124,58,237,0.05);border-left:4px solid #7c3aed;margin:0 32px 28px;border-radius:0 8px 8px 0;">
+      <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.6;font-family:'Inter',sans-serif;">
+        This receipt confirms your agreement to RSFSOFT's
+        <a href="https://www.rsfsoft.co.uk/terms-and-conditions.html" style="color:#06d6f0;text-decoration:none;">Terms of Service</a>
         and <a href="https://www.rsfsoft.co.uk/refund-policy.html" style="color:#06d6f0;text-decoration:none;">Refund Policy</a>.
-        Services are considered initiated upon payment. For queries, contact
+        If you have any questions regarding your invoice or service initiation, please contact us at
         <a href="mailto:billing@rsfsoft.co.uk" style="color:#06d6f0;text-decoration:none;">billing@rsfsoft.co.uk</a>.
       </p>
     </div>
@@ -142,7 +142,7 @@ function buildCustomerReceipt(data) {
       <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">RSFSOFT LTD · Company No. 15878082</p>
       <p style="margin:0 0 8px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">📧 billing@rsfsoft.co.uk · 🌐 www.rsfsoft.co.uk</p>
       <p style="margin:0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">This receipt was automatically generated. Please keep it for your records.</p>
-      <p style="margin:4px 0 0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">🔒 3DS Verified · IP Logged · E-Signed · SHA-256 Integrity Hash on File</p>
+      <p style="margin:4px 0 0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">🔒 Secured and processed via Airwallex. All payments are encrypted.</p>
     </div>
 
   </div>
