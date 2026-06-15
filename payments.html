@@ -1106,8 +1106,22 @@
               </button>
             </div>
 
-            <!-- Airwallex mounts its iframe here — must be display:block, not a flex child -->
-            <div id="airwallex-card-element" style="width:100%; min-height:160px; display:block;"></div>
+            <!-- Airwallex mounts card number here -->
+            <div style="margin-bottom: 12px;">
+              <label style="font-size: 11px; color: var(--text-muted); font-family: 'Inter', sans-serif; display:block; margin-bottom:6px; letter-spacing:.5px; text-transform:uppercase;">Card Number</label>
+              <div id="airwallex-card-number" style="width:100%; min-height:48px; display:block; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; background: rgba(255,255,255,0.04); padding: 4px;"></div>
+            </div>
+            <!-- Expiry + CVC row -->
+            <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+              <div style="flex: 1;">
+                <label style="font-size: 11px; color: var(--text-muted); font-family: 'Inter', sans-serif; display:block; margin-bottom:6px; letter-spacing:.5px; text-transform:uppercase;">Expiry Date</label>
+                <div id="airwallex-expiry" style="width:100%; min-height:48px; display:block; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; background: rgba(255,255,255,0.04); padding: 4px;"></div>
+              </div>
+              <div style="flex: 1;">
+                <label style="font-size: 11px; color: var(--text-muted); font-family: 'Inter', sans-serif; display:block; margin-bottom:6px; letter-spacing:.5px; text-transform:uppercase;">CVC / CVV</label>
+                <div id="airwallex-cvc" style="width:100%; min-height:48px; display:block; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; background: rgba(255,255,255,0.04); padding: 4px;"></div>
+              </div>
+            </div>
           </div>
           <div id="airwallex-card-notice" style="display: none; font-size: 11px; color: #c084fc; margin-top: 8px; font-family: 'Inter', sans-serif; line-height: 1.4;">
             <i class="fa fa-info-circle"></i> <strong>Demo Mode Active:</strong> Airwallex APIs are simulated.
@@ -1479,7 +1493,6 @@
 
   // ── Airwallex Elements Integration ───────────────────
   let cardElement = null;
-  let cardElementReady = false;
   let currentCheckoutStep = 1;
   let currentIntentData = null;
   
@@ -1502,6 +1515,13 @@
     }
   }
   
+  // Airwallex individual card element references
+  let cardNumberElement = null;
+  let expiryElement = null;
+  let cvcElement = null;
+  let cardElementReady = false;
+  let awxReadyCount = 0;
+
   async function initAirwallex(intentData) {
     const Airwallex = window.AirwallexComponentsSDK || window.Airwallex;
     if (typeof Airwallex === 'undefined') {
@@ -1514,59 +1534,95 @@
       document.getElementById('airwallex-card-container').style.display = 'block';
 
       const actualEnv = intentData.env === 'prod' ? 'prod' : 'demo';
-      console.log(`[RSFSOFT] Backend returned env: ${intentData.env}. Initializing Airwallex SDK in ${actualEnv} mode...`);
+      const actualCurrency = intentData.currency || 'GBP';
+      console.log(`[RSFSOFT] Initializing Airwallex card elements in ${actualEnv} mode, currency: ${actualCurrency}`);
 
-      // Initialize Airwallex (origin and client_id are no longer required for DropIn and can break initialization)
+      // Initialize SDK with simple card element mode (no dropIn overhead)
       await Airwallex.init({
         env: actualEnv,
-        enabledElements: ['payments']
+        origin: window.location.origin
       });
-      
-      // Pass intent_id and client_secret to bypass origin check completely
-      cardElement = await Airwallex.createElement('dropIn', {
+
+      // Create three individual card elements
+      cardNumberElement = await Airwallex.createElement('cardNumber', {
         intent_id: intentData.id,
-        client_secret: intentData.client_secret
+        client_secret: intentData.client_secret,
+        currency: actualCurrency,
+        style: {
+          base: {
+            fontSize: '14px',
+            fontFamily: 'Inter, sans-serif',
+            color: '#f0f6ff',
+            '::placeholder': { color: '#64748b' }
+          }
+        }
       });
 
-      // CRITICAL FIX: Mount MUST happen BEFORE attaching event listeners!
-      cardElement.mount('airwallex-card-element');
-
-      // —— Event: form is rendered and interactive ——
-      cardElement.on('ready', () => {
-        cardElementReady = true;
-        const loading = document.getElementById('card-loading');
-        if (loading) loading.style.display = 'none';
-        
-        // Hide our custom submit button because DropIn has its own built-in secure "Pay" button
-        const btnSubmit = document.getElementById('btn-submit');
-        if (btnSubmit) btnSubmit.style.display = 'none';
-        console.log('Airwallex DropIn ready ✅');
+      expiryElement = await Airwallex.createElement('expiry', {
+        intent_id: intentData.id,
+        client_secret: intentData.client_secret,
+        currency: actualCurrency,
+        style: {
+          base: {
+            fontSize: '14px',
+            fontFamily: 'Inter, sans-serif',
+            color: '#f0f6ff',
+            '::placeholder': { color: '#64748b' }
+          }
+        }
       });
 
-      // —— Event: payment successful! (DropIn handles confirmation internally) ——
-      cardElement.on('success', (event) => {
-        console.log('Payment successful via DropIn:', event);
-        // We handle the receipt UI update using the existing function
-        handleSuccessfulPayment(intentData.id, 'Airwallex (DropIn)');
+      cvcElement = await Airwallex.createElement('cvc', {
+        intent_id: intentData.id,
+        client_secret: intentData.client_secret,
+        currency: actualCurrency,
+        style: {
+          base: {
+            fontSize: '14px',
+            fontFamily: 'Inter, sans-serif',
+            color: '#f0f6ff',
+            '::placeholder': { color: '#64748b' }
+          }
+        }
       });
 
-      // —— Event: something went wrong inside the iframe ——
-      cardElement.on('error', (event) => {
-        console.error('Airwallex DropIn error:', event);
-        showCardError(event.detail?.message || event.message || 'Iframe rendering error');
+      // Mount all three elements
+      cardNumberElement.mount('airwallex-card-number');
+      expiryElement.mount('airwallex-expiry');
+      cvcElement.mount('airwallex-cvc');
+
+      // Each element fires its own 'ready' — wait for all three
+      function onElementReady(name) {
+        awxReadyCount++;
+        console.log(`[RSFSOFT] Airwallex ${name} ready (${awxReadyCount}/3)`);
+        if (awxReadyCount >= 3) {
+          cardElementReady = true;
+          const loading = document.getElementById('card-loading');
+          if (loading) loading.style.display = 'none';
+          console.log('Airwallex card elements all ready ✅');
+        }
+      }
+
+      cardNumberElement.on('ready', () => onElementReady('cardNumber'));
+      expiryElement.on('ready', () => onElementReady('expiry'));
+      cvcElement.on('ready', () => onElementReady('cvc'));
+
+      cardNumberElement.on('error', (e) => {
+        console.error('cardNumber error:', e);
+        showCardError(e.detail?.message || 'Card number error');
       });
 
-      // Safety net: if 'ready' hasn’t fired after 12 s, show the error state
+      expiryElement.on('error', (e) => console.error('expiry error:', e));
+      cvcElement.on('error', (e) => console.error('cvc error:', e));
+
+      // Safety net: 20 second timeout
       setTimeout(() => {
         if (!cardElementReady) {
-          console.warn('Airwallex card element timed out after 12 s');
+          console.warn('Airwallex card elements timed out');
           showCardError('Timeout: Airwallex took too long to load.');
         }
-      }, 12000);
+      }, 20000);
       
-    } catch (err) {
-      console.error('Error initialising Airwallex:', err);
-      showCardError(err.message || String(err));
     }
   }
 
@@ -1687,6 +1743,10 @@
         } else {
           // LIVE MODE: Initialize Airwallex UI now that we have the intent!
           await initAirwallex(data);
+          // Advance to step 2 so the submit button now confirms payment
+          currentCheckoutStep = 2;
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = '<i class="fa fa-credit-card"></i> Pay Now';
         }
       } catch (err) {
         btnSubmit.disabled = false;
@@ -1698,7 +1758,7 @@
     // STEP 2: CONFIRM PAYMENT
     // ==========================================
     } else if (currentCheckoutStep === 2) {
-      if (!cardElement) {
+      if (!cardNumberElement) {
         btnSubmit.disabled = false;
         btnSubmit.innerHTML = originalText;
         alert('❌ Payment form not ready. Please refresh the page and try again.');
@@ -1726,7 +1786,7 @@
       const cardFirst      = nameParts[0] || clientName || 'Client';
       const cardLast       = nameParts.slice(1).join(' ') || cardFirst;
 
-      cardElement.confirm({
+      cardNumberElement.confirm({
         id:             currentIntentData.id,
         client_secret:  currentIntentData.client_secret,
         payment_method: {

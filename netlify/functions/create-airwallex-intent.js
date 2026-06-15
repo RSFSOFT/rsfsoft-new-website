@@ -473,6 +473,7 @@ exports.handler = async (event) => {
         env:           airwallexEnv,
         id:            intentData.id,
         client_secret: intentData.client_secret,
+        currency:      currency,
         customer_id:   customerId || null,
         invoice_ref:   invoiceRef
       })
