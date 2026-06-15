@@ -139,7 +139,7 @@ function buildInternalAlert(data) {
           securityAudit } = data;
   return `
 <html><body style="font-family:monospace;background:#0f172a;color:#e2e8f0;padding:20px;">
-  <h2 style="color:#06d6f0;">💰 NEW PAYMENT RECEIVED — RSFSOFT</h2>
+  <h2 style="color:#06d6f0;">New Payment Alert — RSFSOFT</h2>
   <table style="border-collapse:collapse;width:100%;max-width:600px;">
     <tr><td style="padding:6px 12px;color:#94a3b8;width:160px;">Client</td>
         <td style="padding:6px 12px;color:#f1f5f9;font-weight:700;">${clientName}</td></tr>
@@ -224,7 +224,7 @@ exports.handler = async (event) => {
     await transporter.sendMail({
       from:    `"RSFSOFT Payment System" <${senderEmail}>`,
       to:      notifyEmail,
-      subject: `💰 NEW PAYMENT: ${currency} ${amount} — ${clientName} [${invoiceRef}]`,
+      subject: `[New Payment Alert] ${currency} ${amount} from ${clientName}`,
       html:    buildInternalAlert(payload)
     });
     results.internal = true;
@@ -234,10 +234,10 @@ exports.handler = async (event) => {
       await transporter.sendMail({
         from:    `"RSFSOFT Billing" <${senderEmail}>`,
         to:      customerEmail,
-        subject: `Payment Receipt — ${invoiceRef} | RSFSOFT`,
+        subject: `Payment Receipt for Invoice ${invoiceRef} — RSFSOFT`,
         html:    buildCustomerReceipt({
           clientName, invoiceRef, serviceCategory, billingStructure,
-          amount, currency, transactionId, timestamp, milestoneProgress
+          amount, currency, transactionId, timestamp
         })
       });
       results.customer = true;
