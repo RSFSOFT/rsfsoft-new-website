@@ -22,18 +22,20 @@
     Referrer-Policy = "no-referrer"
 
     # Disable unnecessary browser features
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self), usb=(), bluetooth=()"
+    # payment= allows Airwallex card iframe (checkout.airwallex.com) to use Payment Request API (Apple Pay, Google Pay on mobile)
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self https://checkout.airwallex.com), usb=(), bluetooth=()"
 
     # XSS protection for legacy browsers
     X-XSS-Protection = "1; mode=block"
 
     # [S6] Content Security Policy — controls what can load on every page
     # Allows: our own scripts + Google Fonts + Font Awesome CDN + ipapi.co (IP lookup)
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com; frame-ancestors 'none';"
+    # *.airwallex.com covers all subdomains used by Airwallex Elements on mobile
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.airwallex.com; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com https://pci.airwallex.com https://*.airwallex.com; frame-ancestors 'none';"
 
 # ─── Payment Page: Maximum Security ──────────────────────────────────────────
 [[headers]]
-  for = "/pay-now-mockup.html"
+  for = "/payments.html"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
@@ -43,8 +45,22 @@
     # No caching — always load fresh, never serve stale payment form
     Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
     Pragma = "no-cache"
-    # Stricter CSP for payment page — no external frame embeds at all
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com; frame-ancestors 'none'; form-action 'self';"
+    # CSP for payment page — Airwallex wildcard covers all element iframes on mobile
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self https://checkout.airwallex.com), usb=(), bluetooth=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.airwallex.com; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com https://pci.airwallex.com https://*.airwallex.com; frame-ancestors 'none'; form-action 'self';"
+
+[[headers]]
+  for = "/payments"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Referrer-Policy = "no-referrer"
+    X-XSS-Protection = "1; mode=block"
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
+    Pragma = "no-cache"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self https://checkout.airwallex.com), usb=(), bluetooth=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.airwallex.com; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com https://pci.airwallex.com https://*.airwallex.com; frame-ancestors 'none'; form-action 'self';"
 
 # ─── Netlify Functions: Strict headers ───────────────────────────────────────
 [[headers]]
@@ -65,6 +81,19 @@
   from   = "/secure_payment_evidence/*"
   to     = "/404.html"
   status = 404
+  force  = true
+
+# ─── Payment URL Rewrites & Redirects ─────────────────────────────────────────
+[[redirects]]
+  from   = "/payments"
+  to     = "/payments.html"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/pay-now-mockup.html"
+  to     = "/payments"
+  status = 301
   force  = true
 
 # ─── Redirects: Force HTTPS ───────────────────────────────────────────────────
