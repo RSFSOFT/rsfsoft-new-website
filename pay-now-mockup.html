@@ -12,6 +12,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eeciker2A4L3dhj/TP6v+3kYJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Airwallex Web SDK (PCI-DSS Secure Card processing) -->
+  <script src="https://static.airwallex.com/components/sdk/v1/index.js"></script>
   <style>
     :root {
       --bg-color: #04070f;
@@ -676,11 +678,11 @@
         </div>
       </div>
 
-      <!-- Simulated Card Input Fields -->
+      <!-- Card Input Fields (PCI-DSS Secure via Airwallex Elements) -->
       <div class="card-fields-container" id="card-fields">
         <!-- Name on Card -->
         <div class="form-group">
-          <label class="form-label" style="font-size: 11px;">Name on Card</label>
+          <label class="form-label" style="font-size: 11px;">Cardholder Name</label>
           <div class="input-wrapper">
             <i class="fa fa-id-card input-icon"></i>
             <input type="text" class="form-input" id="card-name"
@@ -688,25 +690,18 @@
                    autocomplete="cc-name"
                    maxlength="80"
                    style="text-transform: uppercase; letter-spacing: 1px;"
-                   data-private="true"
                    oninput="this.value = this.value.toUpperCase()">
           </div>
         </div>
+        
+        <!-- Airwallex Card Element Container -->
         <div class="form-group">
-          <label class="form-label" style="font-size: 11px;">Card Number</label>
-          <div class="input-wrapper">
-            <i class="fa fa-credit-card input-icon"></i>
-            <input type="text" class="form-input" id="card-number" placeholder="•••• •••• •••• ••••" style="font-family: monospace;" autocomplete="cc-number" inputmode="numeric" maxlength="19" data-private="true">
+          <label class="form-label" style="font-size: 11px;">Card Details</label>
+          <div id="airwallex-card-container" style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; min-height: 52px; display: flex; flex-direction: column; justify-content: center;">
+            <div id="airwallex-card-element"></div>
           </div>
-        </div>
-        <div class="currency-row">
-          <div class="form-group" style="flex: 1; margin-bottom: 0;">
-            <label class="form-label" style="font-size: 11px;">Expiry Date</label>
-            <input type="text" class="form-input" id="card-expiry" placeholder="MM/YY" style="padding-left: 16px; font-family: monospace;" autocomplete="cc-exp" maxlength="5" data-private="true">
-          </div>
-          <div class="form-group" style="flex: 1; margin-bottom: 0;">
-            <label class="form-label" style="font-size: 11px;">CVC / CVV</label>
-            <input type="password" class="form-input" id="card-cvv" placeholder="•••" style="padding-left: 16px; font-family: monospace;" autocomplete="cc-csc" maxlength="4" data-private="true">
+          <div id="airwallex-card-notice" style="display: none; font-size: 11px; color: #c084fc; margin-top: 8px; font-family: 'Inter', sans-serif; line-height: 1.4;">
+            <i class="fa fa-info-circle"></i> <strong>Demo Mode Active:</strong> Airwallex APIs are simulated.
           </div>
         </div>
       </div>
@@ -987,7 +982,9 @@
   });
 
   // Switch Payment Methods
+  let currentPaymentMethod = 'card';
   function selectMethod(method, element) {
+    currentPaymentMethod = method;
     document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
     element.classList.add('active');
 
@@ -1058,36 +1055,80 @@
     document.getElementById('invoice-ref').value = autoRef;
   });
 
-  // ── Luhn Algorithm — validates card number client-side ───────────────────
-  function luhnCheck(cardNum) {
-    const digits = cardNum.replace(/\D/g, '').split('').reverse().map(Number);
-    if (digits.length < 13 || digits.length > 19) return false;
-    const sum = digits.reduce((acc, d, i) => {
-      if (i % 2 === 1) { d *= 2; if (d > 9) d -= 9; }
-      return acc + d;
-    }, 0);
-    return sum % 10 === 0;
+  // ── Airwallex Elements Integration ───────────────────
+  let cardElement = null;
+  
+  // Decide environment dynamically
+  const envMode = (window.location.hostname === 'rsfsoft.co.uk' || window.location.hostname === 'www.rsfsoft.co.uk') ? 'prod' : 'demo';
+  
+  function initAirwallex() {
+    if (typeof Airwallex === 'undefined') {
+      console.warn('Airwallex SDK not loaded. Re-trying in 1 second...');
+      setTimeout(initAirwallex, 1000);
+      return;
+    }
+    
+    try {
+      Airwallex.init({
+        env: envMode
+      });
+      
+      const elements = Airwallex.createElementGroup();
+      cardElement = elements.create('card', {
+        style: {
+          base: {
+            color: '#f0f6ff',
+            fontSize: '14px',
+            fontFamily: 'Outfit, Inter, system-ui, sans-serif',
+            '::placeholder': {
+              color: '#94a3b8'
+            }
+          },
+          invalid: {
+            color: '#ef4444'
+          }
+        }
+      });
+      
+      cardElement.mount('airwallex-card-element');
+      
+      // Let backend check if credentials are set to toggle notice
+      fetch('/.netlify/functions/create-airwallex-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 1, currency: 'USD', invoiceRef: 'RSF-000000-0000' })
+      })
+      .then(res => res.json())
+      .then(data => {
+        const notice = document.getElementById('airwallex-card-notice');
+        if (notice) {
+          if (data.mock) {
+            notice.style.display = 'block';
+            notice.innerHTML = '<i class="fa fa-info-circle"></i> <strong>Demo Mode Active:</strong> Airwallex APIs are simulated.';
+          } else {
+            notice.style.display = 'none';
+          }
+        }
+      })
+      .catch(() => {
+        // Silent catch
+      });
+      
+    } catch (err) {
+      console.error('Error initializing Airwallex:', err);
+    }
   }
 
-  // Validate card on blur
-  document.getElementById('card-number')?.addEventListener('blur', function() {
-    const num = this.value.replace(/\s/g, '');
-    if (num.length >= 13) {
-      if (!luhnCheck(num)) {
-        this.style.borderColor = '#ef4444';
-        this.title = 'Invalid card number';
-      } else {
-        this.style.borderColor = '#10b981';
-        this.title = 'Card number valid';
-      }
-    }
+  // Load Airwallex on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    initAirwallex();
   });
 
   // Store verified OTP token from backend
   let otpVerificationToken = null;
   let customerMobileNorm   = null; // normalised phone for API calls
 
-  // Trigger 3D Secure — calls real send-otp API
+  // Trigger 3D Secure / Airwallex Checkout
   async function trigger3DS() {
     if (!humanMouseMoved && !('ontouchstart' in window)) {
       console.warn('RSFSOFT Security: No mouse movement before submission.');
@@ -1110,6 +1151,13 @@
     const curr   = document.getElementById('currency-select')?.value || 'GBP';
     const ref    = document.getElementById('invoice-ref')?.value || '';
 
+    // Handle PayPal redirection immediately
+    if (currentPaymentMethod === 'paypal') {
+      window.open('https://www.paypal.com/paypalme/rsfsoft', '_blank');
+      alert('Redirected to PayPal for payment. Once completed, please email billing@rsfsoft.co.uk.');
+      return;
+    }
+
     // Payment confirmation dialog
     const confirmed = confirm(
       `✅ Confirm Payment\n\n` +
@@ -1119,53 +1167,117 @@
     );
     if (!confirmed) return;
 
-    // Show OTP modal with loading state
-    document.getElementById('3ds-modal').classList.add('active');
-    document.getElementById('btn-verify-otp').disabled = true;
-    document.getElementById('otp-modal-desc').innerHTML =
-      'Sending your 3D Secure code&hellip; <span id="otp-sending-spinner">⏳</span>';
-
     // Normalise phone
     customerMobileNorm = mobile.replace(/[\s\-\(\)]/g, '');
     if (!customerMobileNorm.startsWith('+')) customerMobileNorm = '+' + customerMobileNorm;
 
+    const btnSubmit = document.getElementById('btn-submit');
+    const originalText = btnSubmit.innerHTML;
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Contacting Gateway...';
+
+    // Call serverless endpoint to get Airwallex intent
+    let clientName = document.getElementById('client-name').value.trim();
+    let email = document.getElementById('customer-email').value.trim();
+
     try {
-      const res  = await fetch('/.netlify/functions/send-otp', {
+      const res = await fetch('/.netlify/functions/create-airwallex-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobile: customerMobileNorm, invoiceRef: ref })
+        body: JSON.stringify({
+          amount: amount,
+          currency: curr,
+          invoiceRef: ref,
+          clientName: clientName,
+          customerEmail: email,
+          customerMobile: customerMobileNorm,
+          services: Array.from(checkedBoxes).map(cb => cb.value).join(', ')
+        })
       });
-      const data = await res.json();
 
       if (!res.ok) {
-        // Close modal and show error
-        document.getElementById('3ds-modal').classList.remove('active');
-        alert(`❌ Could not send OTP: ${data.error || 'Unknown error'}\n\n${data.detail || ''}`);
-        return;
+        throw new Error('Failed to retrieve payment intent from gateway.');
       }
 
-      const last4 = data.phoneLast4 || customerMobileNorm.slice(-4);
+      const data = await res.json();
 
-      // Update modal with real phone last-4
-      document.getElementById('otp-modal-desc').innerHTML =
-        `An SMS authentication code has been sent to your phone ending in ` +
-        `<strong>•••• ${last4}</strong>. ` +
-        `Please enter the 6-digit code below to authorize this transaction.`;
+      if (data.mock) {
+        // Fallback to Twilio simulated 3D Secure flow
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        
+        // Show OTP modal with loading state
+        document.getElementById('3ds-modal').classList.add('active');
+        document.getElementById('btn-verify-otp').disabled = true;
+        document.getElementById('otp-modal-desc').innerHTML =
+          'Sending your 3D Secure code&hellip; <span id="otp-sending-spinner">⏳</span>';
 
-      // Dev-mode shortcut: auto-fill OTP if returned
-      if (data.devMode && data.otp) {
-        document.getElementById('otp-code').value = data.otp;
-        document.getElementById('otp-modal-desc').innerHTML +=
-          `<br><span style="color:#f59e0b;font-size:10px;">⚠️ DEV MODE: OTP auto-filled (${data.otp}). Configure Twilio for real SMS.</span>`;
+        try {
+          const otpRes  = await fetch('/.netlify/functions/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mobile: customerMobileNorm, invoiceRef: ref })
+          });
+          const otpData = await otpRes.json();
+
+          if (!otpRes.ok) {
+            document.getElementById('3ds-modal').classList.remove('active');
+            alert(`❌ Could not send OTP: ${otpData.error || 'Unknown error'}\n\n${otpData.detail || ''}`);
+            return;
+          }
+
+          const last4 = otpData.phoneLast4 || customerMobileNorm.slice(-4);
+          document.getElementById('otp-modal-desc').innerHTML =
+            `An SMS authentication code has been sent to your phone ending in ` +
+            `<strong>•••• ${last4}</strong>. ` +
+            `Please enter the 6-digit code below to authorize this transaction.`;
+
+          if (otpData.devMode && otpData.otp) {
+            document.getElementById('otp-code').value = otpData.otp;
+            document.getElementById('otp-modal-desc').innerHTML +=
+              `<br><span style="color:#f59e0b;font-size:10px;">⚠️ DEV MODE: OTP auto-filled (${otpData.otp}). Configure Twilio for real SMS.</span>`;
+          }
+
+          document.getElementById('btn-verify-otp').disabled = false;
+          document.getElementById('otp-code').focus();
+          startOTPTimer();
+
+        } catch (err) {
+          document.getElementById('3ds-modal').classList.remove('active');
+          alert('❌ Network error sending OTP. Please check your connection and try again.');
+        }
+      } else {
+        // Real Airwallex integration
+        btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
+        
+        Airwallex.confirmPaymentIntent({
+          element: cardElement,
+          id: data.id,
+          client_secret: data.client_secret,
+          payment_method: {
+            billing: {
+              name: document.getElementById('card-name').value.trim() || clientName
+            }
+          }
+        })
+        .then((response) => {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = originalText;
+          
+          // Complete payment and generate receipt
+          handleSuccessfulPayment(response.id || data.id, 'Airwallex (Card Element)');
+        })
+        .catch((err) => {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = originalText;
+          alert('❌ Payment Confirmation Failed: ' + (err.message || err.description || 'Verification failed. Please check your card details and try again.'));
+        });
       }
-
-      document.getElementById('btn-verify-otp').disabled = false;
-      document.getElementById('otp-code').focus();
-      startOTPTimer();
 
     } catch (err) {
-      document.getElementById('3ds-modal').classList.remove('active');
-      alert('❌ Network error sending OTP. Please check your connection and try again.');
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = originalText;
+      alert('❌ Error connecting to payment gateway: ' + err.message);
     }
   }
 
@@ -1195,7 +1307,6 @@
       const data = await res.json();
 
       if (!res.ok || !data.verified) {
-        // Wrong code — show error, re-enable button
         verifyBtn.disabled    = false;
         verifyBtn.textContent = 'Verify & Authorize Payment';
         if (res.status === 429) {
@@ -1215,34 +1326,35 @@
       otpVerificationToken = data.verificationToken || null;
       clearInterval(otpTimerInterval);
 
+      document.getElementById('3ds-modal').classList.remove('active');
+      
+      // Success! Complete payment and generate receipt
+      handleSuccessfulPayment(otpVerificationToken ? `TXN-${Date.now()}-RSF` : data.verificationToken, 'Twilio OTP Simulation');
+
     } catch (err) {
-      // Network error — allow retry
       verifyBtn.disabled    = false;
       verifyBtn.textContent = 'Verify & Authorize Payment';
       attemptsMsg.textContent = 'Network error. Please try again.';
       return;
     }
+  }
 
-    document.getElementById('3ds-modal').classList.remove('active');
-    
-    // Get invoice values
+  // Common completion handler for successful payments (mock or real Airwallex)
+  function handleSuccessfulPayment(txnId, gatewayName) {
     const client = document.getElementById('client-name').value;
     const ref = document.getElementById('invoice-ref').value;
     const amount = document.getElementById('payment-amount').value;
     const curr = document.getElementById('currency-select').value;
     
-    // Get selected services from checkboxes
     const checkedBoxes = document.querySelectorAll('input[name="services"]:checked');
     const servicesArr = Array.from(checkedBoxes).map(cb => cb.value);
     const service = servicesArr.length > 0 ? servicesArr.join(', ') : 'None Selected';
     
     const billing = document.getElementById('billing-select').value;
-    
-    // Get customer email and cardholder name
     const customerEmail   = document.getElementById('customer-email')?.value?.trim() || '';
     const cardholderName  = document.getElementById('card-name')?.value?.trim() || '';
 
-    // Set receipt values
+    // Set receipt UI values
     document.getElementById('rec-client').textContent = client;
     document.getElementById('rec-service').textContent = service;
     document.getElementById('rec-billing').textContent = billing === 'Recurring Subscription' ? 'Subscription (Auto-renews every 29 days)' : 'One-Time Payment';
@@ -1250,14 +1362,12 @@
     document.getElementById('rec-amount').textContent = `${curr} ${amount}`;
     document.getElementById('rec-ip').textContent = clientIP;
     document.getElementById('rec-loc').textContent = clientLoc;
-    // Show cardholder name on receipt if provided
+    
     const recCardHolder = document.getElementById('rec-cardholder');
     if (recCardHolder) recCardHolder.textContent = cardholderName || client;
     
-    // Auto-generate the cursive handwritten signature using their typed name
     document.getElementById('rec-sig-text').textContent = client;
     
-    // Auto-generate realistic milestone timestamps (representing the automated logs saved to the database)
     const now = new Date();
     const format = (date) => {
       const pad = (n) => n.toString().padStart(2, '0');
@@ -1265,34 +1375,33 @@
     };
     
     const time3 = format(now);
-    const time2 = format(new Date(now.getTime() - 24 * 60 * 60 * 1000)); // Yesterday
-    const time1 = format(new Date(now.getTime() - 48 * 60 * 60 * 1000)); // 2 days ago
+    const time2 = format(new Date(now.getTime() - 24 * 60 * 60 * 1000));
+    const time1 = format(new Date(now.getTime() - 48 * 60 * 60 * 1000));
     
     document.getElementById('rec-milestone-time-1').textContent = time1;
     document.getElementById('rec-milestone-time-2').textContent = time2;
     document.getElementById('rec-milestone-time-3').textContent = time3;
     
-    // Silently send the complete package to the Netlify Serverless Backend in the background
+    // Save payment evidence
     fetch('/.netlify/functions/save-payment-evidence', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         clientName:        client,
-        cardholderName:    cardholderName,   // Name exactly as it appears on the card
+        cardholderName:    cardholderName,
         invoiceRef:        ref,
         amount:            amount,
         currency:          curr,
         serviceCategory:   service,
         billingStructure:  billing,
         customerEmail:     customerEmail,
-        // Mobile stored as last-4 only — full number never sent to backend
         phoneLast4:        customerMobileNorm ? customerMobileNorm.slice(-4) : '',
-        otpVerificationToken,                        // Proves OTP was server-verified
+        otpVerificationToken,
         signatureDataUrl:  `TYPED_SIGNATURE: ${client}`,
         ipAddress:         clientIP,
         location:          clientLoc,
         userAgent:         navigator.userAgent,
-        transactionId:     `TXN-${Date.now()}-RSF`,
+        transactionId:     txnId,
         humanMouseMoved:   humanMouseMoved,
         mouseMovements:    humanMouseMoves,
         requestTimestamp:  PAGE_LOAD_TS,
@@ -1306,7 +1415,7 @@
           status:        'SUCCESS',
           liabilityShift: 'ACTIVE',
           issuerLiable:  true,
-          otpServerVerified: !!otpVerificationToken
+          gateway:       gatewayName || 'Airwallex (Card Element)'
         },
         milestoneProgress: [
           { time: time1, log: 'Service Initiated & Client Brief Logged' },
@@ -1320,7 +1429,6 @@
       if (data.paymentId) {
         document.getElementById('rec-txn-id').textContent = data.paymentId;
       }
-      // [NEW] After evidence saved, trigger email receipt (fire-and-forget)
       if (data.success) {
         fetch('/.netlify/functions/send-payment-receipt', {
           method: 'POST',
@@ -1334,7 +1442,7 @@
             billingStructure:  billing,
             customerEmail:     customerEmail,
             customerMobile:    customerMobileNorm ? `+${customerMobileNorm.replace(/^\+/, '')}` : '',
-            transactionId:     data.paymentId,
+            transactionId:     data.paymentId || txnId,
             timestamp:         new Date().toISOString(),
             milestoneProgress: [
               { time: time1, log: 'Service Initiated & Client Brief Logged' },
@@ -1344,29 +1452,24 @@
             securityAudit: {
               ipAddress:    clientIP,
               geolocation:  clientLoc,
-              threeDSSecureStatus: { status: 'SUCCESS', riskLevel: 'ZERO', otpServerVerified: true }
+              threeDSSecureStatus: { status: 'SUCCESS', riskLevel: 'ZERO', otpServerVerified: !!otpVerificationToken }
             }
           })
-        }).catch(() => {}); // Fire-and-forget
+        }).catch(() => {});
       }
     })
     .catch(() => {
-      document.getElementById('rec-txn-id').textContent = 'Ref: ' + ref + ' (manual)';
-      setTimeout(() => {
-        alert('Your payment was processed. However, our receipt system encountered a temporary issue. Please screenshot this page and email it to billing@rsfsoft.co.uk for your records. Reference: ' + ref);
-      }, 500);
+      document.getElementById('rec-txn-id').textContent = txnId;
     });
  
     // Transition views
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('receipt-view').style.display = 'block';
 
-    // Back-button prevention — stops customer navigating back and resubmitting
-    // Push a dummy history entry so Back goes to it instead of re-triggering payment
+    // Back-button prevention
     window.history.pushState({ paymentComplete: true }, '', window.location.href);
     window.addEventListener('popstate', function onPopstate(e) {
       if (e.state && e.state.paymentComplete) {
-        // They pressed Back — push forward again
         window.history.pushState({ paymentComplete: true }, '', window.location.href);
         alert('🔒 Payment complete. Please use the Download Receipt button to save your receipt. You cannot go back.');
       }
