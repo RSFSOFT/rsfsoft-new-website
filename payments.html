@@ -1645,16 +1645,21 @@
           customerEmail:    email,
           customerMobile:   customerMobileNorm,
           services:         Array.from(checkedBoxes).map(cb => cb.value).join(', '),
-          // FIX: billing-select is a <select> dropdown, not radio buttons
           billingStructure: document.getElementById('billing-select')?.value || 'One-Time Payment'
         })
       });
 
+      // CRITICAL FIX: Always read the JSON body BEFORE checking res.ok.
+      // The previous code threw before reading the body, discarding the real
+      // Airwallex error message. Now we show it to the user and log it.
+      const data = await res.json().catch(() => ({ error: `Server error (HTTP ${res.status})` }));
+
       if (!res.ok) {
-        throw new Error('Failed to retrieve payment intent from gateway.');
+        const errMsg = data.error || data.message || `Payment gateway error (HTTP ${res.status})`;
+        console.error('[RSFSOFT] Gateway error:', data);
+        throw new Error(errMsg);
       }
 
-      const data = await res.json();
 
       if (data.mock) {
         // Fallback to Twilio simulated 3D Secure flow
