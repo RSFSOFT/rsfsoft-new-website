@@ -1,0 +1,24 @@
+{
+  "name": "rsfsoft-new-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build_case_studies.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RSFSOFT/rsfsoft-new-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RSFSOFT/rsfsoft-new-website/issues"
+  },
+  "homepage": "https://github.com/RSFSOFT/rsfsoft-new-website#readme",
+  "dependencies": {
+    "nodemailer": "^9.0.0"
+  }
+}
