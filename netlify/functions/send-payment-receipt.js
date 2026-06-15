@@ -21,10 +21,11 @@ const nodemailer = require('nodemailer');
 
 // ─── Email transporter (configured via Netlify env vars) ──────────────────────
 function createTransport() {
+  const port = parseInt(process.env.SMTP_PORT || '587', 10);
   return nodemailer.createTransport({
     host:   process.env.SMTP_HOST || 'smtp.gmail.com',
-    port:   parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: false, // TLS via STARTTLS
+    port:   port,
+    secure: port === 465, // SSL for port 465, STARTTLS for 587
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
