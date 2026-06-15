@@ -387,29 +387,46 @@ exports.handler = async (event) => {
     console.log(`[RSFSOFT]    Recurring:    ${isRecurring}`);
     console.log(`[RSFSOFT]    View in Airwallex: https://www.airwallex.com/app/payments/${intentData.id}`);
 
-    // ── Step 5: Create Airwallex BILLING records (non-blocking) ───────────────
-    // This populates the Billing → Customers and Billing → Invoices sections
-    // in your Airwallex portal. Runs in background — does NOT affect payment.
+
+    // ── Step 5: Create Airwallex BILLING records ───────────────────────────────
+    // IMPORTANT: These MUST be awaited before returning.
+    // In Netlify serverless functions, once you return the HTTP response the
+    // Lambda process terminates — any un-awaited Promises are silently killed.
     //
-    // The user asked: "why can't I see Faizan Khan / Fartashia Khan in Billing?"
-    // Answer: Payment Intents appear in Payments section. Billing records appear
-    // in Billing section. We create BOTH so the data shows everywhere.
+    // We use Promise.race with a 6-second timeout so billing API slowness
+    // never delays the payment intent response to the customer's browser.
     //
-    // NOTE: Billing API calls run concurrently via Promise.allSettled so that
-    // a failure in one does NOT block the payment intent response to the frontend.
-    Promise.allSettled([
-      // 5a. Create Billing Customer → appears in Billing → Customers
-      upsertBillingCustomer(baseUrl, token, {
-        clientName,
-        customerEmail,
-        customerMobile,
-        billingType: billingStructure
-      }).then(billingCustId => {
-        if (!billingCustId) return;
+    // This creates:
+    //   • Billing → Customers  (every customer, always)
+    //   • Billing → Invoices   (one-time payments)
+    //   • Billing → Customers  (subscriptions — invoice created separately)
+    // ─────────────────────────────────────────────────────────────────────────
+    const BILLING_TIMEOUT_MS = 6000; // Max 6 seconds for billing API calls
+
+    const billingTimeout = new Promise(resolve =>
+      setTimeout(() => resolve({ timedOut: true }), BILLING_TIMEOUT_MS)
+    );
+
+    const billingWork = (async () => {
+      try {
+        // 5a. Create Billing Customer → Billing → Customers
+        const billingCustId = await upsertBillingCustomer(baseUrl, token, {
+          clientName,
+          customerEmail,
+          customerMobile,
+          billingType: billingStructure
+        });
+
+        if (!billingCustId) {
+          console.warn('[RSFSOFT] Billing customer not created — invoice skipped.');
+          return { billingCustomerId: null, billingInvoiceId: null };
+        }
+
+        let billingInvoiceId = null;
 
         if (!isRecurring) {
-          // 5b. One-time: create Billing Invoice → appears in Billing → Invoices
-          return createBillingInvoice(baseUrl, token, {
+          // 5b. One-time payment → create Billing Invoice → Billing → Invoices
+          billingInvoiceId = await createBillingInvoice(baseUrl, token, {
             billingCustomerId: billingCustId,
             currency,
             amountNum,
@@ -419,16 +436,30 @@ exports.handler = async (event) => {
             paymentIntentId: intentData.id
           });
         } else {
-          // 5c. Subscription: billing customer created above.
-          // Full subscription creation requires a Product + Price object in Airwallex
-          // Billing → Product Catalogue. Once you create those in the portal, we can
-          // create subscriptions automatically. For now, the customer appears in
-          // Billing → Customers and the payment intent handles the first charge.
-          console.log(`[RSFSOFT] Subscription billing customer created. Manual subscription creation recommended in Airwallex portal.`);
-          console.log(`[RSFSOFT]    Go to: Billing → Subscriptions → New Subscription → Select customer: ${clientName}`);
+          // 5c. Subscription → customer is created above.
+          // To auto-create subscriptions: add a Product in Airwallex
+          // Billing → Product Catalogue, then we can link it here automatically.
+          // For now, log the customer ID so you can create the subscription in portal.
+          console.log(`[RSFSOFT] 🔄 SUBSCRIPTION customer ready in Billing → Customers`);
+          console.log(`[RSFSOFT]    Billing Customer ID: ${billingCustId}`);
+          console.log(`[RSFSOFT]    Next step: Airwallex → Billing → Subscriptions → New → select ${clientName}`);
         }
-      })
-    ]).catch(e => console.warn('[RSFSOFT] Billing API parallel error:', e.message));
+
+        return { billingCustomerId: billingCustId, billingInvoiceId };
+      } catch (e) {
+        console.warn('[RSFSOFT] Billing work error (non-fatal):', e.message);
+        return { billingCustomerId: null, billingInvoiceId: null };
+      }
+    })();
+
+    // Race: billing work vs timeout — payment ALWAYS completes regardless
+    const billingResult = await Promise.race([billingWork, billingTimeout]);
+
+    if (billingResult?.timedOut) {
+      console.warn('[RSFSOFT] Billing API calls timed out after 6s — payment intent still valid.');
+    } else {
+      console.log(`[RSFSOFT] Billing records done → Customer: ${billingResult?.billingCustomerId || 'none'} | Invoice: ${billingResult?.billingInvoiceId || 'none'}`);
+    }
 
     return {
       statusCode: 200,
@@ -439,9 +470,10 @@ exports.handler = async (event) => {
         id:            intentData.id,
         client_secret: intentData.client_secret,
         customer_id:   customerId || null,
-        invoice_ref:   invoiceRef              // Returned for receipt display
+        invoice_ref:   invoiceRef
       })
     };
+
 
 
   } catch (err) {

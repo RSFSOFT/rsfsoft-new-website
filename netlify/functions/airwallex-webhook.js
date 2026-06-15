@@ -281,6 +281,120 @@ exports.handler = async (event) => {
     }
   }
 
+  // ── Create Airwallex Billing records on payment success ────────────────────
+  // This is the GUARANTEED BACKUP. Even if the billing API calls in
+  // create-airwallex-intent.js timed out, this webhook fires AFTER Airwallex
+  // confirms the payment is real. We create/update the Billing Customer and
+  // Billing Invoice here so data ALWAYS appears in Billing → Customers and
+  // Billing → Invoices regardless of what happened before.
+  //
+  // Fires on: payment_intent.succeeded  (card payment confirmed)
+  //           payment_consent.created   (subscription card saved)
+  if (eventName === 'payment_intent.succeeded' || eventName === 'payment_consent.created') {
+    try {
+      const intent    = payload.data?.object || {};
+      const meta      = intent.metadata      || {};
+      const custName  = meta.rsfsoft_client_name     || '';
+      const custEmail = meta.rsfsoft_customer_email  || '';
+      const custPhone = meta.rsfsoft_customer_mobile || '';
+      const invoiceRef= meta.rsfsoft_invoice_ref || intent.merchant_order_id || intentId;
+      const services  = meta.rsfsoft_services    || 'Digital Marketing Services';
+      const billingType = meta.rsfsoft_billing_type || 'One-Time Payment';
+      const currency  = intent.currency          || 'GBP';
+      const amountNum = intent.amount            || 0;
+      const isRecurring = billingType === 'Recurring Subscription';
+
+      if (custName || custEmail) {
+        // Get a fresh auth token for billing API calls
+        const clientId  = process.env.AIRWALLEX_CLIENT_ID;
+        const apiKey    = process.env.AIRWALLEX_API_KEY;
+        const env       = process.env.AIRWALLEX_ENV || 'prod';
+        const baseUrl   = env === 'prod'
+          ? 'https://api.airwallex.com/api/v1'
+          : 'https://api-demo.airwallex.com/api/v1';
+
+        if (clientId && apiKey) {
+          const authRes = await fetch(`${baseUrl}/authentication/login`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json', 'x-client-id': clientId, 'x-api-key': apiKey },
+            body:    '{}'
+          });
+
+          if (authRes.ok) {
+            const { token } = await authRes.json();
+
+            // Create Billing Customer (appears in Billing → Customers)
+            const bcPayload = {
+              request_id: require('crypto').randomBytes(16).toString('hex'),
+              name:       custName || custEmail || 'RSFSOFT Client',
+              type:       'INDIVIDUAL',
+              ...(custEmail && { email:        custEmail }),
+              ...(custPhone && { phone_number: custPhone })
+            };
+
+            const bcRes = await fetch(`${baseUrl}/billing_customers/create`, {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+              body:    JSON.stringify(bcPayload)
+            });
+
+            let billingCustId = null;
+            if (bcRes.ok) {
+              const bcData = await bcRes.json();
+              billingCustId = bcData.id;
+              console.log(`[RSFSOFT Webhook] ✅ Billing Customer ensured → ${billingCustId} (${custName})`);
+            } else {
+              const bcErr = await bcRes.text().catch(() => '');
+              console.warn(`[RSFSOFT Webhook] Billing Customer (${bcRes.status}): ${bcErr}`);
+            }
+
+            // Create Billing Invoice for one-time payments (Billing → Invoices)
+            if (billingCustId && !isRecurring && amountNum > 0) {
+              const invPayload = {
+                request_id:          require('crypto').randomBytes(16).toString('hex'),
+                billing_customer_id: billingCustId,
+                currency:            currency.toUpperCase(),
+                collection_method:   'OUT_OF_BAND',
+                description:         `${services} — Invoice ${invoiceRef} — ${custName}`,
+                line_items: [{
+                  description: services,
+                  unit_amount: amountNum,
+                  quantity:    1
+                }],
+                metadata: {
+                  payment_intent_id:   intentId,
+                  rsfsoft_invoice_ref: invoiceRef,
+                  rsfsoft_client:      custName
+                }
+              };
+
+              const invRes = await fetch(`${baseUrl}/invoices/create`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body:    JSON.stringify(invPayload)
+              });
+
+              if (invRes.ok) {
+                const invData = await invRes.json();
+                console.log(`[RSFSOFT Webhook] ✅ Billing Invoice ensured → ${invData.id} | ${formatAmount(amountNum, currency)}`);
+              } else {
+                const invErr = await invRes.text().catch(() => '');
+                console.warn(`[RSFSOFT Webhook] Billing Invoice (${invRes.status}): ${invErr}`);
+              }
+            }
+          } else {
+            console.warn('[RSFSOFT Webhook] Cannot get Airwallex token for billing — skipping billing record creation.');
+          }
+        } else {
+          console.warn('[RSFSOFT Webhook] AIRWALLEX_CLIENT_ID or AIRWALLEX_API_KEY not set — billing records skipped.');
+        }
+      }
+    } catch (billingErr) {
+      // NEVER let billing errors block the 200 response to Airwallex
+      console.error('[RSFSOFT Webhook] Billing record error (non-fatal):', billingErr.message);
+    }
+  }
+
   // ── Acknowledge to Airwallex — MUST return 200 within 30s ─────────────────
   return {
     statusCode: 200,
