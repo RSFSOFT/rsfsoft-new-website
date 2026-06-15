@@ -10,6 +10,20 @@
   # Without this, Netlify may default to Node 16 → "fetch is not defined" errors
   NODE_VERSION = "18"
 
+# ─── Apple Pay Domain Verification ───────────────────────────────────────────
+# Apple requires this exact Content-Type for domain verification.
+# The file at /.well-known/apple-developer-merchantid-domain-association must
+# be served as application/octet-stream — not text/plain or anything else.
+# Apple's verification bot crawls this URL when you click "Verify" in the
+# Airwallex portal. Without this header rule, verification will FAIL.
+[[headers]]
+  for = "/.well-known/apple-developer-merchantid-domain-association"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    # Allow Apple's verification crawlers (no CORS restriction on this endpoint)
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "no-cache"
+
 # ─── Global Security Headers (all pages) ─────────────────────────────────────
 [[headers]]
   for = "/*"
