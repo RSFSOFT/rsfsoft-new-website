@@ -47,8 +47,8 @@ function buildCustomerReceipt(data) {
   const milestones = Array.isArray(milestoneProgress)
     ? milestoneProgress.map(m => `
         <tr>
-          <td style="padding:6px 0;font-size:12px;color:#64748b;">
-            🕐 <strong>${m.time}</strong> — ${m.log}
+          <td style="padding:6px 0;font-size:12px;color:#94a3b8;line-height:1.5;">
+            <span style="color:#06d6f0;font-weight:700;">🕐 ${m.time}</span> — <span style="color:#f0f6ff;">${m.log}</span>
           </td>
         </tr>`).join('')
     : '';
@@ -60,53 +60,59 @@ function buildCustomerReceipt(data) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Payment Receipt — RSFSOFT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body style="margin:0;padding:0;background:#f0f4f8;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <div style="max-width:560px;margin:30px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+<body style="margin:0;padding:0;background:#04070f;font-family:'Outfit','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#f0f6ff;padding:30px 10px;">
+  <div style="max-width:560px;margin:0 auto;background:#080d1a;border:1px solid rgba(124,58,237,0.2);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
 
     <!-- Header -->
-    <div style="background:linear-gradient(135deg,#7c3aed,#06d6f0);padding:32px;text-align:center;">
-      <h1 style="margin:0;color:#fff;font-size:26px;font-weight:800;letter-spacing:2px;">RSFSOFT</h1>
-      <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:13px;">PAYMENT RECEIPT & CONFIRMATION</p>
+    <div style="background:linear-gradient(135deg,#7c3aed,#06d6f0);padding:36px;text-align:center;">
+      <h1 style="margin:0;color:#fff;font-size:28px;font-weight:900;letter-spacing:3px;">RSFSOFT</h1>
+      <p style="margin:6px 0 0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;font-family:'Inter',sans-serif;">PAYMENT RECEIPT & CONFIRMATION</p>
     </div>
 
     <!-- Success badge -->
-    <div style="text-align:center;padding:24px 32px 0;">
-      <div style="display:inline-block;width:56px;height:56px;background:#d1fae5;border:2px solid #10b981;border-radius:50%;line-height:52px;font-size:24px;">✅</div>
-      <h2 style="margin:12px 0 4px;color:#0f172a;font-size:20px;">Payment Confirmed</h2>
-      <p style="color:#64748b;font-size:13px;margin:0;">3D Secure Verified &amp; Electronically Signed</p>
+    <div style="text-align:center;padding:28px 32px 0;">
+      <div style="display:inline-block;width:56px;height:56px;background:rgba(6,214,240,0.12);border:2px solid #06d6f0;border-radius:50%;line-height:56px;font-size:24px;color:#06d6f0;box-shadow:0 0 20px rgba(6,214,240,0.2);">✓</div>
+      <h2 style="margin:16px 0 4px;color:#f0f6ff;font-size:22px;font-weight:700;">Payment Confirmed</h2>
+      <p style="color:#94a3b8;font-size:13px;margin:0;font-family:'Inter',sans-serif;">3D Secure Verified &amp; Signed Electronically</p>
     </div>
 
     <!-- Invoice table -->
     <div style="padding:24px 32px;">
       <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:#f8fafc;">
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;border-radius:4px 0 0 4px;">Client</td>
-          <td style="padding:10px 12px;font-size:13px;color:#0f172a;font-weight:600;text-align:right;">${clientName}</td>
+        <tr style="background:#0e1526;">
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:6px 0 0 6px;">Client</td>
+          <td style="padding:12px 14px;font-size:13px;color:#f0f6ff;font-weight:600;text-align:right;border-radius:0 6px 6px 0;">${clientName}</td>
         </tr>
         <tr>
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Invoice Ref</td>
-          <td style="padding:10px 12px;font-size:13px;color:#7c3aed;font-weight:700;text-align:right;font-family:monospace;">${invoiceRef}</td>
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Invoice Ref</td>
+          <td style="padding:12px 14px;font-size:13px;color:#06d6f0;font-weight:700;text-align:right;font-family:monospace;letter-spacing:0.5px;">${invoiceRef}</td>
         </tr>
-        <tr style="background:#f8fafc;">
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Service(s)</td>
-          <td style="padding:10px 12px;font-size:13px;color:#0f172a;text-align:right;">${serviceCategory}</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Billing</td>
-          <td style="padding:10px 12px;font-size:13px;color:#0f172a;text-align:right;">${billingLabel}</td>
-        </tr>
-        <tr style="background:#f8fafc;">
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Transaction ID</td>
-          <td style="padding:10px 12px;font-size:12px;color:#475569;text-align:right;font-family:monospace;">${transactionId}</td>
+        <tr style="background:#0e1526;">
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:6px 0 0 6px;">Service(s)</td>
+          <td style="padding:12px 14px;font-size:13px;color:#f0f6ff;text-align:right;border-radius:0 6px 6px 0;">${serviceCategory}</td>
         </tr>
         <tr>
-          <td style="padding:10px 12px;font-size:12px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Date & Time</td>
-          <td style="padding:10px 12px;font-size:13px;color:#0f172a;text-align:right;">${new Date(timestamp).toUTCString()}</td>
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Billing</td>
+          <td style="padding:12px 14px;font-size:13px;color:#f0f6ff;text-align:right;">${billingLabel}</td>
         </tr>
-        <tr style="background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(6,214,240,0.08));">
-          <td style="padding:14px 12px;font-size:14px;color:#0f172a;font-weight:800;border-radius:4px 0 0 4px;">AMOUNT PAID</td>
-          <td style="padding:14px 12px;font-size:18px;color:#7c3aed;font-weight:800;text-align:right;border-radius:0 4px 4px 0;">${currency} ${amount}</td>
+        <tr style="background:#0e1526;">
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:6px 0 0 6px;">Transaction ID</td>
+          <td style="padding:12px 14px;font-size:12px;color:#94a3b8;text-align:right;font-family:monospace;border-radius:0 6px 6px 0;">${transactionId}</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Date & Time</td>
+          <td style="padding:12px 14px;font-size:13px;color:#f0f6ff;text-align:right;">${new Date(timestamp).toUTCString()}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding:18px 0 0 0;">
+            <div style="background:linear-gradient(135deg,rgba(124,58,237,0.12) 0%,rgba(6,214,240,0.12) 100%);border:1px solid rgba(6,214,240,0.3);border-radius:8px;padding:16px;text-align:center;">
+              <span style="font-size:11px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;font-family:'Inter',sans-serif;">Amount Paid</span>
+              <span style="font-size:26px;color:#06d6f0;font-weight:800;letter-spacing:1px;">${currency} ${amount}</span>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
@@ -114,34 +120,35 @@ function buildCustomerReceipt(data) {
     <!-- Milestone log -->
     ${milestones ? `
     <div style="padding:0 32px 16px;">
-      <p style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">📋 Service Delivery Log</p>
+      <p style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-family:'Inter',sans-serif;">📋 Service Delivery Log</p>
       <table style="width:100%;border-left:3px solid #06d6f0;padding-left:12px;">
         ${milestones}
       </table>
     </div>` : ''}
 
     <!-- Refund policy note -->
-    <div style="padding:16px 32px;background:#fef3c7;border-left:4px solid #f59e0b;margin:0 32px 24px;border-radius:0 8px 8px 0;">
-      <p style="margin:0;font-size:12px;color:#92400e;line-height:1.6;">
+    <div style="padding:16px 24px;background:rgba(245,158,11,0.05);border-left:4px solid #f59e0b;margin:0 32px 28px;border-radius:0 8px 8px 0;">
+      <p style="margin:0;font-size:12px;color:#fef08a;line-height:1.6;font-family:'Inter',sans-serif;">
         <strong>No-Refund Policy:</strong> By completing this payment, you confirmed your agreement to RSFSOFT's
-        <a href="https://www.rsfsoft.co.uk/terms-and-conditions.html" style="color:#7c3aed;">Terms &amp; Conditions</a>
-        and <a href="https://www.rsfsoft.co.uk/refund-policy.html" style="color:#7c3aed;">Refund Policy</a>.
-        Services are considered initiated upon payment. For billing queries, contact
-        <a href="mailto:billing@rsfsoft.co.uk" style="color:#7c3aed;">billing@rsfsoft.co.uk</a>.
+        <a href="https://www.rsfsoft.co.uk/terms-and-conditions.html" style="color:#06d6f0;text-decoration:none;">Terms &amp; Conditions</a>
+        and <a href="https://www.rsfsoft.co.uk/refund-policy.html" style="color:#06d6f0;text-decoration:none;">Refund Policy</a>.
+        Services are considered initiated upon payment. For queries, contact
+        <a href="mailto:billing@rsfsoft.co.uk" style="color:#06d6f0;text-decoration:none;">billing@rsfsoft.co.uk</a>.
       </p>
     </div>
 
     <!-- Footer -->
-    <div style="background:#0f172a;padding:24px 32px;text-align:center;">
-      <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;">RSFSOFT LTD · Company No. 15878082</p>
-      <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;">📧 billing@rsfsoft.co.uk · 🌐 www.rsfsoft.co.uk</p>
-      <p style="margin:0;color:#475569;font-size:10px;">This receipt was automatically generated. Please keep it for your records.</p>
-      <p style="margin:4px 0 0;color:#334155;font-size:10px;">🔒 3DS Verified · IP Logged · E-Signed · SHA-256 Integrity Hash on File</p>
+    <div style="background:#04070f;padding:28px 32px;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">
+      <p style="margin:0 0 6px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">RSFSOFT LTD · Company No. 15878082</p>
+      <p style="margin:0 0 8px;color:#94a3b8;font-size:12px;font-family:'Inter',sans-serif;">📧 billing@rsfsoft.co.uk · 🌐 www.rsfsoft.co.uk</p>
+      <p style="margin:0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">This receipt was automatically generated. Please keep it for your records.</p>
+      <p style="margin:4px 0 0;color:#4b5e7a;font-size:10px;font-family:'Inter',sans-serif;">🔒 3DS Verified · IP Logged · E-Signed · SHA-256 Integrity Hash on File</p>
     </div>
 
   </div>
 </body>
 </html>`;
+}`;
 }
 
 // ─── Internal RSFSOFT Alert HTML ──────────────────────────────────────────────
