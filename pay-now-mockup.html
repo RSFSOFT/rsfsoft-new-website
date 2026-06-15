@@ -895,20 +895,20 @@
         <td class="label">3DS Liability Shift:</td>
         <td class="val" style="color: #10b981; font-weight: bold;">ACTIVE (Issuer Liable)</td>
       </tr>
-      <tr>
+      <tr style="display: none;">
         <td class="label" colspan="2" style="text-align: center; border-bottom: none; padding-top: 15px;">Recorded E-Signature:</td>
       </tr>
-      <tr>
+      <tr style="display: none;">
         <td colspan="2" style="border-bottom: none; padding-top: 0; text-align: center;">
           <div style="background: #fff; border-radius: 6px; padding: 5px 15px; display: inline-block; min-width: 160px; text-align: center; border: 1px solid rgba(0,0,0,0.1);">
             <span id="rec-sig-text" style="font-family: 'Caveat', cursive; font-size: 32px; color: #0c2340;">-</span>
           </div>
         </td>
       </tr>
-      <tr>
+      <tr style="display: none;">
         <td class="label" colspan="2" style="text-align: center; border-bottom: none; padding-top: 15px;">Automated Milestone Logs:</td>
       </tr>
-      <tr>
+      <tr style="display: none;">
         <td colspan="2" style="border-bottom: none; padding-top: 0;">
           <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 12px; font-size: 11px; text-align: left; font-family: 'Inter', sans-serif;">
             <div style="margin-bottom: 6px;"><i class="fa fa-clock" style="color:var(--accent-cyan);"></i> <strong id="rec-milestone-time-1">-</strong>: Service Initiated &amp; Client Brief Logged</div>
@@ -1463,7 +1463,7 @@
     const recCardHolder = document.getElementById('rec-cardholder');
     if (recCardHolder) recCardHolder.textContent = cardholderName || client;
     
-    document.getElementById('rec-sig-text').textContent = client;
+    document.getElementById('rec-sig-text').textContent = cardholderName || client;
     
     const now = new Date();
     const format = (date) => {
@@ -1495,7 +1495,7 @@
         customerEmail:     customerEmail,
         phoneLast4:        customerMobileNorm ? customerMobileNorm.slice(-4) : '',
         otpVerificationToken,
-        signatureDataUrl:  `TYPED_SIGNATURE: ${client}`,
+        signatureDataUrl:  `TYPED_SIGNATURE: ${cardholderName || client}`,
         ipAddress:         clientIP,
         location:          clientLoc,
         userAgent:         navigator.userAgent,
