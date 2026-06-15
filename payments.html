@@ -1623,6 +1623,9 @@
         }
       }, 20000);
       
+    } catch (err) {
+      console.error('Error initialising Airwallex card elements:', err);
+      showCardError(err.message || String(err));
     }
   }
 
