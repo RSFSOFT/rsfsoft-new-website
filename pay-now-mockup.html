@@ -1349,8 +1349,6 @@
         btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
         
         cardElement.confirm({
-          element: cardElement,
-          intent_id: data.id,
           client_secret: data.client_secret,
           payment_method: {
             billing: {
