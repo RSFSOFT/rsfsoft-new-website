@@ -1513,11 +1513,9 @@
       // Show the card container now that we have the intent
       document.getElementById('airwallex-card-container').style.display = 'block';
 
-      // Initialize Airwallex (origin added back for iframe postMessage, client_id added for strict auth)
+      // Initialize Airwallex (origin and client_id are no longer required for DropIn and can break initialization)
       await Airwallex.init({
         env: envMode,
-        client_id: 'yo16dsm2RhyfAS3FmLi65A',
-        origin: window.location.origin,
         enabledElements: ['payments']
       });
       
