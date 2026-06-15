@@ -433,7 +433,7 @@ let currentPage = 1;
 let hasMore     = false;
 let sortKey     = 'createdAt';
 let sortAsc     = false;
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 20; // Airwallex works best with 20-25 per page
 
 // ── Auth ───────────────────────────────────────────────────────
 function doLogin() {
@@ -441,6 +441,7 @@ function doLogin() {
   if (!pass) return;
   adminToken = pass;
   sessionStorage.setItem('rsf_admin', pass);
+  document.getElementById('login-err').textContent = '';
   loadPayments(1);
 }
 function doLogout() {
@@ -466,12 +467,15 @@ async function api(params = {}) {
     headers: { 'Authorization': `Bearer ${adminToken}` }
   });
   if (res.status === 401) {
-    document.getElementById('login-err').textContent = 'Incorrect password.';
+    sessionStorage.removeItem('rsf_admin'); // clear stale session
+    document.getElementById('login-err').textContent = 'Incorrect password. Please try again.';
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('login-screen').style.display = 'flex';
     throw new Error('Unauthorized');
   }
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
 }
 
 // ── Load Payments ──────────────────────────────────────────────
@@ -497,8 +501,13 @@ async function loadPayments(page = 1) {
     allPayments = data.payments || [];
     hasMore     = data.hasMore || false;
     updateStats(data.summary || {});
-    clientFilter(); // apply text search immediately
+    clientFilter();
     updatePagination(data);
+
+    // Show a notice if no data came back
+    if (allPayments.length === 0) {
+      document.getElementById('table-count').textContent = 'No payments found for these filters';
+    }
   } catch(e) {
     if (e.message !== 'Unauthorized') {
       setTableError(e.message);
@@ -527,35 +536,38 @@ function clientFilter() {
   filtered = q
     ? allPayments.filter(p =>
         (p.clientName || '').toLowerCase().includes(q) ||
-        (p.email || '').toLowerCase().includes(q) ||
-        (p.invoiceRef || '').toLowerCase().includes(q) ||
-        (p.mobile || '').toLowerCase().includes(q)
-      )
-    : [...allPayments];
-
-  sortPayments();
-  renderTable();
-  document.getElementById('table-count').textContent = `${filtered.length} of ${allPayments.length} records`;
+        (p.email || '').toLowerCase().infunction renderTable() {
+  const tbody = document.getElementById('payments-table');
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8"><span class="empty-icon"><i class="fa fa-inbox"></i></span>
+      ${ allPayments.length === 0
+          ? 'No payment records found. Try a different filter or check that your Airwallex account has payments.'
+          : 'No results match your search — try a different keyword or clear filters.' }
+    </td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(p => {
+    // Use email as primary if clientName looks like a company (RSFSOFT LTD etc)
+    const displayName = p.clientName && p.clientName !== '—' ? p.clientName : p.email;
+    const displayEmail = p.email && p.email !== '—' ? p.email : '';
+    return `
+    <tr onclick="showDetail('${p.id}')">
+      <td><div class="td-date">${fmtDate(p.createdAt)}</div></td>
+      <td><div class="td-ref">${esc(p.invoiceRef)}</div></td>
+      <td>
+        <div class="td-client">${esc(displayName)}</div>
+        ${displayEmail ? `<div class="td-email">${esc(displayEmail)}</div>` : ''}
+        ${p.mobile && p.mobile !== '—' ? `<div class="td-email">${esc(p.mobile)}</div>` : ''}
+      </td>
+      <td><div class="td-amount" style="color:${p.status==='SUCCEEDED'?'var(--green)':p.status.includes('REQUIRES')?'var(--yellow)':'var(--red)'}">${esc(p.currency)} ${formatAmount(p.amount, p.currency)}</div></td>
+      <td>${statusBadge(p.status)}</td>
+      <td><div class="td-services" title="${esc(p.services)}">${esc(p.services)}</div></td>
+      <td>${cardChip(p)}</td>
+      <td><div style="font-size:11px;color:var(--muted2)">${esc(p.billingType)}</div></td>
+    </tr>
+  `}).join('');
 }
-
-// ── Sort ───────────────────────────────────────────────────────
-function sortBy(key) {
-  if (sortKey === key) sortAsc = !sortAsc;
-  else { sortKey = key; sortAsc = false; }
-  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
-  event.currentTarget.classList.add('sorted');
-  sortPayments();
-  renderTable();
-}
-function sortPayments() {
-  filtered.sort((a, b) => {
-    let av = a[sortKey] ?? '', bv = b[sortKey] ?? '';
-    if (typeof av === 'number') return sortAsc ? av - bv : bv - av;
-    return sortAsc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
-  });
-}
-
-// ── Render Table ───────────────────────────────────────────────
+�──────────────────────────────
 function renderTable() {
   const tbody = document.getElementById('payments-table');
   if (!filtered.length) {
