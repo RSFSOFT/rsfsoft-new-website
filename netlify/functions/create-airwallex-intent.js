@@ -202,14 +202,20 @@ exports.handler = async (event) => {
       request_id:        crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex'),
       amount:            amountNum,
       currency:          currency.toUpperCase(),
-      merchant_order_id: invoiceRef,          // Appears as Order Reference in portal
+      merchant_order_id: invoiceRef,          // Appears as "Order Reference" in Airwallex portal
       descriptor:        'RSFSOFT LTD',       // Appears on customer bank statement
+      capture_method:    'AUTOMATIC',         // Capture immediately when authorised
+
+      // ── 3DS Redirect Support ───────────────────────────────────────────────
+      // Some banks (especially non-UK) use redirect-based 3DS instead of in-iframe.
+      // return_url tells Airwallex where to send the customer after bank authentication.
+      return_url:        'https://www.rsfsoft.co.uk/payments',
 
       // ── Customer linkage (makes customer appear in Airwallex Customers tab) ──
       ...(customerId && { customer_id: customerId }),
 
       // ── Recurring: payment_method_options (only when subscription selected) ──
-      // Uses correct Airwallex field name 'mechanism' (not 'trigger')
+      // Sets up the payment method for future merchant-initiated charges.
       ...(isRecurring && {
         payment_method_options: {
           card: {
@@ -222,23 +228,22 @@ exports.handler = async (event) => {
         }
       }),
 
-      // ── Metadata (searchable in portal, visible in payment detail view) ──────
-      // NOTE: 'order.products' was removed — that field belongs to Airwallex's
-      // /pa/orders endpoint, NOT /pa/payment_intents/create. Including it caused
-      // a 400 validation error from Airwallex. Line-item info lives in metadata.
+      // ── Metadata — appears in Airwallex portal payment detail view ───────────
+      // Every field here is searchable and visible in your Airwallex dashboard.
       metadata: {
-        rsfsoft_invoice_ref:    invoiceRef,
-        rsfsoft_client_name:    clientName       || '',
-        rsfsoft_customer_email: customerEmail    || '',
-        rsfsoft_customer_mobile: customerMobile  || '',
-        rsfsoft_services:       services         || '',
-        rsfsoft_billing_type:   billingStructure || 'One-Time Payment',
-        rsfsoft_source:         'payments.rsfsoft.co.uk'
+        rsfsoft_invoice_ref:     invoiceRef,
+        rsfsoft_client_name:     clientName       || '',
+        rsfsoft_customer_email:  customerEmail    || '',
+        rsfsoft_customer_mobile: customerMobile   || '',
+        rsfsoft_services:        services         || '',
+        rsfsoft_billing_type:    billingStructure || 'One-Time Payment',
+        rsfsoft_source:          'rsfsoft.co.uk/payments',
+        rsfsoft_customer_id:     customerId       || 'not-linked'
       }
     };
 
     // ── Step 4: Create Payment Intent ─────────────────────────────────────────
-    console.log(`[RSFSOFT] Creating payment intent: ${amountNum} ${currency} | ref: ${invoiceRef} | recurring: ${isRecurring}`);
+    console.log(`[RSFSOFT] Creating payment intent: ${amountNum} minor-units (${parseFloat(amount).toFixed(2)} ${currency}) | ref: ${invoiceRef} | recurring: ${isRecurring} | customer: ${customerId || 'none'}`);
     const intentRes = await fetch(`${baseUrl}/pa/payment_intents/create`, {
       method: 'POST',
       headers: {
@@ -262,7 +267,16 @@ exports.handler = async (event) => {
     }
 
     const intentData = await intentRes.json();
-    console.log(`[RSFSOFT] Payment intent created: ${intentData.id} | customer: ${customerId || 'none'} | order: ${invoiceRef}`);
+
+    // Log the intent ID clearly — visible in Netlify function logs for 24h
+    console.log(`[RSFSOFT] ✅ PAYMENT INTENT CREATED SUCCESSFULLY`);
+    console.log(`[RSFSOFT]    Intent ID:    ${intentData.id}`);
+    console.log(`[RSFSOFT]    Amount:       ${parseFloat(amount).toFixed(2)} ${currency} (${amountNum} minor units)`);
+    console.log(`[RSFSOFT]    Invoice Ref:  ${invoiceRef}`);
+    console.log(`[RSFSOFT]    Client:       ${clientName} <${customerEmail}>`);
+    console.log(`[RSFSOFT]    Customer ID:  ${customerId || 'not-linked'}`);
+    console.log(`[RSFSOFT]    Recurring:    ${isRecurring}`);
+    console.log(`[RSFSOFT]    View in Airwallex: https://www.airwallex.com/app/payments/${intentData.id}`);
 
     return {
       statusCode: 200,
@@ -272,9 +286,11 @@ exports.handler = async (event) => {
         env:           airwallexEnv,
         id:            intentData.id,
         client_secret: intentData.client_secret,
-        customer_id:   customerId || null       // Returned for confirmation logging
+        customer_id:   customerId || null,
+        invoice_ref:   invoiceRef              // Returned for receipt display
       })
     };
+
 
   } catch (err) {
     console.error('[RSFSOFT] Error in create-airwallex-intent:', err);
