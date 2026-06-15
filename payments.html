@@ -1522,37 +1522,33 @@
       });
       
       // Pass intent_id and client_secret to bypass origin check completely
-      cardElement = await Airwallex.createElement('card', {
+      cardElement = await Airwallex.createElement('dropIn', {
         intent_id: intentData.id,
-        client_secret: intentData.client_secret,
-        style: {
-          base: {
-            color:      '#f0f6ff',
-            fontSize:   '14px',
-            fontFamily: 'Outfit, Inter, system-ui, sans-serif',
-            '::placeholder': { color: '#94a3b8' }
-          },
-          invalid: { color: '#ef4444' }
-        }
+        client_secret: intentData.client_secret
       });
 
-      // —— Event: card form is rendered and interactive ——
+      // —— Event: form is rendered and interactive ——
       cardElement.on('ready', () => {
         cardElementReady = true;
         const loading = document.getElementById('card-loading');
         if (loading) loading.style.display = 'none';
         
-        // Advance to Step 2
-        currentCheckoutStep = 2;
+        // Hide our custom submit button because DropIn has its own built-in secure "Pay" button
         const btnSubmit = document.getElementById('btn-submit');
-        btnSubmit.innerHTML = '<i class="fa fa-lock"></i> Confirm & Pay Now';
-        btnSubmit.disabled = false;
-        console.log('Airwallex card element ready ✅');
+        if (btnSubmit) btnSubmit.style.display = 'none';
+        console.log('Airwallex DropIn ready ✅');
+      });
+
+      // —— Event: payment successful! (DropIn handles confirmation internally) ——
+      cardElement.on('success', (event) => {
+        console.log('Payment successful via DropIn:', event);
+        // We handle the receipt UI update using the existing function
+        handleSuccessfulPayment(intentData.id, 'Airwallex (DropIn)');
       });
 
       // —— Event: something went wrong inside the iframe ——
       cardElement.on('error', (event) => {
-        console.error('Airwallex card element error:', event);
+        console.error('Airwallex DropIn error:', event);
         showCardError(event.detail?.message || event.message || 'Iframe rendering error');
       });
       
