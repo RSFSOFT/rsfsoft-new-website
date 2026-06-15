@@ -90,22 +90,13 @@
     X-Frame-Options = "DENY"
 
 # ─── Apple Pay Domain Verification ───────────────────────────────────────────
-# Apply the required octet-stream header to BOTH the visible path and the rewrite path
+# Apply the required octet-stream header to the exact verification path.
+# We do not use redirects because Apple's validation fails if the file is redirected.
 [[headers]]
   for = "/.well-known/apple-developer-merchantid-domain-association"
   [headers.values]
     Content-Type = "application/octet-stream"
 
-[[headers]]
-  for = "/Apple/apple-developer-merchantid-domain-association.txt"
-  [headers.values]
-    Content-Type = "application/octet-stream"
-
-[[redirects]]
-  from   = "/.well-known/apple-developer-merchantid-domain-association"
-  to     = "/Apple/apple-developer-merchantid-domain-association.txt"
-  status = 200
-  force  = true
 
 # ─── Secure Evidence Folder — block direct web access ────────────────────────
 [[headers]]
