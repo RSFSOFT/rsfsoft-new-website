@@ -511,6 +511,33 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Trust Badge Link Styling */
+    .trust-badge-link {
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .trust-badge-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    .trust-badge-link.google-badge:hover {
+      background: rgba(255, 255, 255, 0.07) !important;
+      border-color: rgba(255, 255, 255, 0.18) !important;
+    }
+    .trust-badge-link.trustpilot-badge:hover {
+      background: rgba(0, 182, 122, 0.15) !important;
+      border-color: rgba(0, 182, 122, 0.35) !important;
+    }
+    .trust-badge-link.satisfied-badge:hover {
+      background: rgba(6, 214, 240, 0.15) !important;
+      border-color: rgba(6, 214, 240, 0.35) !important;
+    }
+    .trust-badge-link.clients-badge:hover {
+      background: rgba(124, 58, 237, 0.15) !important;
+      border-color: rgba(124, 58, 237, 0.35) !important;
+    }
   </style>
 </head>
 <body>
@@ -541,22 +568,22 @@
         <!-- Small, Elegant trust badges -->
         <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
           <!-- Google Partner -->
-          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; color: #f0f6ff; font-family: 'Inter', sans-serif;">
+          <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener noreferrer" class="trust-badge-link google-badge" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; color: #f0f6ff; font-family: 'Inter', sans-serif;">
             <span style="color: #4285F4;">G</span><span style="color: #EA4335;">o</span><span style="color: #FBBC05;">o</span><span style="color: #4285F4;">g</span><span style="color: #34A853;">l</span><span style="color: #EA4335;">e</span>
             <span style="color: var(--accent-cyan); font-weight: 800; font-size: 9.5px;">Partner</span>
-          </div>
+          </a>
           <!-- Trustpilot -->
-          <div style="background: rgba(0, 182, 122, 0.08); border: 1px solid rgba(0, 182, 122, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #00b67a; font-family: 'Inter', sans-serif;">
+          <a href="https://www.trustpilot.com/review/www.rsfsoft.com" target="_blank" rel="noopener noreferrer" class="trust-badge-link trustpilot-badge" style="background: rgba(0, 182, 122, 0.08); border: 1px solid rgba(0, 182, 122, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #00b67a; font-family: 'Inter', sans-serif;">
             <span style="color: #00b67a; font-size: 11px;">★</span> Trustpilot <span style="color: #fff; font-weight: 500; font-size: 9.5px;">4.9</span>
-          </div>
+          </a>
           <!-- 100% Satisfied -->
-          <div style="background: rgba(6, 214, 240, 0.08); border: 1px solid rgba(6, 214, 240, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: var(--accent-cyan); font-family: 'Inter', sans-serif;">
+          <a href="refund-policy.html" class="trust-badge-link satisfied-badge" style="background: rgba(6, 214, 240, 0.08); border: 1px solid rgba(6, 214, 240, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: var(--accent-cyan); font-family: 'Inter', sans-serif;">
             <i class="fa fa-circle-check" style="font-size: 9.5px;"></i> 100% Satisfied
-          </div>
+          </a>
           <!-- 150+ Clients -->
-          <div style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #c084fc; font-family: 'Inter', sans-serif;">
+          <a href="portfolio.html" class="trust-badge-link clients-badge" style="background: rgba(124, 58, 237, 0.08); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #c084fc; font-family: 'Inter', sans-serif;">
             <i class="fa fa-users" style="font-size: 9.5px;"></i> 150+ Happy Clients
-          </div>
+          </a>
         </div>
 
         <!-- Trustpilot Rating Card (Softer card style) -->
