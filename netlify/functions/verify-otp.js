@@ -8,11 +8,39 @@
  * - Returns a signed verification token used in evidence file
  */
 
-const crypto = require('crypto');
-const fs     = require('fs');
-const path   = require('path');
+let resolvedDir = null;
+function getEvidenceDir() {
+  if (resolvedDir) return resolvedDir;
+  const primaryDir = path.join(__dirname, '..', '..', 'secure_payment_evidence');
+  try {
+    if (!fs.existsSync(primaryDir)) {
+      fs.mkdirSync(primaryDir, { recursive: true });
+    }
+    const testFile = path.join(primaryDir, `.write_test_${Date.now()}.tmp`);
+    fs.writeFileSync(testFile, 'test', 'utf8');
+    fs.unlinkSync(testFile);
+    resolvedDir = primaryDir;
+    return primaryDir;
+  } catch (e) {
+    console.warn(`Primary directory ${primaryDir} is not writable: ${e.message}. Falling back to /tmp.`);
+    const fallbackDir = path.join('/tmp', 'secure_payment_evidence');
+    try {
+      if (!fs.existsSync(fallbackDir)) {
+        fs.mkdirSync(fallbackDir, { recursive: true });
+      }
+      resolvedDir = fallbackDir;
+      return fallbackDir;
+    } catch (err) {
+      console.error(`Fallback directory ${fallbackDir} failed to initialize: ${err.message}`);
+      return primaryDir;
+    }
+  }
+}
 
-const OTP_STORE_FILE = path.join(__dirname, '..', '..', 'secure_payment_evidence', '.otp_store.json');
+function getOtpStoreFile() {
+  return path.join(getEvidenceDir(), '.otp_store.json');
+}
+
 const MAX_ATTEMPTS   = 3;
 
 function hashPhone(phone) {
@@ -21,13 +49,15 @@ function hashPhone(phone) {
 
 function loadStore() {
   try {
-    if (fs.existsSync(OTP_STORE_FILE)) return JSON.parse(fs.readFileSync(OTP_STORE_FILE, 'utf8'));
+    const file = getOtpStoreFile();
+    if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, 'utf8'));
   } catch (e) {}
   return {};
 }
 
 function saveStore(store) {
-  fs.writeFileSync(OTP_STORE_FILE, JSON.stringify(store), 'utf8');
+  const file = getOtpStoreFile();
+  fs.writeFileSync(file, JSON.stringify(store), 'utf8');
 }
 
 // Timing-safe hash comparison (prevents timing attacks)

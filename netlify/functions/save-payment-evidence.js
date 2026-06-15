@@ -35,10 +35,39 @@ const MAX_REQUESTS_PER_HOUR = 10;   // Per IP address
 const MAX_PAYLOAD_BYTES     = 51200; // 50KB
 const MAX_REQUEST_AGE_MS    = 600000; // 10 minutes
 
+let resolvedDir = null;
+function getEvidenceDir() {
+  if (resolvedDir) return resolvedDir;
+  const primaryDir = path.join(__dirname, '..', '..', 'secure_payment_evidence');
+  try {
+    if (!fs.existsSync(primaryDir)) {
+      fs.mkdirSync(primaryDir, { recursive: true });
+    }
+    const testFile = path.join(primaryDir, `.write_test_${Date.now()}.tmp`);
+    fs.writeFileSync(testFile, 'test', 'utf8');
+    fs.unlinkSync(testFile);
+    resolvedDir = primaryDir;
+    return primaryDir;
+  } catch (e) {
+    console.warn(`Primary directory ${primaryDir} is not writable: ${e.message}. Falling back to /tmp.`);
+    const fallbackDir = path.join('/tmp', 'secure_payment_evidence');
+    try {
+      if (!fs.existsSync(fallbackDir)) {
+        fs.mkdirSync(fallbackDir, { recursive: true });
+      }
+      resolvedDir = fallbackDir;
+      return fallbackDir;
+    } catch (err) {
+      console.error(`Fallback directory ${fallbackDir} failed to initialize: ${err.message}`);
+      return primaryDir;
+    }
+  }
+}
+
 // ─── IP RATE LIMITER (file-based, no external dependency) ────────────────────
 // Stores { "ip": { count: N, windowStart: timestamp } } in a single JSON file
 function checkRateLimit(ip) {
-  const rateFile = path.join(__dirname, '..', '..', 'secure_payment_evidence', '.rate_limits.json');
+  const rateFile = path.join(getEvidenceDir(), '.rate_limits.json');
   const now = Date.now();
   const WINDOW_MS = 3600000; // 1 hour
 
@@ -415,11 +444,8 @@ exports.handler = async (event) => {
       platform:           payload.platform || null
     };
 
-    // Ensure evidence directory exists
-    const logsDir = path.join(__dirname, '..', '..', 'secure_payment_evidence');
-    if (!fs.existsSync(logsDir)) {
-      fs.mkdirSync(logsDir, { recursive: true });
-    }
+    // Resolve write-resilient evidence directory
+    const logsDir = getEvidenceDir();
 
     // Duplicate TXN protection
     const prospectiveFile = path.join(logsDir, `${transactionId}_evidence.json`);
@@ -533,6 +559,9 @@ exports.handler = async (event) => {
       JSON.stringify(evidenceRecord, null, 2),
       'utf8'
     );
+
+    // Log to console for Netlify dashboard archiving
+    console.log(`[PAYMENT EVIDENCE RECORD - ${evidenceRecord.transactionId}]:`, JSON.stringify(evidenceRecord));
 
     // Success response
     return {

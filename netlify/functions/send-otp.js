@@ -19,8 +19,39 @@ const crypto = require('crypto');
 const fs     = require('fs');
 const path   = require('path');
 
-// ─── Config ───────────────────────────────────────────────────────────────────
-const OTP_STORE_FILE  = path.join(__dirname, '..', '..', 'secure_payment_evidence', '.otp_store.json');
+let resolvedDir = null;
+function getEvidenceDir() {
+  if (resolvedDir) return resolvedDir;
+  const primaryDir = path.join(__dirname, '..', '..', 'secure_payment_evidence');
+  try {
+    if (!fs.existsSync(primaryDir)) {
+      fs.mkdirSync(primaryDir, { recursive: true });
+    }
+    const testFile = path.join(primaryDir, `.write_test_${Date.now()}.tmp`);
+    fs.writeFileSync(testFile, 'test', 'utf8');
+    fs.unlinkSync(testFile);
+    resolvedDir = primaryDir;
+    return primaryDir;
+  } catch (e) {
+    console.warn(`Primary directory ${primaryDir} is not writable: ${e.message}. Falling back to /tmp.`);
+    const fallbackDir = path.join('/tmp', 'secure_payment_evidence');
+    try {
+      if (!fs.existsSync(fallbackDir)) {
+        fs.mkdirSync(fallbackDir, { recursive: true });
+      }
+      resolvedDir = fallbackDir;
+      return fallbackDir;
+    } catch (err) {
+      console.error(`Fallback directory ${fallbackDir} failed to initialize: ${err.message}`);
+      return primaryDir;
+    }
+  }
+}
+
+function getOtpStoreFile() {
+  return path.join(getEvidenceDir(), '.otp_store.json');
+}
+
 const OTP_EXPIRY_MS   = 5 * 60 * 1000;   // 5 minutes
 const OTP_RESEND_LIMIT = 3;              // Max OTP sends per phone per 10 min
 const OTP_WINDOW_MS   = 10 * 60 * 1000; // 10 minute resend window
@@ -38,15 +69,17 @@ function hashPhone(phone) {
 
 function loadStore() {
   try {
-    if (fs.existsSync(OTP_STORE_FILE)) return JSON.parse(fs.readFileSync(OTP_STORE_FILE, 'utf8'));
+    const file = getOtpStoreFile();
+    if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, 'utf8'));
   } catch (e) { /* fresh start */ }
   return {};
 }
 
 function saveStore(store) {
-  const dir = path.dirname(OTP_STORE_FILE);
+  const file = getOtpStoreFile();
+  const dir = path.dirname(file);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(OTP_STORE_FILE, JSON.stringify(store), 'utf8');
+  fs.writeFileSync(file, JSON.stringify(store), 'utf8');
 }
 
 function cleanExpired(store) {
