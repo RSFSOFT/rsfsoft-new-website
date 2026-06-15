@@ -81,6 +81,115 @@ async function upsertCustomer(baseUrl, token, { clientName, customerEmail, custo
   return null;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// AIRWALLEX BILLING API — creates data in Billing → Customers / Invoices /
+// Subscriptions sections of the Airwallex portal.
+//
+// This is a SEPARATE system from Payment Intents.
+// Payment Intents → appear under Payments → Payment Intents
+// Billing records  → appear under Billing → Customers / Invoices / Subscriptions
+//
+// By calling both APIs, every customer payment appears in BOTH sections.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Create or retrieve a Billing Customer in Airwallex.
+ * These appear under Billing → Customers in your Airwallex portal.
+ * Endpoint: POST /api/v1/billing_customers/create
+ */
+async function upsertBillingCustomer(baseUrl, token, { clientName, customerEmail, customerMobile, billingType }) {
+  try {
+    const payload = {
+      request_id:   crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex'),
+      name:         clientName    || 'Unknown Client',
+      type:         'INDIVIDUAL',                        // INDIVIDUAL or BUSINESS
+      ...(customerEmail  && { email:        customerEmail  }),
+      ...(customerMobile && { phone_number: customerMobile })
+    };
+
+    const res = await fetch(`${baseUrl}/billing_customers/create`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body:    JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log(`[RSFSOFT] ✅ Billing Customer created → ID: ${data.id} | Name: ${clientName} | ${billingType}`);
+      return data.id;
+    }
+
+    const errBody = await res.text().catch(() => '');
+    console.warn(`[RSFSOFT] Billing Customer create failed (${res.status}): ${errBody}`);
+    return null;
+  } catch (e) {
+    console.warn(`[RSFSOFT] Billing Customer exception: ${e.message}`);
+    return null;
+  }
+}
+
+/**
+ * Create a Billing Invoice in Airwallex for one-time payments.
+ * These appear under Billing → Invoices in your Airwallex portal.
+ *
+ * We use collection_method: 'OUT_OF_BAND' because we already collected the
+ * payment via our Card Element (Payment Intent). This records the invoice as
+ * a completed transaction in the Billing section.
+ *
+ * Endpoint: POST /api/v1/invoices/create
+ */
+async function createBillingInvoice(baseUrl, token, {
+  billingCustomerId, currency, amountNum, invoiceRef, services, clientName, paymentIntentId
+}) {
+  if (!billingCustomerId) return null;
+  try {
+    const payload = {
+      request_id:         crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex'),
+      billing_customer_id: billingCustomerId,
+      currency:           currency.toUpperCase(),
+      // OUT_OF_BAND = payment was collected via another method (our card element)
+      // This marks the invoice as a record of the payment, not a new payment request.
+      collection_method:  'OUT_OF_BAND',
+      description:        `${services || 'Digital Marketing Services'} — Invoice ${invoiceRef} — Client: ${clientName}`,
+      line_items: [
+        {
+          // Inline line item without requiring a pre-created Price object
+          description: services || 'Digital Marketing Services',
+          unit_amount: amountNum,   // Already in minor units (pence/cents)
+          quantity:    1
+        }
+      ],
+      // Link this invoice to the Payment Intent for audit trail
+      ...(paymentIntentId && {
+        metadata: {
+          payment_intent_id:   paymentIntentId,
+          rsfsoft_invoice_ref: invoiceRef,
+          rsfsoft_client:      clientName
+        }
+      })
+    };
+
+    const res = await fetch(`${baseUrl}/invoices/create`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body:    JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log(`[RSFSOFT] ✅ Billing Invoice created → ID: ${data.id} | Status: ${data.status} | Amount: ${amountNum / 100} ${currency}`);
+      return data.id;
+    }
+
+    const errBody = await res.text().catch(() => '');
+    console.warn(`[RSFSOFT] Billing Invoice create failed (${res.status}): ${errBody}`);
+    return null;
+  } catch (e) {
+    console.warn(`[RSFSOFT] Billing Invoice exception: ${e.message}`);
+    return null;
+  }
+}
+
 // ─── Main Handler ──────────────────────────────────────────────────────────────
 
 exports.handler = async (event) => {
@@ -277,6 +386,49 @@ exports.handler = async (event) => {
     console.log(`[RSFSOFT]    Customer ID:  ${customerId || 'not-linked'}`);
     console.log(`[RSFSOFT]    Recurring:    ${isRecurring}`);
     console.log(`[RSFSOFT]    View in Airwallex: https://www.airwallex.com/app/payments/${intentData.id}`);
+
+    // ── Step 5: Create Airwallex BILLING records (non-blocking) ───────────────
+    // This populates the Billing → Customers and Billing → Invoices sections
+    // in your Airwallex portal. Runs in background — does NOT affect payment.
+    //
+    // The user asked: "why can't I see Faizan Khan / Fartashia Khan in Billing?"
+    // Answer: Payment Intents appear in Payments section. Billing records appear
+    // in Billing section. We create BOTH so the data shows everywhere.
+    //
+    // NOTE: Billing API calls run concurrently via Promise.allSettled so that
+    // a failure in one does NOT block the payment intent response to the frontend.
+    Promise.allSettled([
+      // 5a. Create Billing Customer → appears in Billing → Customers
+      upsertBillingCustomer(baseUrl, token, {
+        clientName,
+        customerEmail,
+        customerMobile,
+        billingType: billingStructure
+      }).then(billingCustId => {
+        if (!billingCustId) return;
+
+        if (!isRecurring) {
+          // 5b. One-time: create Billing Invoice → appears in Billing → Invoices
+          return createBillingInvoice(baseUrl, token, {
+            billingCustomerId: billingCustId,
+            currency,
+            amountNum,
+            invoiceRef,
+            services,
+            clientName,
+            paymentIntentId: intentData.id
+          });
+        } else {
+          // 5c. Subscription: billing customer created above.
+          // Full subscription creation requires a Product + Price object in Airwallex
+          // Billing → Product Catalogue. Once you create those in the portal, we can
+          // create subscriptions automatically. For now, the customer appears in
+          // Billing → Customers and the payment intent handles the first charge.
+          console.log(`[RSFSOFT] Subscription billing customer created. Manual subscription creation recommended in Airwallex portal.`);
+          console.log(`[RSFSOFT]    Go to: Billing → Subscriptions → New Subscription → Select customer: ${clientName}`);
+        }
+      })
+    ]).catch(e => console.warn('[RSFSOFT] Billing API parallel error:', e.message));
 
     return {
       statusCode: 200,
