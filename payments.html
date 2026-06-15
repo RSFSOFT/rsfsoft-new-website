@@ -1717,13 +1717,21 @@
         btnSubmit.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Awaiting 3DS / Approval...';
 
         // FIX: Include email + phone in billing to improve 3DS success rates
+        // CRITICAL: Split full name into first_name + last_name (Airwallex required format).
+        // Sending a single 'name' field causes Airwallex to reject the billing object.
+        const cardholderFull = (document.getElementById('card-name')?.value?.trim() || clientName || '').trim();
+        const nameParts      = cardholderFull.trim().split(/\s+/);
+        const cardFirst      = nameParts[0] || clientName || 'Client';
+        const cardLast       = nameParts.slice(1).join(' ') || cardFirst;
+
         cardElement.confirm({
           client_secret: data.client_secret,
           payment_method: {
             billing: {
-              name:  document.getElementById('card-name').value.trim() || clientName,
-              email: email || undefined,
-              phone: customerMobileNorm || undefined
+              first_name:   cardFirst,
+              last_name:    cardLast,
+              email:        email        || undefined,
+              phone_number: customerMobileNorm || undefined   // Airwallex uses phone_number not phone
             }
           }
         })
@@ -1874,7 +1882,9 @@
         transactionId:     txnId,
         humanMouseMoved:   humanMouseMoved,
         mouseMovements:    humanMouseMoves,
-        requestTimestamp:  PAGE_LOAD_TS,
+        requestTimestamp:  Date.now(),  // Use submission time not page-load time
+                                         // (page-load time caused 10-min rejection if form
+                                         //  took >10 min to fill; TXN ID dedupe handles replays)
         screenResolution:  deviceFP.screenResolution,
         colorDepth:        deviceFP.colorDepth,
         timezone:          deviceFP.timezone,
@@ -1955,4 +1965,4 @@
 <script src="js/bg-canvas.js" defer></script>
 </body>
 </html>
-<!-- deploy-trigger: 2026-06-15T17:32:00+05:00 | ROOT-FIX-airwallex-origin-param-postMessage-iOS-card-element-loading-state-backdrop-none -->
+<!-- deploy-trigger: 2026-06-15T17:49:00+05:00 | PROD-READY: fix-billing-first-last-name, fix-phone_number-field, fix-requestTimestamp-to-Date.now, fix-MAX_REQUEST_AGE_MS-90min, NODE_VERSION-18, fix-order.products-removed, fix-origin-param, fix-card-loading-state -->

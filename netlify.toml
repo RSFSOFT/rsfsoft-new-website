@@ -5,6 +5,11 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.environment]
+  # All functions use native fetch() — requires Node.js 18+
+  # Without this, Netlify may default to Node 16 → "fetch is not defined" errors
+  NODE_VERSION = "18"
+
 # ─── Global Security Headers (all pages) ─────────────────────────────────────
 [[headers]]
   for = "/*"

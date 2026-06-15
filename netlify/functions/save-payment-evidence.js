@@ -23,7 +23,7 @@ const crypto = require('crypto');
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 const REQUIRED_FIELDS    = ['clientName', 'invoiceRef', 'amount', 'currency', 'transactionId'];
-const ALLOWED_CURRENCIES = ['GBP', 'USD', 'EUR', 'CAD', 'AUD'];
+const ALLOWED_CURRENCIES = ['GBP', 'USD', 'EUR', 'CAD', 'AUD', 'AED'];
 const ALLOWED_ORIGINS    = [
   'https://www.rsfsoft.co.uk',
   'https://rsfsoft.co.uk',
@@ -33,7 +33,10 @@ const ALLOWED_ORIGINS    = [
 ];
 const MAX_REQUESTS_PER_HOUR = 10;   // Per IP address
 const MAX_PAYLOAD_BYTES     = 51200; // 50KB
-const MAX_REQUEST_AGE_MS    = 600000; // 10 minutes
+// FIX: was 600000 (10 min) — too short for a detailed payment form.
+// Customers routinely take 15–30 min to fill invoice ref, select services, etc.
+// 5400000 = 90 minutes — still provides anti-replay protection via TXN ID dedupe.
+const MAX_REQUEST_AGE_MS    = 5400000; // 90 minutes
 
 let resolvedDir = null;
 function getEvidenceDir() {
