@@ -1527,6 +1527,9 @@
         client_secret: intentData.client_secret
       });
 
+      // CRITICAL FIX: Mount MUST happen BEFORE attaching event listeners!
+      cardElement.mount('airwallex-card-element');
+
       // —— Event: form is rendered and interactive ——
       cardElement.on('ready', () => {
         cardElementReady = true;
@@ -1551,8 +1554,6 @@
         console.error('Airwallex DropIn error:', event);
         showCardError(event.detail?.message || event.message || 'Iframe rendering error');
       });
-      
-      cardElement.mount('airwallex-card-element');
 
       // Safety net: if 'ready' hasn’t fired after 12 s, show the error state
       setTimeout(() => {
