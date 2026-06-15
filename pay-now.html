@@ -372,8 +372,21 @@
       <div class="security-badges">
         <div class="sec-badge"> 256-bit SSL Encrypted</div>
         <div class="sec-badge"> 2Checkout Secure</div>
+        <div class="sec-badge"> PayPal Accepted</div>
         <div class="sec-badge"> Money Back Guarantee</div>
         <div class="sec-badge"> GBP Payments Supported</div>
+      </div>
+
+      <!-- Payment method logos (PayPal must be shown with equal prominence — PayPal requirement) -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:18px;padding:12px 0;border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+        <span style="font-size:10px;color:#64748b;letter-spacing:.5px;text-transform:uppercase;">We Accept:</span>
+        <i class="fab fa-paypal" style="font-size:28px;color:#009cde;" title="PayPal"></i>
+        <i class="fab fa-cc-visa" style="font-size:28px;color:#1a1f71;" title="Visa"></i>
+        <i class="fab fa-cc-mastercard" style="font-size:28px;color:#eb001b;" title="Mastercard"></i>
+        <i class="fab fa-cc-amex" style="font-size:28px;color:#007cc3;" title="American Express"></i>
+        <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:3px 10px;font-size:10px;color:#10b981;font-weight:700;">
+          <i class="fa fa-lock" style="font-size:9px;"></i> SSL Secured
+        </span>
       </div>
     </div>
 
@@ -413,7 +426,31 @@
               <p style="font-size:0.7rem;color:var(--text-muted);text-align:center;margin:0;font-family:var(--font-secondary);line-height:1.4;">Payments are securely processed for RSFSOFT LTD (Company No: 12874141). Registered Office: 2nd Floor College House, 17 King Edwards Road, Ruislip, HA4 7AE, United Kingdom.</p>
             </div>
           </div>
-        <!-- GBP panel ends here, other panels removed -->
+        </div>
+
+        <!-- PayPal Payment Option (equal prominence required by PayPal) -->
+        <div class="pay-form-panel" id="pay-form-paypal" role="tabpanel" style="display:none;">
+          <div class="pay-form-card">
+            <div class="pay-card-header">
+              <div style="font-size:2rem;"><i class="fab fa-paypal" style="color:#003087;"></i></div>
+              <div class="pay-card-header-text">
+                <h3>PayPal &mdash; Secure Checkout</h3>
+                <span>Pay with your PayPal account or card via PayPal</span>
+              </div>
+            </div>
+            <div class="pay-card-body">
+              <div style="background:rgba(0,48,135,0.07);border:1px solid rgba(0,48,135,0.2);border-radius:12px;padding:20px;text-align:center;">
+                <i class="fab fa-paypal" style="font-size:3rem;color:#009cde;display:block;margin-bottom:12px;"></i>
+                <p style="font-size:0.88rem;color:var(--text-secondary);font-family:var(--font-secondary);line-height:1.7;margin-bottom:18px;">You will be securely redirected to PayPal to complete your payment. You can pay using your PayPal balance or any card &mdash; no PayPal account required.</p>
+                <a href="https://www.paypal.com/paypalme/rsfsoft" target="_blank" rel="noopener" class="pay-submit-btn" style="display:inline-block;text-decoration:none;background:linear-gradient(135deg,#003087,#009cde);">
+                  <i class="fab fa-paypal"></i> Pay with PayPal
+                </a>
+                <p style="font-size:0.7rem;color:var(--text-muted);margin-top:14px;font-family:var(--font-secondary);">Payments processed by PayPal (Europe) S.&agrave; r.l. et Cie, S.C.A. &mdash; RSFSOFT LTD does not store your PayPal or card details.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /pay-forms-container -->
 
       <!-- RIGHT: Trust Panel -->
@@ -429,7 +466,25 @@
           <li><span class="check-ico"></span> 24/7 support after payment</li>
         </ul>
         <div class="trust-2co-logo">
-          <img loading="lazy" src="https://rsfsoft.co.uk/assets/img/banners/2checkout.png" alt="2Checkout Secure Payment" style="max-width:200px;margin-top:20px;">
+          <img loading="lazy" src="https://rsfsoft.co.uk/assets/img/banners/2checkout.png" alt="2Checkout Secure Payment" style="max-width:180px;margin-top:16px;">
+          <!-- PayPal accepted mark (required by PayPal when PayPal is offered) -->
+          <div style="margin-top:12px;display:flex;align-items:center;gap:8px;justify-content:center;">
+            <i class="fab fa-paypal" style="font-size:1.8rem;color:#003087;"></i>
+            <span style="font-size:0.78rem;color:var(--text-secondary);font-family:var(--font-secondary);">PayPal Accepted</span>
+          </div>
+
+          <!-- Payment method selector tabs -->
+          <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;">
+            <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">Choose payment method:</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+              <button onclick="switchPayNowMethod('gbp', this)" class="pay-method-tab active" id="tab-gbp" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.4);border-radius:8px;color:#f0f6ff;font-size:0.78rem;cursor:pointer;font-family:inherit;">
+                <i class="fab fa-cc-visa"></i> Card / 2Checkout
+              </button>
+              <button onclick="switchPayNowMethod('paypal', this)" class="pay-method-tab" id="tab-paypal" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(0,156,222,0.08);border:1px solid rgba(0,156,222,0.25);border-radius:8px;color:#f0f6ff;font-size:0.78rem;cursor:pointer;font-family:inherit;">
+                <i class="fab fa-paypal" style="color:#009cde;"></i> PayPal
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -478,6 +533,23 @@
   <script src="js/bg-canvas.js" defer></script>
   <script src="js/animations.js" defer></script>
 <script>
+  // Switch between Card/2Checkout and PayPal payment panels
+  function switchPayNowMethod(method, btn) {
+    // Update tab button styles
+    document.querySelectorAll('.pay-method-tab').forEach(function(b) {
+      b.style.background  = 'rgba(0,156,222,0.08)';
+      b.style.borderColor = 'rgba(0,156,222,0.25)';
+    });
+    btn.style.background  = (method === 'paypal') ? 'rgba(0,156,222,0.2)' : 'rgba(124,58,237,0.25)';
+    btn.style.borderColor = (method === 'paypal') ? 'rgba(0,156,222,0.6)'  : 'rgba(124,58,237,0.6)';
+
+    // Show correct form panel
+    var gbpPanel    = document.getElementById('pay-form-gbp');
+    var paypalPanel = document.getElementById('pay-form-paypal');
+    if (gbpPanel)    gbpPanel.style.display    = (method === 'gbp')    ? 'block' : 'none';
+    if (paypalPanel) paypalPanel.style.display = (method === 'paypal') ? 'block' : 'none';
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
 
     // ── Three.js animated background ──────────────────────────────
