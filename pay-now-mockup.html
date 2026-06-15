@@ -705,7 +705,19 @@
         </div>
       </div>
 
-
+      <!-- Mobile Number (for customer contact & marketing) -->
+      <div class="form-group">
+        <label class="form-label">Mobile Number</label>
+        <div class="input-wrapper">
+          <i class="fa fa-mobile-alt input-icon"></i>
+          <input type="tel" id="customer-mobile" class="form-input"
+                 placeholder="Add your mobile number (e.g. +447700900123)"
+                 autocomplete="tel" maxlength="20" required>
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);margin:5px 0 0 4px;">
+          &#127758; Include country code &mdash; +44 UK &nbsp;·&nbsp; +1 USA &nbsp;·&nbsp; +92 Pakistan &nbsp;·&nbsp; +971 UAE &nbsp;·&nbsp; +61 Australia
+        </p>
+      </div>
 
       <div class="form-group">
         <label class="form-label">Invoice Reference</label>
@@ -1274,7 +1286,12 @@
       return;
     }
 
-    const mobile = '+447700900123'; // Fallback phone format for mock OTP backend compatibility
+    const mobile = document.getElementById('customer-mobile')?.value?.trim() || '';
+    if (!mobile) {
+      alert('Please enter your mobile number.');
+      document.getElementById('customer-mobile')?.focus();
+      return;
+    }
 
     const amount = document.getElementById('payment-amount')?.value || '0';
     const curr   = document.getElementById('currency-select')?.value || 'GBP';
@@ -1522,6 +1539,7 @@
         serviceCategory:   service,
         billingStructure:  billing,
         customerEmail:     customerEmail,
+        customerMobile:    customerMobileNorm || '',
         phoneLast4:        customerMobileNorm ? customerMobileNorm.slice(-4) : '',
         otpVerificationToken,
         signatureDataUrl:  `TYPED_SIGNATURE: ${cardholderName || client}`,

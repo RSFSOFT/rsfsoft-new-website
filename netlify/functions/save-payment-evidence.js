@@ -142,7 +142,8 @@ const FIELD_LIMITS = {
   location:         200,
   userAgent:         512,
   transactionId:     60,
-  customerEmail:    254
+  customerEmail:    254,
+  customerMobile:    30
 };
 
 function validateFieldLengths(payload) {
@@ -423,6 +424,7 @@ exports.handler = async (event) => {
     const userAgent        = sanitize(payload.userAgent);
     const transactionId    = sanitize(payload.transactionId);
     const customerEmail    = sanitize(payload.customerEmail || '');
+    const customerMobile   = sanitize(payload.customerMobile || '');
     const signatureDataUrl = payload.signatureDataUrl || '';
     // Bot detection flags from frontend
     const humanMouseMoved  = !!payload.humanMouseMoved;
@@ -488,6 +490,7 @@ exports.handler = async (event) => {
         serviceCategory:  serviceCategory,
         billingStructure: billingStructure,
         customerEmail:    customerEmail,
+        customerMobile:   customerMobile,
         phoneLast4:       phoneLast4
       },
 
@@ -495,6 +498,7 @@ exports.handler = async (event) => {
         ipAddress:          ipAddress,
         geolocation:        location,
         customerEmail:      customerEmail,
+        customerMobile:     customerMobile,
         cardholderName:     cardholderName,   // For cross-reference with chargeback
         phoneLast4:         phoneLast4,
         deviceUserAgent:    userAgent,
