@@ -37,21 +37,12 @@ function createTransport() {
 function buildCustomerReceipt(data) {
   const {
     clientName, invoiceRef, serviceCategory, billingStructure,
-    amount, currency, transactionId, timestamp, milestoneProgress
+    amount, currency, transactionId, timestamp
   } = data;
 
   const billingLabel = billingStructure === 'Recurring Subscription'
     ? '📅 Monthly Retainer — Auto-renews every 29 days'
     : '✅ One-Time Payment';
-
-  const milestones = Array.isArray(milestoneProgress)
-    ? milestoneProgress.map(m => `
-        <tr>
-          <td style="padding:6px 0;font-size:12px;color:#94a3b8;line-height:1.5;">
-            <span style="color:#06d6f0;font-weight:700;">🕐 ${m.time}</span> — <span style="color:#f0f6ff;">${m.log}</span>
-          </td>
-        </tr>`).join('')
-    : '';
 
   return `
 <!DOCTYPE html>
@@ -116,15 +107,6 @@ function buildCustomerReceipt(data) {
         </tr>
       </table>
     </div>
-
-    <!-- Milestone log -->
-    ${milestones ? `
-    <div style="padding:0 32px 16px;">
-      <p style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-family:'Inter',sans-serif;">📋 Service Delivery Log</p>
-      <table style="width:100%;border-left:3px solid #06d6f0;padding-left:12px;">
-        ${milestones}
-      </table>
-    </div>` : ''}
 
     <!-- Support / Agreement reference -->
     <div style="padding:16px 24px;background:rgba(124,58,237,0.05);border-left:4px solid #7c3aed;margin:0 32px 28px;border-radius:0 8px 8px 0;">
