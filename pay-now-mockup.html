@@ -1159,6 +1159,7 @@
   const envMode = (window.location.hostname === 'rsfsoft.co.uk' || window.location.hostname === 'www.rsfsoft.co.uk') ? 'prod' : 'demo';
   
   async function initAirwallex() {
+    const Airwallex = window.AirwallexComponentsSDK || window.Airwallex;
     if (typeof Airwallex === 'undefined') {
       console.warn('Airwallex SDK not loaded. Re-trying in 1 second...');
       setTimeout(initAirwallex, 1000);
