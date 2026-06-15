@@ -1194,7 +1194,7 @@
       fetch('/.netlify/functions/create-airwallex-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: 1, currency: 'USD', invoiceRef: 'RSF-000000-0000' })
+        body: JSON.stringify({ checkOnly: true })
       })
       .then(res => res.json())
       .then(data => {

@@ -42,7 +42,7 @@ exports.handler = async (event) => {
     const { amount, currency, invoiceRef, clientName, customerEmail, customerMobile, services } = body;
 
     // Validation
-    if (!amount || !currency || !invoiceRef) {
+    if (!body.checkOnly && (!amount || !currency || !invoiceRef)) {
       return {
         statusCode: 400,
         headers,
@@ -65,6 +65,18 @@ exports.handler = async (event) => {
           env: 'demo',
           id: `intent_${crypto.randomBytes(12).toString('hex')}`,
           client_secret: `mock_secret_${crypto.randomBytes(32).toString('hex')}`
+        })
+      };
+    }
+
+    // If only verifying if credentials are set, return status without hitting Airwallex API
+    if (body.checkOnly) {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          mock: false,
+          env: airwallexEnv
         })
       };
     }
