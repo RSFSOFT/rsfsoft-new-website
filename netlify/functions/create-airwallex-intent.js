@@ -143,7 +143,7 @@ async function upsertBillingCustomer(baseUrl, token, { clientName, customerEmail
  * Endpoint: POST /api/v1/invoices/create
  */
 async function createBillingInvoice(baseUrl, token, {
-  billingCustomerId, currency, amountNum, invoiceRef, services, clientName, paymentIntentId
+  billingCustomerId, currency, amountFloat, invoiceRef, services, clientName, paymentIntentId
 }) {
   if (!billingCustomerId) return null;
   try {
@@ -157,9 +157,9 @@ async function createBillingInvoice(baseUrl, token, {
       description:        `${services || 'Digital Marketing Services'} — Invoice ${invoiceRef} — Client: ${clientName}`,
       line_items: [
         {
-          // Inline line item without requiring a pre-created Price object
+          // Airwallex billing uses MAJOR units (actual £/$ amount)
           description: services || 'Digital Marketing Services',
-          unit_amount: amountNum,   // Already in minor units (pence/cents)
+          unit_amount: amountFloat,   // e.g. 1.00 for £1, 500.00 for £500
           quantity:    1
         }
       ],
@@ -181,7 +181,7 @@ async function createBillingInvoice(baseUrl, token, {
 
     if (res.ok) {
       const data = await res.json();
-      console.log(`[RSFSOFT] ✅ Billing Invoice created → ID: ${data.id} | Status: ${data.status} | Amount: ${amountNum / 100} ${currency}`);
+      console.log(`[RSFSOFT] ✅ Billing Invoice created → ID: ${data.id} | Status: ${data.status} | Amount: ${amountFloat} ${currency}`);
       return data.id;
     }
 
@@ -304,16 +304,16 @@ exports.handler = async (event) => {
     });
 
     // ── Step 3: Build the Payment Intent payload ───────────────────────────────
-    // ── CRITICAL: Airwallex requires amount in MINOR UNITS (pence / cents) ───────
-    // £500.00 → 50000 pence  |  $299.99 → 29999 cents  |  €150 → 15000 cents
-    // Sending the raw decimal (500) means Airwallex charges 500 pence = £5.00 !!!
-    // All supported currencies (GBP, USD, EUR, CAD, AUD, AED) use factor 100.
-    const amountNum   = Math.round(parseFloat(amount) * 100); // e.g. 500 → 50000
+    // ── CRITICAL: Airwallex uses MAJOR UNITS (actual £/$ amount), NOT pence/cents ─
+    // Unlike Stripe, Airwallex takes the real decimal amount directly.
+    // £1.00 → send 1      |  $299.99 → send 299.99  |  €500 → send 500
+    // DO NOT multiply by 100 — that would charge 100× the intended amount!
+    const amountFloat = parseFloat(parseFloat(amount).toFixed(2)); // e.g. 1 → 1.00
     const isRecurring = billingStructure === 'Recurring Subscription';
 
     const intentPayload = {
       request_id:        crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex'),
-      amount:            amountNum,
+      amount:            amountFloat,
       currency:          currency.toUpperCase(),
       merchant_order_id: invoiceRef,          // Appears as "Order Reference" in Airwallex portal
       descriptor:        'RSFSOFT LTD',       // Appears on customer bank statement
@@ -356,7 +356,7 @@ exports.handler = async (event) => {
     };
 
     // ── Step 4: Create Payment Intent ─────────────────────────────────────────
-    console.log(`[RSFSOFT] Creating payment intent: ${amountNum} minor-units (${parseFloat(amount).toFixed(2)} ${currency}) | ref: ${invoiceRef} | recurring: ${isRecurring} | customer: ${customerId || 'none'}`);
+    console.log(`[RSFSOFT] Creating payment intent: ${amountFloat} ${currency} | ref: ${invoiceRef} | recurring: ${isRecurring} | customer: ${customerId || 'none'}`);
     const intentRes = await fetch(`${baseUrl}/pa/payment_intents/create`, {
       method: 'POST',
       headers: {
@@ -384,7 +384,7 @@ exports.handler = async (event) => {
     // Log the intent ID clearly — visible in Netlify function logs for 24h
     console.log(`[RSFSOFT] ✅ PAYMENT INTENT CREATED SUCCESSFULLY`);
     console.log(`[RSFSOFT]    Intent ID:    ${intentData.id}`);
-    console.log(`[RSFSOFT]    Amount:       ${parseFloat(amount).toFixed(2)} ${currency} (${amountNum} minor units)`);
+    console.log(`[RSFSOFT]    Amount:       ${amountFloat} ${currency}`);
     console.log(`[RSFSOFT]    Invoice Ref:  ${invoiceRef}`);
     console.log(`[RSFSOFT]    Client:       ${clientName} <${customerEmail}>`);
     console.log(`[RSFSOFT]    Customer ID:  ${customerId || 'not-linked'}`);
@@ -433,7 +433,7 @@ exports.handler = async (event) => {
           billingInvoiceId = await createBillingInvoice(baseUrl, token, {
             billingCustomerId: billingCustId,
             currency,
-            amountNum,
+            amountFloat,
             invoiceRef,
             services,
             clientName,

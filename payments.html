@@ -1653,8 +1653,14 @@
     }
 
     const amount = document.getElementById('payment-amount')?.value || '0';
-    if (!amount || parseFloat(amount) <= 0) {
+    const amountNum = parseFloat(amount);
+    if (!amount || isNaN(amountNum) || amountNum <= 0) {
       alert('Please enter a valid payment amount greater than zero.');
+      document.getElementById('payment-amount')?.focus();
+      return;
+    }
+    if (amountNum < 0.50) {
+      alert('Minimum payment amount is 0.50 (50 pence / 50 cents). Please enter a higher amount.');
       document.getElementById('payment-amount')?.focus();
       return;
     }
