@@ -1167,7 +1167,8 @@
     
     try {
       Airwallex.init({
-        env: envMode
+        env: envMode,
+        enabledElements: ['payments']
       });
       
       const elements = Airwallex.createElementGroup();
