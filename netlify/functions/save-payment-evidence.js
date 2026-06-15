@@ -133,13 +133,14 @@ function validateAmount(raw) {
 // ─── INPUT LENGTH LIMITS ──────────────────────────────────────────────────────
 const FIELD_LIMITS = {
   clientName:       200,
+  clientWebsite:    200,
   cardholderName:    80,  // Matches cc-name input maxlength
   invoiceRef:        30,
   serviceCategory:  500,
   billingStructure:  50,
   ipAddress:         45,
   location:         200,
-  userAgent:        512,
+  userAgent:         512,
   transactionId:     60,
   customerEmail:    254
 };
@@ -412,6 +413,7 @@ exports.handler = async (event) => {
   try {
     // Sanitize all string inputs
     const clientName       = sanitize(payload.clientName);
+    const clientWebsite    = sanitize(payload.clientWebsite || '');
     const cardholderName   = sanitize(payload.cardholderName || ''); // Name on card
     const invoiceRef       = sanitize(payload.invoiceRef);
     const serviceCategory  = sanitize(payload.serviceCategory);
@@ -477,6 +479,7 @@ exports.handler = async (event) => {
 
       clientDetails: {
         name:             clientName,
+        website:          clientWebsite,
         cardholderName:   cardholderName,   // Name exactly as printed on the card
         invoiceRef:       invoiceRef,
         amount:           `${currency} ${amountCheck.value}`,

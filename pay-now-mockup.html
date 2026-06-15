@@ -12,6 +12,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eeciker2A4L3dhj/TP6v+3kYJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Shared Style Sheets for Header & Footer Layouts -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pages.css">
   <!-- Airwallex Web SDK (PCI-DSS Secure Card processing) -->
   <script src="https://static.airwallex.com/components/sdk/v1/index.js"></script>
   <style>
@@ -36,11 +39,6 @@
       font-family: 'Outfit', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
       overflow-x: hidden;
       position: relative;
     }
@@ -516,11 +514,95 @@
   </style>
 </head>
 <body>
+<div id="site-nav"></div>
 
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
+<section class="page-hero" style="padding: 140px 0 60px; text-align: center; position: relative; z-index: 1;">
+  <div class="page-hero-glow"></div>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <span>Secure Checkout</span>
+    </nav>
+    <div class="page-hero-badge"><span></span> Checkout</div>
+    <h1 class="page-hero-title">Secure <span class="gradient-text">Payment Portal</span></h1>
+    <p class="page-hero-sub">Complete your project payments using our secure, PCI-DSS Level 1 payment system.</p>
+  </div>
+</section>
 
-<div class="portal-container" id="portal-card">
+<section class="content-section" style="padding: 20px 0 80px; position: relative; z-index: 2;">
+  <div class="container">
+    <div style="display: flex; gap: 40px; align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+      
+      <!-- Left Column: Trust, Ratings, and Reviews -->
+      <div style="flex: 1 1 420px; max-width: 500px; display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Trustpilot Rating Card -->
+        <div style="background: rgba(8, 13, 26, 0.65); border: 1px solid var(--border-color); border-radius: 20px; padding: 28px; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+            <div style="color: #00b67a; font-size: 2.2rem; font-weight: 800;">4.9</div>
+            <div>
+              <div style="color: #00b67a; font-size: 1.1rem; letter-spacing: 1.5px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Trustscore &bull; 150+ Reviews</div>
+            </div>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            RSF SOFT is rated <strong>Excellent</strong> on Trustpilot. We maintain a 98% client satisfaction rate based on design, SEO performance, and reliability.
+          </p>
+        </div>
+
+        <!-- Customer Testimonial 1 -->
+        <div style="background: rgba(8, 13, 26, 0.65); border: 1px solid var(--border-color); border-radius: 20px; padding: 28px; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); position: relative;">
+          <i class="fa fa-quote-left" style="position: absolute; top: 20px; right: 28px; font-size: 1.5rem; opacity: 0.08; color: var(--accent-cyan);"></i>
+          <p style="font-size: 13.5px; color: rgba(240, 246, 255, 0.95); line-height: 1.7; font-style: italic; margin-bottom: 14px; font-family: 'Inter', sans-serif;">
+            "The SEO campaign managed by RSF Soft boosted our organic traffic by 247% within six months. The payment process was transparent, secure, and easy. Highly recommended digital partner!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--accent-cyan);">Dr. Sarah Jenkins</div>
+            <div style="font-size: 10px; color: var(--text-muted);">Clinic Director, Design Dental Clinic</div>
+          </div>
+        </div>
+
+        <!-- Customer Testimonial 2 -->
+        <div style="background: rgba(8, 13, 26, 0.65); border: 1px solid var(--border-color); border-radius: 20px; padding: 28px; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); position: relative;">
+          <i class="fa fa-quote-left" style="position: absolute; top: 20px; right: 28px; font-size: 1.5rem; opacity: 0.08; color: var(--accent-violet);"></i>
+          <p style="font-size: 13.5px; color: rgba(240, 246, 255, 0.95); line-height: 1.7; font-style: italic; margin-bottom: 14px; font-family: 'Inter', sans-serif;">
+            "RSF Soft built our Shopify store and integrated everything flawlessly. Our conversion rate increased by 40% in month one. The elements card checkout was incredibly smooth!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--accent-violet);">Mark Thompson</div>
+            <div style="font-size: 10px; color: var(--text-muted);">Operations Manager, USA E-Commerce Group</div>
+          </div>
+        </div>
+
+        <!-- Bank Grade Security Features -->
+        <div style="background: rgba(8, 13, 26, 0.65); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+            🛡️ Encrypted Checkout Security
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 12px;">
+            <i class="fa fa-check-circle" style="color: var(--accent-cyan); font-size: 14px;"></i>
+            <span style="color: var(--text-muted);"><strong>PCI-DSS SAQ-A:</strong> Card data handled fully by Airwallex servers</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 12px;">
+            <i class="fa fa-check-circle" style="color: var(--accent-cyan); font-size: 14px;"></i>
+            <span style="color: var(--text-muted);"><strong>3D Secure 2.0:</strong> Automatic bank identity challenge verification</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 12px;">
+            <i class="fa fa-check-circle" style="color: var(--accent-cyan); font-size: 14px;"></i>
+            <span style="color: var(--text-muted);"><strong>SHA-256 Signatures:</strong> Encrypted transaction logs and evidence protection</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 12px;">
+            <i class="fa fa-check-circle" style="color: var(--accent-cyan); font-size: 14px;"></i>
+            <span style="color: var(--text-muted);"><strong>SSL Session:</strong> High-grade 256-bit data encryption in transit</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: The Payment Portal Card -->
+      <div style="flex: 1 1 450px; max-width: 550px; width: 100%;">
+        <div class="portal-container" id="portal-card" style="width: 100%; max-width: 100%; margin: 0;">
   <!-- Payment Form -->
   <div id="form-view">
     <div class="header">
@@ -551,7 +633,16 @@
         <label class="form-label">Client Name / Business Name</label>
         <div class="input-wrapper">
           <i class="fa fa-user input-icon"></i>
-          <input type="text" id="client-name" class="form-input" placeholder="e.g. Design Dental Clinic" required>
+          <input type="text" id="client-name" class="form-input" placeholder="Add your name / business name (e.g. John Doe / Design Dental Clinic)" required>
+        </div>
+      </div>
+
+      <!-- Client Website URL (Optional) -->
+      <div class="form-group">
+        <label class="form-label">Website URL <span style="color:#06d6f0;font-size:10px;">(Optional)</span></label>
+        <div class="input-wrapper">
+          <i class="fa fa-globe input-icon"></i>
+          <input type="url" id="client-website" class="form-input" placeholder="Add your website URL (e.g. www.yourcompany.com)">
         </div>
       </div>
 
@@ -560,7 +651,7 @@
         <label class="form-label">Email Address <span style="color:#06d6f0;font-size:10px;">(Receipt will be sent here)</span></label>
         <div class="input-wrapper">
           <i class="fa fa-envelope input-icon"></i>
-          <input type="email" id="customer-email" class="form-input" placeholder="e.g. accounts@designdental.co.uk"
+          <input type="email" id="customer-email" class="form-input" placeholder="Add your email address (e.g. accounts@designdental.co.uk)"
                  autocomplete="email" maxlength="254" required>
         </div>
       </div>
@@ -571,7 +662,7 @@
         <div class="input-wrapper">
           <i class="fa fa-mobile-alt input-icon"></i>
           <input type="tel" id="customer-mobile" class="form-input"
-                 placeholder="+447700900123 or +12025551234"
+                 placeholder="Add your mobile number (e.g. +447700900123)"
                  autocomplete="tel" maxlength="20" required>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin:5px 0 0 4px;">
@@ -832,6 +923,11 @@
     </button>
   </div>
 </div>
+
+      </div> <!-- Right Column -->
+    </div> <!-- flex container -->
+  </div> <!-- container -->
+</section> <!-- content-section -->
 
 <!-- 3D Secure SMS Verification Modal Overlay -->
 <div class="modal-overlay" id="3ds-modal">
@@ -1342,6 +1438,7 @@
   // Common completion handler for successful payments (mock or real Airwallex)
   function handleSuccessfulPayment(txnId, gatewayName) {
     const client = document.getElementById('client-name').value;
+    const clientWebsite = document.getElementById('client-website')?.value?.trim() || '';
     const ref = document.getElementById('invoice-ref').value;
     const amount = document.getElementById('payment-amount').value;
     const curr = document.getElementById('currency-select').value;
@@ -1388,6 +1485,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         clientName:        client,
+        clientWebsite:     clientWebsite,
         cardholderName:    cardholderName,
         invoiceRef:        ref,
         amount:            amount,
@@ -1435,6 +1533,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             clientName:        client,
+            clientWebsite:     clientWebsite,
             invoiceRef:        ref,
             amount:            amount,
             currency:          curr,
@@ -1466,6 +1565,9 @@
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('receipt-view').style.display = 'block';
 
+    // Scroll to top of the page to view receipt cleanly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Back-button prevention
     window.history.pushState({ paymentComplete: true }, '', window.location.href);
     window.addEventListener('popstate', function onPopstate(e) {
@@ -1476,6 +1578,8 @@
     });
   }
 </script>
+<div id="site-footer"></div>
+<script src="js/shared.js"></script>
 </body>
 </html>
 <!-- deploy-trigger: 2026-06-15T07:29 -->
