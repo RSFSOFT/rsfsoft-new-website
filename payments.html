@@ -494,6 +494,10 @@
       text-align: right;
       font-family: monospace;
       color: var(--text-main);
+      /* Prevent long TXN IDs / IP addresses from overflowing table on mobile */
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      max-width: 200px;
     }
 
     .receipt-signature-img {
@@ -581,7 +585,7 @@
       #airwallex-card-container {
         min-height: 220px !important;
         padding: 16px !important;
-        align-items: flex-start !important;
+        /* Removed: align-items: flex-start — has no effect on display:block */
       }
 
       /* Force the inner iframe div to fill the container */
@@ -980,8 +984,8 @@
         <label class="form-label">Payment Amount</label>
         <div class="currency-row">
           <select class="form-select currency-select" id="currency-select">
-            <option value="GBP">£ GBP — British Pound</option>
-            <option value="USD" selected>$ USD — US Dollar</option>
+            <option value="GBP" selected>£ GBP — British Pound</option>
+            <option value="USD">$ USD — US Dollar</option>
             <option value="EUR">€ EUR — Euro (Bancontact, SEPA)</option>
             <option value="CAD">$ CAD — Canadian Dollar</option>
             <option value="AUD">$ AUD — Australian Dollar</option>
@@ -989,8 +993,9 @@
           </select>
           <div class="amount-input-wrapper">
             <div class="input-wrapper">
-              <i class="fa fa-dollar-sign input-icon" id="currency-icon"></i>
-              <input type="number" step="0.01" min="1" max="999999" id="payment-amount" class="form-input" placeholder="1067.59" style="padding-left: 45px;" required>
+              <!-- Icon updates via JS on currency change; GBP is the default -->
+              <i class="fa fa-sterling-sign input-icon" id="currency-icon"></i>
+              <input type="number" step="0.01" min="1" max="999999" id="payment-amount" class="form-input" placeholder="499.00" style="padding-left: 45px;" inputmode="decimal" required>
             </div>
           </div>
         </div>
@@ -1019,7 +1024,7 @@
         </div>
         <!-- PayPal info — shown when PayPal selected -->
         <div id="paypal-info" style="display:none; margin-top:14px; padding:14px 18px; background:rgba(0,48,135,0.08); border:1px solid rgba(0,48,135,0.25); border-radius:12px;">
-          <p style="font-size:12px; color:var(--text-secondary); margin:0;">
+          <p style="font-size:12px; color:var(--text-muted); margin:0;">
             <i class="fa-brands fa-paypal" style="color:#003087; margin-right:6px;"></i>
             <strong style="color:#f0f6ff;">PayPal Secure Checkout</strong> — You will be redirected to PayPal's secure login page to complete payment. Your PayPal account or card details are processed entirely by PayPal Inc. and are never stored by RSFSOFT.
           </p>
@@ -1027,7 +1032,7 @@
 
         <!-- Google Pay / Apple Pay info — shown when those methods are selected -->
         <div id="gpay-info" style="display:none; margin-top:14px; padding:14px 18px; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:12px;">
-          <p style="font-size:12px; color:var(--text-secondary); margin:0;">
+          <p style="font-size:12px; color:var(--text-muted); margin:0;">
             <i class="fa fa-mobile-screen-button" style="color:#10b981; margin-right:6px;"></i>
             <strong style="color:#f0f6ff;">Google Pay / Apple Pay</strong> — Please complete your card details below and proceed. Your bank's 3D Secure verification step will automatically present Google Pay or Apple Pay as a payment option where supported by your device and bank.
           </p>
@@ -1725,6 +1730,7 @@
         const cardLast       = nameParts.slice(1).join(' ') || cardFirst;
 
         cardElement.confirm({
+          id:             data.id,
           client_secret: data.client_secret,
           payment_method: {
             billing: {

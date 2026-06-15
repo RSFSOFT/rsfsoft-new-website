@@ -191,7 +191,11 @@ exports.handler = async (event) => {
     });
 
     // ── Step 3: Build the Payment Intent payload ───────────────────────────────
-    const amountNum   = parseFloat(amount);
+    // ── CRITICAL: Airwallex requires amount in MINOR UNITS (pence / cents) ───────
+    // £500.00 → 50000 pence  |  $299.99 → 29999 cents  |  €150 → 15000 cents
+    // Sending the raw decimal (500) means Airwallex charges 500 pence = £5.00 !!!
+    // All supported currencies (GBP, USD, EUR, CAD, AUD, AED) use factor 100.
+    const amountNum   = Math.round(parseFloat(amount) * 100); // e.g. 500 → 50000
     const isRecurring = billingStructure === 'Recurring Subscription';
 
     const intentPayload = {
