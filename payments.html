@@ -1513,9 +1513,12 @@
       // Show the card container now that we have the intent
       document.getElementById('airwallex-card-container').style.display = 'block';
 
+      const actualEnv = intentData.env === 'prod' ? 'prod' : 'demo';
+      console.log(`[RSFSOFT] Backend returned env: ${intentData.env}. Initializing Airwallex SDK in ${actualEnv} mode...`);
+
       // Initialize Airwallex (origin and client_id are no longer required for DropIn and can break initialization)
       await Airwallex.init({
-        env: envMode,
+        env: actualEnv,
         enabledElements: ['payments']
       });
       
