@@ -41,8 +41,9 @@
     Referrer-Policy = "no-referrer"
 
     # Disable unnecessary browser features
-    # payment= allows Airwallex card iframe (checkout.airwallex.com) to use Payment Request API (Apple Pay, Google Pay on mobile)
-    # Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
+    # fullscreen= allows Airwallex Apple Pay modal to launch (required for Apple Pay flow)
+    # payment= allows Airwallex card iframe (checkout.airwallex.com) to use Payment Request API
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), fullscreen=(self \"https://checkout.airwallex.com\" \"https://static.airwallex.com\" \"https://pci.airwallex.com\"), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
 
     # XSS protection for legacy browsers
     X-XSS-Protection = "1; mode=block"
@@ -65,8 +66,8 @@
     Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
     Pragma = "no-cache"
     # CSP for payment page — Airwallex wildcard covers all element iframes on mobile
-    # Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
-    # Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.airwallex.com; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com https://pci.airwallex.com https://*.airwallex.com; frame-ancestors 'none'; form-action 'self';"
+    # fullscreen= required for Apple Pay sheet/modal to open inside Airwallex checkout iframe
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), fullscreen=(self \"https://checkout.airwallex.com\" \"https://static.airwallex.com\" \"https://pci.airwallex.com\"), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
 
 [[headers]]
   for = "/payments"
@@ -78,7 +79,7 @@
     X-XSS-Protection = "1; mode=block"
     Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate"
     Pragma = "no-cache"
-    # Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), fullscreen=(self \"https://checkout.airwallex.com\" \"https://static.airwallex.com\" \"https://pci.airwallex.com\"), payment=(self \"https://checkout.airwallex.com\"), usb=(), bluetooth=()"
     # Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://static.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https://*.airwallex.com; connect-src 'self' https://ipapi.co https://api.ipify.org https://api.airwallex.com https://api-demo.airwallex.com https://checkout.airwallex.com https://pci.airwallex.com; frame-src 'self' https://checkout.airwallex.com https://static.airwallex.com https://pci.airwallex.com https://*.airwallex.com; frame-ancestors 'none'; form-action 'self';"
 
 # ─── Netlify Functions: Strict headers ───────────────────────────────────────
