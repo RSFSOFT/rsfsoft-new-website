@@ -108,11 +108,34 @@
     X-Robots-Tag = "noindex, nofollow, noarchive"
     Cache-Control = "no-store"
 
+# ─── AMP Pages: Allow AMP CDN & AMP Cache ────────────────────────────────────
+# AMP requires cdn.ampproject.org for runtime scripts and the AMP Cache
+# must be able to serve pages (no DENY frame-ancestors).
+[[headers]]
+  for = "/amp/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self' https://cdn.ampproject.org; script-src 'self' 'unsafe-inline' https://cdn.ampproject.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.ampproject.org https://formspree.io; font-src 'self' data: https:; frame-ancestors 'none'; form-action 'self' https://formspree.io;"
+    X-Frame-Options = "SAMEORIGIN"
+    Cache-Control = "public, max-age=900, stale-while-revalidate=3600"
+
 [[redirects]]
   from   = "/secure_payment_evidence/*"
   to     = "/404.html"
   status = 404
   force  = true
+
+# ─── AMP Pages: Serve directly (bypass .html-stripping redirects) ─────────────
+[[redirects]]
+  from   = "/amp"
+  to     = "/amp/index.html"
+  status = 200
+  force  = false
+
+[[redirects]]
+  from   = "/amp/"
+  to     = "/amp/index.html"
+  status = 200
+  force  = false
 
 # ─── Payment URL Rewrites & Redirects ─────────────────────────────────────────
 [[redirects]]
