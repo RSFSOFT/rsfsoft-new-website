@@ -1,4 +1,4 @@
-# RSFSOFT — Netlify Configuration (Maximum Security Edition)
+﻿# RSFSOFT — Netlify Configuration (Maximum Security Edition)
 # 13 security layers active
 
 [build]
@@ -153,12 +153,12 @@
 # ─── Redirects: Force HTTPS ───────────────────────────────────────────────────
 [[redirects]]
   from   = "http://rsfsoft.co.uk/*"
-  to     = "https://www.rsfsoft.co.uk/:splat"
+  to     = "https://rsfsoft.co.uk/:splat"
   status = 301
   force  = true
 
 [[redirects]]
-  from   = "http://www.rsfsoft.co.uk/*"
-  to     = "https://www.rsfsoft.co.uk/:splat"
+  from   = "http://rsfsoft.co.uk/*"
+  to     = "https://rsfsoft.co.uk/:splat"
   status = 301
   force  = true
