@@ -1,0 +1,721 @@
+<!doctype html>
+<html ⚡ lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title>RSF Soft | Premium Digital Agency — Web, App, SEO &amp; Growth</title>
+  <meta name="description" content="RSF Soft is a professional digital agency delivering Web Development, App Development, SEO, and Social Media Marketing. Registered in the UK with our operations and development center in Pakistan.">
+  <link rel="canonical" href="https://www.rsfsoft.co.uk/">
+  <link rel="amphtml" href="https://www.rsfsoft.co.uk/amp/index.html">
+
+  <!-- AMP boilerplate -->
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+  <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+  <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RSF Soft | Premium Digital Agency">
+  <meta property="og:description" content="Reliable. Secure. Fast. RSF Soft builds powerful digital solutions for businesses worldwide.">
+  <meta property="og:url" content="https://www.rsfsoft.co.uk/">
+  <meta property="og:image" content="https://rsfsoft-new-website.netlify.app/assets/img/favicon-new.png">
+
+  <style amp-custom>
+    /* ======= RESET & BASE ======= */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#04070f;color:#f0f6ff;line-height:1.7;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+    img{max-width:100%;display:block;height:auto}
+
+    /* ======= CSS VARS ======= */
+    :root{
+      --violet:#7c3aed;--cyan:#06d6f0;--purple:#a855f7;
+      --bg:#04070f;--card-bg:rgba(8,13,26,0.8);
+      --border:rgba(255,255,255,0.08);
+      --text-muted:#94a3b8;
+    }
+
+    /* ======= GRADIENT TEXT ======= */
+    .grad{background:linear-gradient(135deg,#7c3aed,#a855f7 40%,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* ======= TOP BAR ======= */
+    .topbar{background:linear-gradient(90deg,rgba(124,58,237,.9),rgba(6,214,240,.8));padding:8px 16px;text-align:center;font-size:.78rem;font-weight:600;color:#fff;letter-spacing:.3px}
+    .topbar a{color:#fff;opacity:.9}
+
+    /* ======= NAV ======= */
+    .nav{background:rgba(4,7,15,.92);border-bottom:1px solid var(--border);padding:0 24px}
+    .nav-inner{max-width:1200px;margin:0 auto;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,#7c3aed,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px}
+    .nav-links{display:flex;gap:6px;flex-wrap:wrap}
+    .nav-links a{padding:7px 13px;border-radius:8px;font-size:.85rem;font-weight:500;color:#94a3b8}
+    .nav-links a:hover{color:#f0f6ff;background:rgba(255,255,255,.05)}
+    .nav-cta{background:linear-gradient(135deg,#7c3aed,#06d6f0)!important;color:#fff!important;padding:9px 22px!important;border-radius:40px!important;font-weight:700!important}
+    @media(max-width:700px){.nav-links{display:none}}
+
+    /* ======= HERO ======= */
+    .hero{padding:100px 24px 80px;text-align:center;max-width:900px;margin:0 auto}
+    .hero-badge{display:inline-block;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.35);color:#a855f7;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:22px}
+    .hero h1{font-size:clamp(2rem,6vw,3.8rem);font-weight:900;line-height:1.1;margin-bottom:18px}
+    .hero-sub{font-size:1.05rem;color:#94a3b8;max-width:680px;margin:0 auto 32px;line-height:1.8}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:.95rem;font-weight:700;border-radius:50px}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;background:rgba(255,255,255,.05);color:#f0f6ff;font-size:.95rem;font-weight:600;border:1px solid rgba(255,255,255,.14);border-radius:50px}
+
+    /* ======= STATS ======= */
+    .stats{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:10px}
+    .stat{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:20px 28px;text-align:center;min-width:140px}
+    .stat-val{font-size:2rem;font-weight:900;background:linear-gradient(135deg,#7c3aed,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .stat-lbl{font-size:.8rem;color:#94a3b8;margin-top:4px}
+
+    /* ======= SECTION ======= */
+    .section{padding:80px 24px}
+    .section-alt{background:rgba(124,58,237,.03)}
+    .container{max-width:1200px;margin:0 auto}
+    .section-hd{text-align:center;margin-bottom:52px}
+    .section-badge{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#a855f7;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:14px}
+    .section-title{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;line-height:1.2;margin-bottom:14px}
+    .section-sub{font-size:.95rem;color:#94a3b8;max-width:600px;margin:0 auto;line-height:1.8}
+
+    /* ======= PROMISE CARDS ======= */
+    .promise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .promise-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:32px 28px}
+    .promise-icon{font-size:2rem;margin-bottom:14px}
+    .promise-card h3{font-size:1.15rem;font-weight:800;margin-bottom:10px}
+    .promise-card p{font-size:.88rem;color:#94a3b8;line-height:1.7}
+    .promise-stat{font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,#7c3aed,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:14px 0 4px}
+    .promise-lbl{font-size:.78rem;color:#94a3b8}
+
+    /* ======= SERVICES GRID ======= */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .svc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:border-color .25s}
+    .svc-card:hover{border-color:rgba(124,58,237,.45)}
+    .svc-icon{font-size:2rem;margin-bottom:14px}
+    .svc-card h3{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+    .svc-card p{font-size:.84rem;color:#94a3b8;line-height:1.65;margin-bottom:14px}
+    .svc-link{font-size:.82rem;font-weight:700;color:#7c3aed}
+
+    /* ======= WHY US ======= */
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .why-item{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:24px 20px;display:flex;gap:16px;align-items:flex-start}
+    .why-icon{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+    .why-item h4{font-size:.95rem;font-weight:800;margin-bottom:6px}
+    .why-item p{font-size:.82rem;color:#94a3b8;line-height:1.6}
+
+    /* ======= TESTIMONIALS (amp-carousel) ======= */
+    .testi-slide{padding:4px 8px}
+    .testi-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:28px 24px;height:100%}
+    .testi-stars{color:#f59e0b;font-size:1rem;margin-bottom:10px;letter-spacing:2px}
+    .testi-quote{font-size:3rem;color:rgba(124,58,237,.4);line-height:.8;margin-bottom:10px}
+    .testi-text{font-size:.88rem;color:#cbd5e1;line-height:1.7;margin-bottom:20px}
+    .testi-author{display:flex;align-items:center;gap:12px}
+    .testi-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#fff;flex-shrink:0}
+    .testi-name{font-size:.9rem;font-weight:700}
+    .testi-loc{font-size:.76rem;color:#94a3b8}
+
+    /* ======= TRUST ======= */
+    .trust-row{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px}
+    .trust-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px 32px;text-align:center;max-width:280px}
+    .trust-card h4{font-size:.9rem;font-weight:700;margin-top:12px}
+    .trust-card p{font-size:.78rem;color:#94a3b8;margin-top:6px}
+
+    /* ======= FAQ (amp-accordion) ======= */
+    .amp-accordion-section{border-bottom:1px solid var(--border)}
+    amp-accordion > section > h4{font-size:1rem;font-weight:700;padding:18px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:#f0f6ff}
+    amp-accordion > section > div{font-size:.88rem;color:#94a3b8;line-height:1.7;padding:0 0 18px}
+
+    /* ======= CONTACT FORM ======= */
+    .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:start}
+    @media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
+    .contact-info h3{font-size:1.4rem;font-weight:900;margin-bottom:10px}
+    .contact-info p{font-size:.88rem;color:#94a3b8;margin-bottom:28px}
+    .contact-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px}
+    .ci-icon{font-size:1.2rem;flex-shrink:0;margin-top:3px}
+    .ci-lbl{font-size:.75rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+    .ci-val{font-size:.9rem;font-weight:600}
+    .ci-val a{color:#f0f6ff}
+    .contact-form-wrap{background:var(--card-bg);border:1px solid rgba(124,58,237,.2);border-radius:22px;padding:36px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+    @media(max-width:520px){.form-row{grid-template-columns:1fr}}
+    .form-row-full{margin-bottom:14px}
+    .form-grp label{display:block;font-size:.78rem;font-weight:600;margin-bottom:6px;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px}
+    .form-grp input,.form-grp textarea,.form-grp select{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;color:#f0f6ff;font-size:.9rem;font-family:inherit}
+    .form-grp textarea{min-height:110px;resize:vertical}
+    .form-submit{width:100%;padding:15px;background:linear-gradient(135deg,#7c3aed,#06d6f0);color:#fff;font-size:1rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;margin-top:6px;font-family:inherit}
+    .form-grp-full{grid-column:1/-1}
+
+    /* ======= FOOTER ======= */
+    .footer{background:rgba(4,7,15,.95);border-top:1px solid var(--border);padding:60px 24px 30px}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+    @media(max-width:820px){.footer-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
+    .footer-brand{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#7c3aed,#06d6f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px}
+    .footer-desc{font-size:.82rem;color:#94a3b8;line-height:1.7;max-width:280px}
+    .footer-col h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:14px}
+    .footer-col a{display:block;font-size:.82rem;color:#94a3b8;margin-bottom:8px}
+    .footer-col a:hover{color:#f0f6ff}
+    .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:.78rem;color:#64748b}
+
+    /* ======= AMP VIEW FULL SITE BANNER ======= */
+    .amp-notice{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:12px 20px;margin:12px 24px;text-align:center;font-size:.82rem;color:#a855f7}
+    .amp-notice a{color:#06d6f0;font-weight:700}
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "RSF Soft",
+    "legalName": "RSFSOFT LTD",
+    "url": "https://www.rsfsoft.co.uk",
+    "logo": "https://rsfsoft-new-website.netlify.app/assets/img/favicon-new.png",
+    "description": "RSF Soft is a UK-registered digital agency delivering Web Development, App Development, SEO, and Social Media Marketing.",
+    "foundingDate": "2020",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "GB"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+441296794358",
+        "contactType": "customer service",
+        "areaServed": "GB",
+        "availableLanguage": "English"
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+923200605762",
+        "contactType": "customer service",
+        "areaServed": "PK"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/RsfSoft/",
+      "https://www.instagram.com/rsfsoftofficial/",
+      "https://twitter.com/SoftRsf",
+      "https://www.linkedin.com/company/rsf-soft/",
+      "https://www.trustpilot.com/review/rsfsoft.com"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "RSF Soft",
+    "url": "https://www.rsfsoft.co.uk",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.rsfsoft.co.uk/?s={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why choose RSF Soft over other agencies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RSF Soft combines creative talent with proven technical expertise across Web Dev, App Dev, SEO and Digital Marketing. Registered in the UK with our operations based in Pakistan, we bring a global perspective with local dedication. Transparent pricing, dedicated project managers, and 7-day support mean results always come first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a website or app cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Website projects start from £499 for a simple site, up to £5,000+ for complex e-commerce. App development starts from £999."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does RSF stand for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RSF stands for Reliable, Secure, and Fast — the three pillars at the heart of everything we do."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does SEO take to show results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most clients begin to see measurable improvements in rankings and organic traffic within 3–6 months. We provide monthly reports tracking keyword rankings, backlinks built, traffic growth and conversion improvements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer ongoing maintenance and support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We offer flexible monthly maintenance plans covering software updates, security monitoring, performance optimisation, content updates, and priority support. No lock-in contracts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you work with businesses outside the UK?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Registered in the UK with operations in Pakistan, we work with clients globally. Time zones are never a barrier."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- AMP notice -->
+<div class="amp-notice">
+  &#9889; You're viewing the fast AMP version &mdash; <a href="https://www.rsfsoft.co.uk/">View Full Site</a>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  &#127881; Trusted by <strong>150+</strong> businesses globally &nbsp;|&nbsp;
+  &#127881; <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener">Certified Google Partner</a> &nbsp;|&nbsp;
+  UK: <a href="tel:+441296794358">+441296794358</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://www.rsfsoft.co.uk/" class="nav-brand">RSF SOFT</a>
+    <div class="nav-links">
+      <a href="https://www.rsfsoft.co.uk/">Home</a>
+      <a href="https://www.rsfsoft.co.uk/search-engine-optimization.html">SEO</a>
+      <a href="https://www.rsfsoft.co.uk/web-development.html">Web Dev</a>
+      <a href="https://www.rsfsoft.co.uk/mobile-app.html">App Dev</a>
+      <a href="https://www.rsfsoft.co.uk/about-us.html">About</a>
+      <a href="https://www.rsfsoft.co.uk/contact-us.html" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">&#11088; Google Partner &middot; Award-Winning Digital Agency</div>
+  <h1>We Power Your<br><span class="grad">Digital Growth</span><br>&amp; Business Success</h1>
+  <p class="hero-sub">
+    RSF Soft is a team of creative, expertly trained <strong>"Out of the Box"</strong> thinkers. Registered in the UK since 2020 with our primary operations and development centre in Pakistan, we follow all UK regulatory rules and standards for complete transparency.
+  </p>
+  <div class="hero-actions">
+    <a href="https://www.rsfsoft.co.uk/#services" class="btn-primary">&#128640; Explore Services</a>
+    <a href="https://www.rsfsoft.co.uk/contact-us.html" class="btn-outline">&#128222; Get Free Callback</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">12+</div><div class="stat-lbl">Services</div></div>
+    <div class="stat"><div class="stat-val">50+</div><div class="stat-lbl">Team Members</div></div>
+    <div class="stat"><div class="stat-val">150+</div><div class="stat-lbl">Happy Clients</div></div>
+    <div class="stat"><div class="stat-val">250+</div><div class="stat-lbl">Projects Delivered</div></div>
+  </div>
+</section>
+
+<!-- WHAT WE PROMISE -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">What We Promise</span>
+      <h2 class="section-title">We Don't Just Talk &mdash; <span class="grad">We Deliver Results</span></h2>
+      <p class="section-sub">Real numbers. Real impact. Every service we offer is engineered to grow your business measurably.</p>
+    </div>
+    <div class="promise-grid">
+      <div class="promise-card">
+        <div class="promise-icon">&#128269;</div>
+        <h3>We Get You Found on Google</h3>
+        <p>Our SEO campaigns are built on data, not guesswork. We push your website to the top of search results for keywords your customers actually use.</p>
+        <div class="promise-stat">247%</div>
+        <div class="promise-lbl">Average organic traffic increase in 6 months</div>
+      </div>
+      <div class="promise-card">
+        <div class="promise-icon">&#128250;</div>
+        <h3>We Convert Visitors Into Buyers</h3>
+        <p>Beautiful websites mean nothing without conversions. We craft experiences that guide visitors through your sales funnel and turn them into loyal customers.</p>
+        <div class="promise-stat">40%</div>
+        <div class="promise-lbl">Average conversion rate improvement for clients</div>
+      </div>
+      <div class="promise-card">
+        <div class="promise-icon">&#9201;</div>
+        <h3>We Deliver On Time, Every Time</h3>
+        <p>Deadlines are sacred. Our project management system ensures every milestone is hit on schedule, keeping your business launch on track and stress-free.</p>
+        <div class="promise-stat">2,000+</div>
+        <div class="promise-lbl">Projects delivered on time across all services</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">What We Do</span>
+      <h2 class="section-title">Our <span class="grad">Core Services</span></h2>
+      <p class="section-sub">Every service is delivered by specialists — not generalists.</p>
+    </div>
+    <div class="services-grid">
+      <a href="https://www.rsfsoft.co.uk/search-engine-optimization.html" class="svc-card">
+        <div class="svc-icon">&#128269;</div>
+        <h3>Search Engine Optimisation</h3>
+        <p>Data-driven SEO strategies that push your website to Page 1 of Google for the keywords your customers are actually searching for.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+      <a href="https://www.rsfsoft.co.uk/web-development.html" class="svc-card">
+        <div class="svc-icon">&#128187;</div>
+        <h3>Web Development</h3>
+        <p>Custom websites, WordPress, Shopify &amp; full-stack web apps crafted to convert visitors into paying customers at scale.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+      <a href="https://www.rsfsoft.co.uk/mobile-app.html" class="svc-card">
+        <div class="svc-icon">&#128241;</div>
+        <h3>App Development</h3>
+        <p>Native and cross-platform iOS &amp; Android apps built by specialists who solve complex mobile engineering challenges beautifully.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+      <a href="https://www.rsfsoft.co.uk/social-media-marketing.html" class="svc-card">
+        <div class="svc-icon">&#128100;</div>
+        <h3>Social Media Marketing</h3>
+        <p>Strategic campaigns across Facebook, Instagram, TikTok and LinkedIn that grow your audience and drive real enquiries and sales.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+      <a href="https://www.rsfsoft.co.uk/ppc-advertising-campaign-management.html" class="svc-card">
+        <div class="svc-icon">&#127919;</div>
+        <h3>PPC &amp; Google Ads</h3>
+        <p>Precision-targeted pay-per-click campaigns engineered for maximum ROI. Every pound of your budget is tracked and optimised.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+      <a href="https://www.rsfsoft.co.uk/content-writing-service.html" class="svc-card">
+        <div class="svc-icon">&#9997;</div>
+        <h3>Content Writing</h3>
+        <p>SEO-optimised blogs, landing pages, product descriptions and web copy written by expert writers who understand conversion and rankings.</p>
+        <div class="svc-link">Explore Service &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-alt" id="why-us">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">Why RSF Soft</span>
+      <h2 class="section-title">What Makes Us <span class="grad">Different</span></h2>
+      <p class="section-sub">We're not just another agency. We're your digital growth partner.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">&#9989;</div>
+        <div>
+          <h4>Transparent Reporting</h4>
+          <p>Monthly performance reports covering rankings, traffic, conversions and ROI — no jargon, no hiding results.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">&#128081;</div>
+        <div>
+          <h4>Certified Google Partner</h4>
+          <p>One of the few UK agencies with full Google Partner status — verified expertise in Google Ads and SEO.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">&#128119;</div>
+        <div>
+          <h4>Dedicated &amp; Insured Specialists</h4>
+          <p>Expert specialists assigned to your project, fully accountable for results.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">&#128275;</div>
+        <div>
+          <h4>No Lock-in Contracts</h4>
+          <p>Stay because you love the results — not because you're contractually trapped.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">&#127758;</div>
+        <div>
+          <h4>UK Registered &middot; Pakistan Operations</h4>
+          <p>Registered in the UK with operations in Pakistan, we serve clients globally with overlapping hours.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">&#127881;</div>
+        <div>
+          <h4>5-Star Trustpilot Rating</h4>
+          <p>Verified client reviews on Trustpilot — real businesses sharing real results from working with us.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">Client Reviews</span>
+      <h2 class="section-title">UK Success <span class="grad">Stories</span></h2>
+      <p class="section-sub">Real reviews from real businesses we've helped grow online.</p>
+    </div>
+    <amp-carousel width="auto" height="280" layout="fixed-height" type="slides" autoplay delay="4000" loop>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testi-quote">"</div>
+          <p class="testi-text">We are a moving company based in London. I've been with RSF Soft for the past years, they have been great on providing services to rank on Google. You may face a lot of issues trying to rank but they do try their best.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">GM</div>
+            <div>
+              <div class="testi-name">Gago Movers</div>
+              <div class="testi-loc">Moving Company, London, UK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testi-quote">"</div>
+          <p class="testi-text">RSFSOFT LTD has done great work for us. We will continue to use them for our marketing. For our website they hooked in an API that I know takes above average skill to complete and make it work right. All works great.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#06d6f0,#7c3aed)">MM</div>
+            <div>
+              <div class="testi-name">Matthew Mitchell</div>
+              <div class="testi-loc">Book Auto Transport</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testi-quote">"</div>
+          <p class="testi-text">Zara and Faizan are excellent. I built my business website with them two months ago, and whenever I need something, they fix it right away. If anyone wants to create a business website, they are highly skilled and experienced.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#a855f7,#06d6f0)">AA</div>
+            <div>
+              <div class="testi-name">Asad Malik Awan</div>
+              <div class="testi-loc">GoDrive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testi-quote">"</div>
+          <p class="testi-text">Contact RSFSOFT LTD only if you are looking for QUALITY service. The team is full of energy, they listen to you, they do everything possible to get you good results. They have generated leads for us from day 1.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#06d6f0)">PE</div>
+            <div>
+              <div class="testi-name">My Pest Exterminator</div>
+              <div class="testi-loc">Pest Control Company</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="testi-quote">"</div>
+          <p class="testi-text">They were proactive and provided regular updates throughout our website design project, ensuring we were always in the loop. Great communication and excellent work!</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f97316,#eab308)">JP</div>
+            <div>
+              <div class="testi-name">Jennifer Palmer</div>
+              <div class="testi-loc">Director, UK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </amp-carousel>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="section section-alt" id="trust-badges">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">Verified &amp; Trusted</span>
+      <h2 class="section-title">Recognised by <span class="grad">Google &amp; Customers</span></h2>
+      <p class="section-sub">We're a certified Google Partner and proud of our 5-star Trustpilot reputation.</p>
+    </div>
+    <div class="trust-row">
+      <a href="https://partnersdirectory.withgoogle.com/partners/2646423901" target="_blank" rel="noopener" class="trust-card">
+        <amp-img src="https://www.gstatic.com/partners/badge/images/2024/PartnerBadgeClickable.svg" width="180" height="72" layout="responsive" alt="Google Partner — RSFSOFT LTD"></amp-img>
+        <h4>Certified Google Partner</h4>
+        <p>View our official Google profile</p>
+      </a>
+      <a href="https://www.trustpilot.com/review/rsfsoft.com" target="_blank" rel="noopener" class="trust-card">
+        <div style="font-size:2.2rem;color:#00b67a">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <h4>5.0 / 5 on Trustpilot</h4>
+        <p>Read our verified client reviews</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">FAQ</span>
+      <h2 class="section-title">Frequently Asked <span class="grad">Questions</span></h2>
+      <p class="section-sub">Everything you need to know before getting started with us.</p>
+    </div>
+    <amp-accordion animate>
+      <section>
+        <h4>Why choose RSF Soft over other agencies? <span>+</span></h4>
+        <div>RSF Soft combines creative talent with proven technical expertise across Web Dev, App Dev, SEO and Digital Marketing. Registered in the UK with our operations based in Pakistan, we bring a global perspective with local dedication. Transparent pricing, dedicated project managers, and 7-day support mean you always know what's happening with your project — and results always come first.</div>
+      </section>
+      <section>
+        <h4>How much does a website or app cost? <span>+</span></h4>
+        <div>Website projects start from £499 for a simple site, up to £5,000+ for complex e-commerce. App development starts from £999. Contact us for a free, no-obligation quote based on your exact requirements.</div>
+      </section>
+      <section>
+        <h4>What does RSF stand for? <span>+</span></h4>
+        <div>RSF stands for Reliable, Secure, and Fast — the three pillars at the heart of everything we do. Every project is delivered reliably against agreed timelines, is built with security best practices baked in from day one, and is optimised for speed and performance throughout.</div>
+      </section>
+      <section>
+        <h4>How long does SEO take to show results? <span>+</span></h4>
+        <div>SEO is a long-term investment. Most clients begin to see measurable improvements in rankings and organic traffic within 3–6 months. We provide monthly reports tracking keyword rankings, backlinks built, traffic growth and conversion improvements so progress is always transparent and visible.</div>
+      </section>
+      <section>
+        <h4>Do you offer ongoing maintenance and support? <span>+</span></h4>
+        <div>Yes. We offer flexible monthly maintenance plans covering software updates, security monitoring, performance optimisation, content updates, and priority support. No lock-in contracts — just great service that keeps you coming back because you love the results.</div>
+      </section>
+      <section>
+        <h4>Do you work with businesses outside the UK? <span>+</span></h4>
+        <div>Absolutely. Registered in the UK with operations in Pakistan, we work with clients globally. Time zones are never a barrier — our team is structured with overlapping hours across regions to ensure seamless communication.</div>
+      </section>
+    </amp-accordion>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="section-hd">
+      <span class="section-badge">Get In Touch</span>
+      <h2 class="section-title">Let's Build Something <span class="grad">Amazing Together</span></h2>
+      <p class="section-sub">Tell us about your project — we'll respond within 24 hours with a plan.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>Our registered office is located in the UK, and all development operations are conducted at our operations centre in Pakistan.</p>
+        <div class="contact-row">
+          <div class="ci-icon">&#128222;</div>
+          <div><div class="ci-lbl">UK Registered Office</div><div class="ci-val"><a href="tel:+441296794358">+441296794358</a></div></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci-icon">&#128222;</div>
+          <div><div class="ci-lbl">PK Operations Centre</div><div class="ci-val"><a href="tel:+923200605762">+92-320-060-5762</a></div></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci-icon">&#128140;</div>
+          <div><div class="ci-lbl">General Enquiries</div><div class="ci-val"><a href="mailto:info@rsfsoft.co.uk">info@rsfsoft.co.uk</a></div></div>
+        </div>
+        <div class="contact-row">
+          <div class="ci-icon">&#128084;</div>
+          <div><div class="ci-lbl">HR &amp; Careers</div><div class="ci-val"><a href="mailto:hr@rsfsoft.co.uk">hr@rsfsoft.co.uk</a></div></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form method="POST"
+              action-xhr="https://formspree.io/f/rsfsoft-contact"
+              target="_top">
+          <div class="form-row">
+            <div class="form-grp">
+              <label for="a-name">Your Name</label>
+              <input type="text" id="a-name" name="name" placeholder="John Smith" required>
+            </div>
+            <div class="form-grp">
+              <label for="a-email">Email Address</label>
+              <input type="email" id="a-email" name="email" placeholder="john@company.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-grp">
+              <label for="a-phone">Phone Number</label>
+              <input type="tel" id="a-phone" name="phone" placeholder="+44 1234 567890">
+            </div>
+            <div class="form-grp">
+              <label for="a-service">Service Required</label>
+              <select id="a-service" name="service">
+                <option>SEO Services</option>
+                <option>Web Development</option>
+                <option>App Development</option>
+                <option>Social Media Marketing</option>
+                <option>PPC / Google Ads</option>
+                <option>Content Writing</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row-full">
+            <div class="form-grp">
+              <label for="a-msg">Your Message</label>
+              <textarea id="a-msg" name="message" placeholder="Tell us about your project..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit">&#128640; Send Message</button>
+          <div submit-success><p style="color:#22c55e;margin-top:12px;text-align:center">&#9989; Message sent! We'll reply within 24 hours.</p></div>
+          <div submit-error><p style="color:#ef4444;margin-top:12px;text-align:center">&#10060; Something went wrong. Please email info@rsfsoft.co.uk directly.</p></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">RSF SOFT</div>
+      <p class="footer-desc">A UK-registered digital agency delivering reliable, secure and fast digital solutions for businesses worldwide since 2020.</p>
+    </div>
+    <div class="footer-col">
+      <h4>SEO &amp; Search</h4>
+      <a href="https://www.rsfsoft.co.uk/search-engine-optimization.html">SEO Services</a>
+      <a href="https://www.rsfsoft.co.uk/seo-packages.html">SEO Packages</a>
+      <a href="https://www.rsfsoft.co.uk/google-my-business-optimisation.html">Google My Business</a>
+      <a href="https://www.rsfsoft.co.uk/local-business.html">Local SEO</a>
+      <a href="https://www.rsfsoft.co.uk/penalty-recovery.html">Penalty Recovery</a>
+    </div>
+    <div class="footer-col">
+      <h4>Web &amp; App Dev</h4>
+      <a href="https://www.rsfsoft.co.uk/web-development.html">Web Development</a>
+      <a href="https://www.rsfsoft.co.uk/wordpress-development.html">WordPress</a>
+      <a href="https://www.rsfsoft.co.uk/shopify.html">Shopify</a>
+      <a href="https://www.rsfsoft.co.uk/mobile-app.html">App Development</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="https://www.rsfsoft.co.uk/about-us.html">About Us</a>
+      <a href="https://www.rsfsoft.co.uk/contact-us.html">Contact Us</a>
+      <a href="https://www.rsfsoft.co.uk/privacy-policy.html">Privacy Policy</a>
+      <a href="https://www.rsfsoft.co.uk/terms-and-conditions.html">Terms &amp; Conditions</a>
+      <a href="https://www.rsfsoft.co.uk/refund-policy.html">Refund Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 RSFSOFT LTD. Registered in England &amp; Wales. All rights reserved.</span>
+    <span>Reliable &middot; Secure &middot; Fast</span>
+  </div>
+</footer>
+
+</body>
+</html>
